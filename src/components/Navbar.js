@@ -170,9 +170,9 @@ const Bottom = styled.div`
 
 function Navbar () {
 
-    const handleSearch = () => {
+    // const handleSearch = () => {
 
-    }
+    // }
 
     
 
