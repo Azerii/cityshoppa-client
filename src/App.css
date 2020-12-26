@@ -1,0 +1,32 @@
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+  
+a:hover {
+    text-decoration: none;
+}
+
+::placeholder {
+    color: #000000 !important;
+}
+
+select, button {
+    cursor: pointer;
+}
+
+/* input:focus, select:focus, textarea:focus {
+    background-color: #F7FAFA;
+    outline-color: var(--postslate-blue-dark);
+} */
+
+/* input:hover, select:hover {
+    border: 1px solid var(--postslate-blue-dark) !important;
+} */
+
+button:focus, input:focus, select:focus, textarea:focus {
+    outline: none;
+}
