@@ -177,7 +177,7 @@ function SignIn () {
             <Inner>
                 <div className='content'>
                     <h1 className='heading'>Welcome</h1>
-                    <p className='subheading'>Sign In Your Account</p>
+                    <p className='subheading'>Sign In To Your Account</p>
                     
                     <Route exact path='/sign-in'>
                         <div className='row'>

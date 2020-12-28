@@ -44,7 +44,7 @@ const Top = styled.div`
         
         .hamburger {
             display: block;
-            margin-left: 4rem;
+            margin-left: 2rem;
 
             span {
                 display: block;
@@ -57,7 +57,7 @@ const Top = styled.div`
     }
 
     .contentCenter {
-        min-width: 60%;
+        min-width: 50%;
         height: 3rem;
 
         div {
@@ -73,7 +73,7 @@ const Top = styled.div`
 
             input {
                 width: 100%;
-                font-size: 100%;
+                font-size: 90%;
                 color: #000000;
             }
         }
@@ -91,9 +91,9 @@ const Top = styled.div`
 
             input {
                 width: 100%;
-                font-size: 100%;
+                font-size: 90%;
                 color: #000000;
-                margin-left: 1rem;
+                margin-left: 0.5rem;
             }
         }
 
