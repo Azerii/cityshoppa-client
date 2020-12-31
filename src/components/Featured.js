@@ -20,7 +20,7 @@ const Track = styled.ul`
     position: relative;
     width: 100%;
     list-style: none;
-    min-height: 20rem;
+    height: 20rem;
     transition: all ease-in 500ms;
 `
 
@@ -43,6 +43,7 @@ const Slide = styled.li`
             algin-items: flex-start;
             justify-content: flex-end;
             width: 30%;
+            padding-left: 2rem;
 
             .featuredBadge {
                 width: 60%;
@@ -62,6 +63,7 @@ const Slide = styled.li`
                 height: 100%;
                 width: auto;
                 transform: translateX(-25%) scale(2.0);
+                margin-top: -2.5rem;
             }
         }
 
@@ -180,11 +182,11 @@ function Featured (props) {
             indicators: Array.from(document.querySelector('#indicatorNav_featured').children),
         })
 
-        // const interval = setInterval(() => {
-        //     slideShow();
-        // }, 5000);
+        const interval = setInterval(() => {
+            slideShow();
+        }, 5000);
 
-        // return () => clearInterval(interval);
+        return () => clearInterval(interval);
 
         // eslint-disable-next-line
     }, [currentIndex])
@@ -207,9 +209,51 @@ function Featured (props) {
                         </a>
                     </div>
                 </Slide>
-                <Slide bg='darkslateblue' left={state.slideWidth}></Slide>
-                <Slide bg='darkslategrey' left={state.slideWidth*2}></Slide>
-                <Slide bg='burlywood' left={state.slideWidth*3}></Slide>
+                <Slide bg='darkslateblue' left={state.slideWidth}>
+                    <div className='contentLeft'>
+                        <img className='featuredBadge' src={featured_badge} alt='' />
+                        <img className='business' src={mack_ken} alt='' />
+                    </div>
+                    <div className='contentCenter'>
+                        <img src={cookies_img} alt='' />
+                    </div>
+                    <div className='contentRight'>
+                        <a className='buyNow' href='/'>
+                            13$ Buy Now
+                            <img src={right_arrow} alt='' />
+                        </a>
+                    </div>
+                </Slide>
+                <Slide bg='darkslategrey' left={state.slideWidth*2}>
+                    <div className='contentLeft'>
+                        <img className='featuredBadge' src={featured_badge} alt='' />
+                        <img className='business' src={mack_ken} alt='' />
+                    </div>
+                    <div className='contentCenter'>
+                        <img src={cookies_img} alt='' />
+                    </div>
+                    <div className='contentRight'>
+                        <a className='buyNow' href='/'>
+                            13$ Buy Now
+                            <img src={right_arrow} alt='' />
+                        </a>
+                    </div>
+                </Slide>
+                <Slide bg='burlywood' left={state.slideWidth*3}>
+                    <div className='contentLeft'>
+                        <img className='featuredBadge' src={featured_badge} alt='' />
+                        <img className='business' src={mack_ken} alt='' />
+                    </div>
+                    <div className='contentCenter'>
+                        <img src={cookies_img} alt='' />
+                    </div>
+                    <div className='contentRight'>
+                        <a className='buyNow' href='/'>
+                            13$ Buy Now
+                            <img src={right_arrow} alt='' />
+                        </a>
+                    </div>
+                </Slide>
             </Track>
             <Indicators id='indicatorNav_featured'>
                 <li className='active' onClick={(e) => {
