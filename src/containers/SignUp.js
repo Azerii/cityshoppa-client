@@ -23,6 +23,11 @@ const Inner = styled.div`
     border-radius: 2rem;
     overflow: hidden;
 
+    @media screen and (max-width: 768px) {
+        width: unset;
+        min-width: 70%;
+    }
+
     .contentLeft {
         width: 55%;
         padding: 2rem 0;

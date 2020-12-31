@@ -18,9 +18,7 @@ function Layout (props) {
         <>
         <Navbar />
         <Body>
-            <Container>
-                {props.children}
-            </Container>
+            {props.children}
         </Body>
         <Footer />
         </>

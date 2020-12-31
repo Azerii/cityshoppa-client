@@ -46,7 +46,11 @@ const Body = styled.div`
     margin: 7rem 0;
 
     .col {
-        width: 25%;
+        min-width: 20%;
+        
+        &.links {
+            padding-left: 2rem;
+        }
     }
 
     a {
@@ -64,7 +68,7 @@ const Body = styled.div`
     }
 
     .logo {
-        height: 1.5rem
+        height: 1.5rem;
     }
 `
 
@@ -103,17 +107,17 @@ function Footer () {
                     <div className='col'>
                         <img src={logo} alt='' className='logo' />
                     </div>
-                    <div className='col'>
+                    <div className='col links'>
                         <a href='/'>Products</a>
                         <a href='/'>Services</a>
                         <a href='/'>Discounts</a>
                     </div>
-                    <div className='col'>
+                    <div className='col links'>
                         <a href='/'>Businesses</a>
                         <a href='/'>Community</a>
                         {/* <a href='/'>lorem</a> */}
                     </div>
-                    <div className='col'>
+                    <div className='col links'>
                         <a href='/'>Contact<span>*</span></a>
                         {/* <a href='/'>lorem</a> */}
                         {/* <a href='/'>lorem</a> */}

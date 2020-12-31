@@ -1,0 +1,3 @@
+export const GET_USER = 'GET_USER'
+export const LOGIN_USER = 'LOGIN_USER'
+export const SET_FEATURED_PRODUCTS_DATA = 'SET_FEATURED_PRODUCTS_DATA'

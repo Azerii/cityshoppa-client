@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 import google from '../assets/auth/google.svg'
@@ -7,6 +7,8 @@ import apple from '../assets/auth/apple.svg'
 import email from '../assets/auth/email.svg'
 
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loginUser } from '../redux/actions'
 
 const Wrapper = styled.div`
     padding: 5rem 0;
@@ -21,6 +23,11 @@ const Inner = styled.div`
     border: 1px solid #666666;
     border-radius: 2rem;
     overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+        width: unset;
+        min-width: 60%;
+    }
 
     .content {
         width: 70%;
@@ -50,7 +57,7 @@ const Inner = styled.div`
         }
 
         form {
-            width: 70%;
+            width: 80%;
 
             .names {
                 width: 100%;
@@ -118,7 +125,7 @@ const FormInput = styled.div`
     padding: 1rem;
 
     input {
-        width: 100%;
+        width: 80%;
         font-size: 80%;
         border: none;
 
@@ -149,13 +156,16 @@ const Button = styled.button`
     }
 `
 
-function SignIn () {
+function SignIn (props) {
 
     const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        props.loginUser({
+            identifier: 'ezenniaodinaka58@outlook.com',
+            password: 'subsaharan'
+        })
         return
     }
 
@@ -209,11 +219,12 @@ function SignIn () {
                         </SigninItem>
 
                         <form onSubmit={(e) => handleSubmit(e)}>
+                            {/* Note: all fields must be required */}
                             <FormInput>
-                                <input type='email' id='email' name='email' placeholder='Email Address' required />
+                                <input type='email' id='email' name='email' placeholder='Email Address'  />
                             </FormInput>
                             <FormInput>
-                                <input className='password' type='password' id='password' name='password' placeholder='Password' required />
+                                <input className='password' type='password' id='password' name='password' placeholder='Password'  />
                                 <p onClick={() => toggleShowPassword('password')}>{showPassword ? 'Hide' : 'Show'} me</p>
                             </FormInput>
 
@@ -236,4 +247,10 @@ function SignIn () {
     )
 }
 
-export default SignIn
+const mapDispatchToProps = dispatch => {
+    return {
+        loginUser: (cred) => dispatch(loginUser(cred))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignIn)

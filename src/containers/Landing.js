@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import Container from '../components/Container'
+import Featured from '../components/Featured'
+import { getUser } from '../redux/actions'
 
-function Landing () {
+function Landing (props) {
+
+    // useEffect(() => {
+    //     props.getUser()
+    //     setTimeout(() => console.log('user data: ', props.user))
+        
+    // }, [])
 
     return (
-        <h1>Welcome to Localshopping.com</h1>
+        <>
+        <Container>
+            <Featured />
+        </Container>
+        </>
     )
 }
 
-export default Landing
+const mapDispatchToProps = dispatch => {
+    return {
+        getUser: () => dispatch(getUser)
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing)

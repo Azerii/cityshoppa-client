@@ -8,6 +8,7 @@ const Container = styled.div`
     @media (min-width: 576px) { max-width: 540px }
 
     // Medium devices (tablets, 768px and up)
+    @media (min-width: 700px) { max-width: 620px }
     @media (min-width: 768px) { max-width: 720px }
 
     // Large devices (desktops, 992px and up)
@@ -18,9 +19,7 @@ const Container = styled.div`
 
     // XX-Large devices (larger desktops, 1400px and up)
     @media (min-width: 1400px) { max-width: 1320px }
-
-    // XXX-Large devices (1600px and up)
-    @media (min-width: 1600px) { max-width: 1440px }
+    @media (min-width: 1600px) { max-width: 1400px }
 `
 
 export default Container

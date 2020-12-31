@@ -146,10 +146,10 @@ const Bottom = styled.div`
     align-items: center;
 
     .inner {
-        width: 60%;
+        // width: 60%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
 
         .item {
             display: flex;
@@ -157,7 +157,7 @@ const Bottom = styled.div`
             text-decoration: none;
             color: #000000;
             font-size: 100%;
-            width: 10%;
+            padding: 0 1rem;
 
             img {
                 height: 1rem;
