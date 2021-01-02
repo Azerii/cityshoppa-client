@@ -63,7 +63,7 @@ const Card = styled.li`
         width: 15rem;
         height: 20rem;
         padding: 1rem 2rem;
-        border: 1px solid #666666;
+        border: 1px solid #e5e5e5;
         border-radius: 0.3rem;
         position: relative;
         overflow: hidden;
@@ -145,15 +145,11 @@ const getCssProperty = (el, property) => {
 }
 
 const goToSlide = (track, cardWidth, index, fn) => {
-    // console.log(`translateX(-${cardWidth * Number(index)}px)`)
-    console.log(index)
-
+    
     track.style.transform = `translateX(-${index >= 0 ? cardWidth * Number(index) : cardWidth * Number(index*(-1))}px)`
-    // current && current.classList.remove('active')
-    // target && target.classList.add('active')
 
     fn({
-        index: index
+        slide_index: index
     })
 }
 
@@ -177,6 +173,10 @@ function Trending (props) {
             track: document.querySelector('#track_trending'),
             cards,
             cardWidth: (cardWidth_px).slice(0, cardWidth_px.length - 2)
+        })
+
+        props.setTrendingProductsData({
+            slide_index: 0
         })
 
         // eslint-disable-next-line
@@ -247,7 +247,7 @@ function Trending (props) {
                 <button className='left' onClick={() => {
                     const track = state.track
                     const cardWidth = state.cardWidth
-                    const index = (props.trending_products.index - 1) % state.cards.length
+                    const index = (props.trending_products.slide_index - 1) % state.cards.length
 
                     index >= 0 && goToSlide(track, cardWidth, index, props.setTrendingProductsData)
                 }}>
@@ -256,9 +256,9 @@ function Trending (props) {
                 <button className='right' onClick={() => {
                     const track = state.track
                     const cardWidth = state.cardWidth
-                    const index = (props.trending_products.index + 1) % state.cards.length
+                    const index = (props.trending_products.slide_index + 1) % state.cards.length
 
-                    index < (state.cards.length - 2) && goToSlide(track, cardWidth, index, props.setTrendingProductsData)
+                    Math.abs(index) < (state.cards.length - 2) && goToSlide(track, cardWidth, index, props.setTrendingProductsData)
                 }}>
                     <img src={right_arrow} alt='' />
                 </button>

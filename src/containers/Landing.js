@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Container from '../components/Container'
 import Featured from '../components/Featured'
+import Places from '../components/Places'
 import Trending from '../components/Trending'
 import { getUser } from '../redux/actions'
 
@@ -18,6 +19,7 @@ function Landing (props) {
         <Container>
             <Featured />
         </Container>
+        <Places />
         <Trending />
         </>
     )

@@ -157,7 +157,7 @@ function Featured (props) {
         const currentSlide = track.querySelector('.active')
         const slides = Array.from(document.querySelector('#track_featured').children)
         const indicators = Array.from(document.querySelector('#indicatorNav_featured').children)
-        const targetIndex = props.featured_products.index
+        const targetIndex = props.featured_products.slide_index
     
         const targetSlide = slides[targetIndex]
         const targetIndicator = indicators[targetIndex]
@@ -166,10 +166,10 @@ function Featured (props) {
         updateIndicators(currentIndicator, targetIndicator)
     
         props.setFeaturedProductsData({
-            index: (targetIndex + 1) % slides.length
+            slide_index: (targetIndex + 1) % slides.length
         })
 
-        setCurrentIndex(props.featured_products.index)
+        setCurrentIndex(props.featured_products.slide_index)
     }
 
     useEffect(() => {
@@ -265,7 +265,7 @@ function Featured (props) {
                     goToSlide(state.track, currentSlide, targetSlide)
                     updateIndicators(currentIndicator, e.target)
                     props.setFeaturedProductsData({
-                        index: targetIndex
+                        slide_index: targetIndex
                     })
                 }}></li>
                 <li onClick={(e) => {
@@ -277,7 +277,7 @@ function Featured (props) {
                     goToSlide(state.track, currentSlide, targetSlide)
                     updateIndicators(currentIndicator, e.target)
                     props.setFeaturedProductsData({
-                        index: targetIndex
+                        slide_index: targetIndex
                     })
                 }}></li>
                 <li onClick={(e) => {
@@ -289,7 +289,7 @@ function Featured (props) {
                     goToSlide(state.track, currentSlide, targetSlide)
                     updateIndicators(currentIndicator, e.target)
                     props.setFeaturedProductsData({
-                        index: targetIndex
+                        slide_index: targetIndex
                     })
                 }}></li>
                 <li onClick={(e) => {
@@ -301,7 +301,7 @@ function Featured (props) {
                     goToSlide(state.track, currentSlide, targetSlide)
                     updateIndicators(currentIndicator, e.target)
                     props.setFeaturedProductsData({
-                        index: targetIndex
+                        slide_index: targetIndex
                     })
                 }}></li>
             </Indicators>
