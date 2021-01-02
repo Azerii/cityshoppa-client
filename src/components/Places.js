@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-// import trending_badge from '../assets/landing/trending_badge.svg'
 import cake from '../assets/landing/cake.png'
 import jacket from '../assets/landing/jacket.png'
 import chicken from '../assets/landing/chicken.png'
@@ -10,41 +9,77 @@ import right_arrow from '../assets/landing/right_arrow.svg'
 import left_arrow from '../assets/landing/left_arrow.svg'
 import arrow_places from '../assets/landing/arrow_places.svg'
 import arrow_places_active from '../assets/landing/arrow_places_active.svg'
+import location_orange from '../assets/landing/location_orange.svg'
 
 import { setPlacesData } from '../redux/actions'
+import Container from './Container'
 
 const MainWrapper = styled.div`
     width: 100vw;
     margin: 5rem 0;
 `
 
+const Header = styled.div`
+    .caption {
+        display: flex;
+        justify-content: center;
+    
+        .textWrapper {
+            margin-right: 5rem;
+
+            .heading {
+                font-size: 200%;
+                font-weight: 500;
+            }
+
+            .subheading {
+                font-size: 120%;
+            }
+        }
+    
+        .changeCity {
+            display: flex;
+            align-items: flex-end;
+            cursor: pointer;
+
+            img {
+                margin-right: 0.5rem;
+                height: 1.5rem;
+            }
+
+            p {
+                font-size: 120%;
+                color: #ff7235;
+            }
+        }
+    }
+
+    .tabNav {
+        display: flex;
+        justify-content: center;
+        margin: 3rem 0;
+
+        .item {
+            font-size: 90%;
+            text-transform: uppercase;
+            margin: 0 1.5rem;
+            color: #000000;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all ease-out 200ms;
+
+            &.active, &:hover {
+                color: #ff7235;
+            }
+        }
+    }
+    
+`
+
 const Wrapper = styled.div`
     display: flex;
     width: 100vw;
-    margin-top: 5rem;
-    padding-top: 3rem;
     overflow-x: hidden;
-
-    // >.caption {
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: flex-start;
-    //     justify-content: center;
-    //     width: 30%;
-    //     padding-left: 5%;
-        
-    //     .heading {
-    //         font-size: 200%;
-    //         font-weight: 500;
-    //         color: #ff7235;
-    //         margin-bottom: 1rem;
-    //     }
-
-    //     .subheading {
-    //         font-size: 100%;
-    //         color: #000000;
-    //     }
-    // }
 
     .trackWrapper {
         width: 100%;
@@ -68,6 +103,10 @@ const Card = styled.a`
     top: 50%;
     transform: translateY(-50%);
 
+    &:visited {
+        color: inherit;
+    }
+
     .inner {
         display: flex;
         flex-direction: column;
@@ -75,6 +114,7 @@ const Card = styled.a`
         width: 15rem;
         height: 23rem;
         position: relative;
+        cursor: pointer;
         overflow: hidden;
         transition: transform ease-out 200ms;
 
@@ -240,6 +280,7 @@ function Places (props) {
     }
 
     const [state, setState] = useState(initialState)
+    const [activeTab, setActiveTab] = useState('all')
 
     useEffect(() => {
         const card1 = Array.from(document.querySelector('#track_places').children)[0]
@@ -259,6 +300,40 @@ function Places (props) {
     return (
         <>
         <MainWrapper>
+            <Container>
+                <Header>
+                    <div className='caption'>
+                        <div className='textWrapper'>
+                            <p className='heading'>Local Business</p>
+                            <p className='subheading'>Buy From And Support Businesses Near You</p>
+                        </div>
+                        <div className='changeCity'>
+                            <img src={location_orange} alt='' />
+                            <p>Change City</p>
+                        </div>
+                    </div>
+                    <div className='tabNav'>
+                        <p className={`item ${activeTab === 'all' ? 'active' : ''}`} onClick={() => {
+                            setActiveTab('all')
+                        }}>all</p>
+                        <p className={`item ${activeTab === 'consumables' ? 'active' : ''}`} onClick={() => {
+                            setActiveTab('consumables')
+                        }}>consumables</p>
+                        <p className={`item ${activeTab === 'gifts' ? 'active' : ''}`} onClick={() => {
+                            setActiveTab('gifts')
+                        }}>gifts</p>
+                        <p className={`item ${activeTab === 'groceries' ? 'active' : ''}`} onClick={() => {
+                            setActiveTab('groceries')
+                        }}>groceries</p>
+                        <p className={`item ${activeTab === 'women' ? 'active' : ''}`}  onClick={() => {
+                            setActiveTab('women')
+                        }}>women</p>
+                        <p className={`item ${activeTab === 'men' ? 'active' : ''}`}  onClick={() => {
+                            setActiveTab('men')
+                        }}>men</p>
+                    </div>
+                </Header>
+            </Container>
             <Wrapper>
                 {/* <div className='caption'>
                     <p className='heading'>Support<br />Local Business</p>

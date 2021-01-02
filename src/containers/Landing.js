@@ -16,6 +16,7 @@ function Landing (props) {
 
     return (
         <>
+        {/* <Places /> */}
         <Container>
             <Featured />
         </Container>
