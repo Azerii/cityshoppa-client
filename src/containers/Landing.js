@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Container from '../components/Container'
+import Discounted from '../components/Discounted'
 import Featured from '../components/Featured'
 import Places from '../components/Places'
 import Trending from '../components/Trending'
@@ -17,6 +18,7 @@ function Landing (props) {
     return (
         <>
         {/* <Places /> */}
+        <Discounted />
         <Container>
             <Featured />
         </Container>

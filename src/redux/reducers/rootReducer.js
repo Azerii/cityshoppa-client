@@ -3,7 +3,8 @@ import {
     GET_USER,
     SET_FEATURED_PRODUCTS_DATA,
     SET_TRENDING_PRODUCTS_DATA,
-    SET_PLACES_DATA
+    SET_PLACES_DATA,
+    SET_DISCOUNTED_DATA
 } from "../actions/types";
 
 export const initialState = {
@@ -17,6 +18,9 @@ export const initialState = {
         slide_index: 0,
     },
     places: {
+        slide_index: 0,
+    },
+    discounted: {
         slide_index: 0,
     }
 }
@@ -47,6 +51,11 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 places: action.payload
+            }
+        case SET_DISCOUNTED_DATA:
+            return {
+                ...state,
+                discounted: action.payload
             }
         default:
             return state

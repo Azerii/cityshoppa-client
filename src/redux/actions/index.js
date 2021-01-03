@@ -1,6 +1,6 @@
 import axios from "axios"
 import { store } from "../store"
-import { GET_USER, LOGIN_USER, SET_FEATURED_PRODUCTS_DATA, SET_PLACES_DATA, SET_TRENDING_PRODUCTS_DATA } from "./types"
+import { GET_USER, LOGIN_USER, SET_DISCOUNTED_DATA, SET_FEATURED_PRODUCTS_DATA, SET_PLACES_DATA, SET_TRENDING_PRODUCTS_DATA } from "./types"
 
 const api_host = store.getState().api_host
 
@@ -63,6 +63,13 @@ export const setTrendingProductsData = data => dispatch => {
 export const setPlacesData = data => dispatch => {
     dispatch({
         type: SET_PLACES_DATA,
+        payload: data
+    })
+}
+
+export const setDiscountedData = data => dispatch => {
+    dispatch({
+        type: SET_DISCOUNTED_DATA,
         payload: data
     })
 }
