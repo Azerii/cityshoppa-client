@@ -48,9 +48,11 @@ const Header = styled.div`
                 height: 1.5rem;
             }
 
-            p {
+            select {
+                appearance: none;
                 font-size: 120%;
                 color: #ff7235;
+                border: none;
             }
         }
     }
@@ -310,7 +312,15 @@ function Places (props) {
                         </div>
                         <div className='changeCity'>
                             <img src={location_orange} alt='' />
-                            <p>Change City</p>
+
+                            <select id='city' name='city'>
+                                <option className='label'>Change City</option>
+                                <option value='london'>London</option>
+                                <option value='manchester'>Manchester</option>
+                                <option value='cambridge'>Cambridge</option>
+                                <option value='belfast'>Belfast</option>
+                            </select>
+
                         </div>
                     </div>
                     <div className='tabNav'>
