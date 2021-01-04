@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import arrow_places from '../assets/landing/arrow_places.svg'
+// import arrow_places from '../assets/landing/arrow_places.svg'
 import Container from './Container'
 
 const Wrapper = styled.div`
@@ -34,7 +34,7 @@ const Shops = styled.div`
     align-items: center;
     
     .item {
-        
+
     }
 `
 
@@ -51,7 +51,7 @@ function Suppliers () {
                         </div>
                     </div>
                 </Header>
-
+                <Shops></Shops>
             </Container>
         </Wrapper>
     )

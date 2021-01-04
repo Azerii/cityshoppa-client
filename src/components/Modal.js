@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import close from '../assets/landing/close.svg'
 import product_display_img from '../assets/landing/product_display_img.png'
-import service_display_image from '../assets/landing/service_display_img.png'
+// import service_display_image from '../assets/landing/service_display_img.png'
 import mack_ken from '../assets/landing/mack&ken.svg'
-import checked_small from '../assets/landing/checked_small.svg'
+// import checked_small from '../assets/landing/checked_small.svg'
 import location_modal from '../assets/landing/location_modal.svg'
 
 const Wrapper = styled.div`
@@ -242,14 +242,14 @@ const getCssProperty = (el, property) => {
     return window.getComputedStyle(el,null).getPropertyValue(property);
 }
 
-const goToSlide = (track, cardWidth, index, fn) => {
+// const goToSlide = (track, cardWidth, index, fn) => {
 
-    track.style.transform = `translateX(-${index >= 0 ? cardWidth * Number(index) : cardWidth * Number(index*(-1))}px)`
+//     track.style.transform = `translateX(-${index >= 0 ? cardWidth * Number(index) : cardWidth * Number(index*(-1))}px)`
 
-    fn({
-        slide_index: index
-    })
-}
+//     fn({
+//         slide_index: index
+//     })
+// }
 
 function Modal (props) {
 
@@ -290,10 +290,10 @@ function Modal (props) {
                 <div className='displayCards' >
                     <div id='track_modal' className='track'>
                         <Card left={0}>
-                            <img src={product_display_img} />
+                            <img src={product_display_img} alt='' />
                         </Card>
                         <Card left={state.cardWidth}>
-                            <img src={product_display_img} />
+                            <img src={product_display_img} alt='' />
                         </Card>
                     </div>
                 </div>
