@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import Container from '../components/Container'
 import Discounted from '../components/Discounted'
 import Featured from '../components/Featured'
+import Modal from '../components/Modal'
 import Places from '../components/Places'
+import Suppliers from '../components/Suppliers'
 import Trending from '../components/Trending'
 import { getUser } from '../redux/actions'
 
@@ -18,12 +20,14 @@ function Landing (props) {
     return (
         <>
         {/* <Places /> */}
-        <Discounted />
+        <Modal />
         <Container>
             <Featured />
         </Container>
-        <Places />
+        <Places header />
+        <Discounted />
         <Trending />
+        <Suppliers />
         </>
     )
 }

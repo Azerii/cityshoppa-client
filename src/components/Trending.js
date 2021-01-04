@@ -9,6 +9,7 @@ import xmas_tree from '../assets/landing/xmas_tree.png'
 import right_arrow from '../assets/landing/right_arrow.svg'
 import left_arrow from '../assets/landing/left_arrow.svg'
 import { setTrendingProductsData } from '../redux/actions'
+import { loadModal } from '../utils'
 
 const Wrapper = styled.div`
     display: flex;
@@ -67,6 +68,7 @@ const Card = styled.li`
         border-radius: 0.3rem;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
 
         .trendingBadge {
             position: absolute;
@@ -191,7 +193,7 @@ function Trending (props) {
             </div>
             <div className='trackWrapper'>
                 <Track id='track_trending'>
-                    <Card discount left={0} >
+                    <Card discount left={0} onClick={loadModal}>
                         <div className='inner'>
                             <img src={trending_badge} alt='' className='trendingBadge' />
                             <div className='cardImageWrapper'>
@@ -203,7 +205,7 @@ function Trending (props) {
                             </div>
                         </div>
                     </Card>
-                    <Card discount left={Number(state.cardWidth)}>
+                    <Card discount left={Number(state.cardWidth)} onClick={loadModal}>
                         <div className='inner'>
                             <img src={trending_badge} alt='' className='trendingBadge' />
                             <div className='cardImageWrapper'>
@@ -215,7 +217,7 @@ function Trending (props) {
                             </div>
                         </div>
                     </Card>
-                    <Card discount left={Number(state.cardWidth)*2}>
+                    <Card discount left={Number(state.cardWidth)*2} onClick={loadModal}>
                         <div className='inner'>
                             <img src={trending_badge} alt='' className='trendingBadge' />
                             <div className='cardImageWrapper'>
@@ -227,7 +229,7 @@ function Trending (props) {
                             </div>
                         </div>
                     </Card>
-                    <Card discount left={Number(state.cardWidth)*3}>
+                    <Card discount left={Number(state.cardWidth)*3} onClick={loadModal}>
                         <div className='inner'>
                             <img src={trending_badge} alt='' className='trendingBadge' />
                             <div className='cardImageWrapper'>

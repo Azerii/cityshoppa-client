@@ -13,10 +13,11 @@ import location_orange from '../assets/landing/location_orange.svg'
 
 import { setPlacesData } from '../redux/actions'
 import Container from './Container'
+import { loadModal } from '../utils'
 
 const MainWrapper = styled.div`
     width: 100vw;
-    margin: 5rem 0;
+    margin-top: 5rem;
 `
 
 const Header = styled.div`
@@ -300,7 +301,7 @@ function Places (props) {
     return (
         <>
         <MainWrapper>
-            <Container>
+            {props.header && <Container>
                 <Header>
                     <div className='caption'>
                         <div className='textWrapper'>
@@ -333,7 +334,7 @@ function Places (props) {
                         }}>men</p>
                     </div>
                 </Header>
-            </Container>
+            </Container>}
             <Wrapper>
                 {/* <div className='caption'>
                     <p className='heading'>Support<br />Local Business</p>
@@ -341,7 +342,7 @@ function Places (props) {
                 </div> */}
                 <div className='trackWrapper'>
                     <Track id='track_places'>
-                        <Card discount left={0} >
+                        <Card discount left={0} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={jacket} alt='' className='cardimage' />
@@ -359,7 +360,7 @@ function Places (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)}>
+                        <Card discount left={Number(state.cardWidth)} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={cake} alt='' className='cardimage' />
@@ -377,7 +378,7 @@ function Places (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*2}>
+                        <Card discount left={Number(state.cardWidth)*2} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={jacket} alt='' className='cardimage' />
@@ -395,7 +396,7 @@ function Places (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*3}>
+                        <Card discount left={Number(state.cardWidth)*3} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={chicken} alt='' className='cardimage' />
@@ -413,7 +414,7 @@ function Places (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*4}>
+                        <Card discount left={Number(state.cardWidth)*4}  onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={cake} alt='' className='cardimage' />
@@ -431,7 +432,7 @@ function Places (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*5}>
+                        <Card discount left={Number(state.cardWidth)*5} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
                                     <img src={chicken} alt='' className='cardimage' />
@@ -456,7 +457,7 @@ function Places (props) {
                 <div className='btnWrapper'>
                     <button className='left' onClick={() => {
                         const track = state.track
-                        const cardWidth = state.cardWidth/2
+                        const cardWidth = state.cardWidth
                         const index = (props.places.slide_index - 1) % state.cards.length
 
                         index >= 0 && goToSlide(track, cardWidth, index, props.setPlacesData)
@@ -465,10 +466,10 @@ function Places (props) {
                     </button>
                     <button className='right' onClick={() => {
                         const track = state.track
-                        const cardWidth = state.cardWidth/2
+                        const cardWidth = state.cardWidth
                         const index = (props.places.slide_index + 1) % state.cards.length
 
-                        Math.abs(index) < (state.cards.length - 2) && goToSlide(track, cardWidth, index, props.setPlacesData)
+                        Math.abs(index) < (state.cards.length - 3) && goToSlide(track, cardWidth, index, props.setPlacesData)
                     }}>
                         <img src={right_arrow} alt='' />
                     </button>

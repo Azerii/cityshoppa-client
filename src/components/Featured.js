@@ -7,6 +7,7 @@ import featured_badge from '../assets/landing/featured.svg'
 import mack_ken from '../assets/landing/mack&ken.svg'
 import right_arrow from '../assets/landing/right_arrow.svg'
 import cookies_img from '../assets/landing/cookies.svg'
+import { loadModal } from '../utils'
 
 const Wrapper = styled.div`
     width: 100%;
@@ -194,7 +195,7 @@ function Featured (props) {
     return (
         <Wrapper>
             <Track id='track_featured'>
-                <Slide left={0}>
+                <Slide left={0} onClick={loadModal}>
                     <div className='contentLeft'>
                         <img className='featuredBadge' src={featured_badge} alt='' />
                         <img className='business' src={mack_ken} alt='' />
@@ -209,7 +210,7 @@ function Featured (props) {
                         </a>
                     </div>
                 </Slide>
-                <Slide bg='darkslateblue' left={state.slideWidth}>
+                <Slide bg='darkslateblue' left={state.slideWidth} onClick={loadModal}>
                     <div className='contentLeft'>
                         <img className='featuredBadge' src={featured_badge} alt='' />
                         <img className='business' src={mack_ken} alt='' />
@@ -224,7 +225,7 @@ function Featured (props) {
                         </a>
                     </div>
                 </Slide>
-                <Slide bg='darkslategrey' left={state.slideWidth*2}>
+                <Slide bg='darkslategrey' left={state.slideWidth*2} onClick={loadModal}>
                     <div className='contentLeft'>
                         <img className='featuredBadge' src={featured_badge} alt='' />
                         <img className='business' src={mack_ken} alt='' />
@@ -239,7 +240,7 @@ function Featured (props) {
                         </a>
                     </div>
                 </Slide>
-                <Slide bg='burlywood' left={state.slideWidth*3}>
+                <Slide bg='burlywood' left={state.slideWidth*3} onClick={loadModal}>
                     <div className='contentLeft'>
                         <img className='featuredBadge' src={featured_badge} alt='' />
                         <img className='business' src={mack_ken} alt='' />

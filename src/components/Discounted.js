@@ -13,10 +13,11 @@ import left_arrow from '../assets/landing/left_arrow.svg'
 
 import { setDiscountedData } from '../redux/actions'
 import Container from './Container'
+import { loadModal } from '../utils'
 
 const MainWrapper = styled.div`
     width: 100vw;
-    margin: 5rem 0;
+    margin-bottom: 5rem;
 `
 
 const Header = styled.div`
@@ -216,13 +217,13 @@ function Discounted (props) {
     const [state, setState] = useState(initialState)
 
     useEffect(() => {
-        const card1 = Array.from(document.querySelector('#track_places').children)[0]
-        const cards = Array.from(document.querySelector('#track_places').children)
+        const card1 = Array.from(document.querySelector('#track_discounted').children)[0]
+        const cards = Array.from(document.querySelector('#track_discounted').children)
         const cardWidth_px = getCssProperty(card1, 'width')
 
         setState({
             ...state,
-            track: document.querySelector('#track_places'),
+            track: document.querySelector('#track_discounted'),
             cards,
             cardWidth: (cardWidth_px).slice(0, cardWidth_px.length - 2)
         })
@@ -249,8 +250,8 @@ function Discounted (props) {
                     <p className='subheading'>Do Business With Your Commuity<br />Get Special Discount.</p>
                 </div> */}
                 <div className='trackWrapper'>
-                    <Track id='track_places'>
-                        <Card discount left={0} >
+                    <Track id='track_discounted'>
+                        <Card discount left={0} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={burger_king_logo} alt='' />
@@ -263,7 +264,7 @@ function Discounted (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)}>
+                        <Card discount left={Number(state.cardWidth)} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={sg_logo} alt='' />
@@ -276,7 +277,7 @@ function Discounted (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*2}>
+                        <Card discount left={Number(state.cardWidth)*2} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={starbucks_logo} alt='' />
@@ -289,7 +290,7 @@ function Discounted (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*3}>
+                        <Card discount left={Number(state.cardWidth)*3} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={burger_king_logo} alt='' />
@@ -302,7 +303,7 @@ function Discounted (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*4}>
+                        <Card discount left={Number(state.cardWidth)*4} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={sg_logo} alt='' />
@@ -315,7 +316,7 @@ function Discounted (props) {
                                 </div>
                             </div>
                         </Card>
-                        <Card discount left={Number(state.cardWidth)*5}>
+                        <Card discount left={Number(state.cardWidth)*5} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardLogoWrapper'>
                                     <img src={starbucks_logo} alt='' />
@@ -335,7 +336,7 @@ function Discounted (props) {
                 <div className='btnWrapper'>
                     <button className='left' onClick={() => {
                         const track = state.track
-                        const cardWidth = state.cardWidth/2
+                        const cardWidth = state.cardWidth
                         const index = (props.discounted.slide_index - 1) % state.cards.length
 
                         index >= 0 && goToSlide(track, cardWidth, index, props.setDiscountedData)
@@ -344,10 +345,10 @@ function Discounted (props) {
                     </button>
                     <button className='right' onClick={() => {
                         const track = state.track
-                        const cardWidth = state.cardWidth/2
+                        const cardWidth = state.cardWidth
                         const index = (props.discounted.slide_index + 1) % state.cards.length
 
-                        Math.abs(index) < (state.cards.length - 2) && goToSlide(track, cardWidth, index, props.setDiscountedData)
+                        Math.abs(index) < (state.cards.length - 3) && goToSlide(track, cardWidth, index, props.setDiscountedData)
                     }}>
                         <img src={right_arrow} alt='' />
                     </button>
