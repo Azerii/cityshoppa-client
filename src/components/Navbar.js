@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import logo from '../assets/global/logo_nav.svg'
+import logo from '../assets/global/logo_nav.png'
 import location_pin from '../assets/navbar/location_black.png'
 import search from '../assets/navbar/search.png'
 import home from '../assets/navbar/home.svg'

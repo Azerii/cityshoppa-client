@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Container from '../components/Container'
 import Discounted from '../components/Discounted'
 import Featured from '../components/Featured'
+import FeaturedPlaces from '../components/FeaturedPlaces'
 import Modal from '../components/Modal'
 import Places from '../components/Places'
 import Suppliers from '../components/Suppliers'
@@ -11,21 +12,21 @@ import { getUser } from '../redux/actions'
 
 function Landing (props) {
 
-    // useEffect(() => {
-    //     props.getUser()
-    //     setTimeout(() => console.log('user data: ', props.user))
+    useEffect(() => {
+        props.getUser()
+        setTimeout(() => console.log('user data: ', props.user))
         
-    // }, [])
+    }, [])
 
     return (
         <>
-        {/* <Places /> */}
         <Modal />
+        <FeaturedPlaces />
+        <Discounted />
         <Container>
             <Featured />
         </Container>
-        <Places header />
-        <Discounted />
+        <Places />
         <Trending />
         <Suppliers />
         </>

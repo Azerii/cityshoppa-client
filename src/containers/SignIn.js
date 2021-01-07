@@ -191,11 +191,11 @@ function SignIn (props) {
                     
                     <Route exact path='/sign-in'>
                         <div className='row'>
-                            <SigninItem href='/'>
+                            <SigninItem href='http://localhost:1337/connect/google'>
                                 <div className='imgWrapper'><img src={google} alt='' /></div>
                                 <p>Sign in with Google</p>
                             </SigninItem>
-                            <SigninItem href='/'>
+                            <SigninItem href='http://localhost:1337/connect/facebook'>
                                 <div className='imgWrapper'><img src={facebook} alt='' /></div>
                                 <p>Sign in with Facebook</p>
                             </SigninItem>

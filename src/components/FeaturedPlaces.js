@@ -9,74 +9,12 @@ import right_arrow from '../assets/landing/right_arrow.svg'
 import left_arrow from '../assets/landing/left_arrow.svg'
 import arrow_places from '../assets/landing/arrow_places.svg'
 import arrow_places_active from '../assets/landing/arrow_places_active.svg'
-import location_orange from '../assets/landing/location_orange.svg'
 
-import { setPlacesData } from '../redux/actions'
-import Container from './Container'
+import { setFeaturedPlacesData } from '../redux/actions'
 import { loadModal } from '../utils'
 
 const MainWrapper = styled.div`
     width: 100vw;
-    margin-top: 5rem;
-`
-
-const Header = styled.div`
-    .caption {
-        display: flex;
-        justify-content: center;
-    
-        .textWrapper {
-            margin-right: 5rem;
-
-            .heading {
-                font-size: 200%;
-                font-weight: 500;
-            }
-
-            .subheading {
-                font-size: 120%;
-            }
-        }
-    
-        .changeCity {
-            display: flex;
-            align-items: flex-end;
-            cursor: pointer;
-
-            img {
-                margin-right: 0.5rem;
-                height: 1.5rem;
-            }
-
-            select {
-                appearance: none;
-                font-size: 120%;
-                color: #ff7235;
-                border: none;
-            }
-        }
-    }
-
-    .tabNav {
-        display: flex;
-        justify-content: center;
-        margin: 3rem 0;
-
-        .item {
-            font-size: 90%;
-            text-transform: uppercase;
-            margin: 0 1.5rem;
-            color: #000000;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all ease-out 200ms;
-
-            &.active, &:hover {
-                color: #ff7235;
-            }
-        }
-    }
-    
 `
 
 const Wrapper = styled.div`
@@ -274,7 +212,7 @@ const goToSlide = (track, cardWidth, index, fn) => {
     })
 }
 
-function Places (props) {
+function FeaturedPlaces (props) {
 
     const initialState = {
         track: null,
@@ -283,16 +221,15 @@ function Places (props) {
     }
 
     const [state, setState] = useState(initialState)
-    const [activeTab, setActiveTab] = useState('all')
 
     useEffect(() => {
-        const card1 = Array.from(document.querySelector('#track_places').children)[0]
-        const cards = Array.from(document.querySelector('#track_places').children)
+        const card1 = Array.from(document.querySelector('#track_featured_places').children)[0]
+        const cards = Array.from(document.querySelector('#track_featured_places').children)
         const cardWidth_px = getCssProperty(card1, 'width')
 
         setState({
             ...state,
-            track: document.querySelector('#track_places'),
+            track: document.querySelector('#track_featured_places'),
             cards,
             cardWidth: (cardWidth_px).slice(0, cardWidth_px.length - 2)
         })
@@ -303,55 +240,13 @@ function Places (props) {
     return (
         <>
         <MainWrapper>
-            <Container>
-                <Header>
-                    <div className='caption'>
-                        <div className='textWrapper'>
-                            <p className='heading'>Local Business</p>
-                            <p className='subheading'>Buy From And Support Businesses Near You</p>
-                        </div>
-                        <div className='changeCity'>
-                            <img src={location_orange} alt='' />
-
-                            <select id='city' name='city'>
-                                <option className='label'>Change City</option>
-                                <option value='london'>London</option>
-                                <option value='manchester'>Manchester</option>
-                                <option value='cambridge'>Cambridge</option>
-                                <option value='belfast'>Belfast</option>
-                            </select>
-
-                        </div>
-                    </div>
-                    <div className='tabNav'>
-                        <p className={`item ${activeTab === 'all' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('all')
-                        }}>all</p>
-                        <p className={`item ${activeTab === 'consumables' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('consumables')
-                        }}>consumables</p>
-                        <p className={`item ${activeTab === 'gifts' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('gifts')
-                        }}>gifts</p>
-                        <p className={`item ${activeTab === 'groceries' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('groceries')
-                        }}>groceries</p>
-                        <p className={`item ${activeTab === 'women' ? 'active' : ''}`}  onClick={() => {
-                            setActiveTab('women')
-                        }}>women</p>
-                        <p className={`item ${activeTab === 'men' ? 'active' : ''}`}  onClick={() => {
-                            setActiveTab('men')
-                        }}>men</p>
-                    </div>
-                </Header>
-            </Container>
             <Wrapper>
                 {/* <div className='caption'>
                     <p className='heading'>Support<br />Local Business</p>
                     <p className='subheading'>Do Business With Your Commuity<br />Get Special Discount.</p>
                 </div> */}
                 <div className='trackWrapper'>
-                    <Track id='track_places'>
+                    <Track id='track_featured_places'>
                         <Card discount left={0} onClick={loadModal}>
                             <div className='inner'>
                                 <div className='cardImageWrapper'>
@@ -468,18 +363,18 @@ function Places (props) {
                     <button className='left' onClick={() => {
                         const track = state.track
                         const cardWidth = state.cardWidth
-                        const index = (props.places.slide_index - 1) % state.cards.length
+                        const index = (props.featured_places.slide_index - 1) % state.cards.length
 
-                        index >= 0 && goToSlide(track, cardWidth, index, props.setPlacesData)
+                        index >= 0 && goToSlide(track, cardWidth, index, props.setFeaturedPlacesData)
                     }}>
                         <img src={left_arrow} alt='' />
                     </button>
                     <button className='right' onClick={() => {
                         const track = state.track
                         const cardWidth = state.cardWidth
-                        const index = (props.places.slide_index + 1) % state.cards.length
+                        const index = (props.featured_places.slide_index + 1) % state.cards.length
 
-                        Math.abs(index) < (state.cards.length - 3) && goToSlide(track, cardWidth, index, props.setPlacesData)
+                        Math.abs(index) < (state.cards.length - 3) && goToSlide(track, cardWidth, index, props.setFeaturedPlacesData)
                     }}>
                         <img src={right_arrow} alt='' />
                     </button>
@@ -492,14 +387,14 @@ function Places (props) {
 
 const mapStateToProps = state => {
     return {
-        places: state.places,
+        featured_places: state.featured_places,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setPlacesData: (data) => dispatch(setPlacesData(data))
+        setFeaturedPlacesData: (data) => dispatch(setFeaturedPlacesData(data))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Places)
+export default connect(mapStateToProps, mapDispatchToProps)(FeaturedPlaces)

@@ -10,6 +10,8 @@ import Layout from './containers/Layout';
 import Landing from './containers/Landing';
 import SignUp from './containers/SignUp';
 import SignIn from './containers/SignIn';
+import Container from './components/Container';
+import LoginRedirect from './containers/LoginRedirect';
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
                 <Route exact path='/' component={Landing} />
                 <Route path='/sign-up' component={SignUp} />
                 <Route path='/sign-in' component={SignIn} />
-                <Route component={() => <h1>Page Not Found.</h1>} />
+                <Route path='/auth/:provider/callback' component={LoginRedirect} />
+                <Route component={() => <Container><h1>Page Not Found.</h1></Container>} />
               </Switch>
             </Layout>
           </div>

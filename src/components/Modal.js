@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const ModalContent = styled.div`
     width: 60%;
     height: 100vh;
-    border-radius: 0.3rem;
+    // border-radius: 0.3rem;
     background-color: #ffffff;
     overflow: auto;
     position: relative;
@@ -39,15 +39,12 @@ const ModalContent = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // background-color: #ffffff;
         padding: 2rem;
-        // position: sticky;
-        // top: 0;
-        // z-index: 234;
 
         .heading {
             font-size: 200%;
             font-weight: 500;
+            color: #666666;
         }
 
         .closeIcon {
@@ -58,7 +55,7 @@ const ModalContent = styled.div`
 
     .displayCards {
         width: 100%;
-        margin: 2rem 0;
+        margin-bottom: 2rem;
         overflow: hidden;
 
         .track {

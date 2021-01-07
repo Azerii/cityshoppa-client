@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import logo from '../assets/global/logo_footer.svg'
+import logo from '../assets/global/logo_footer.png'
 import Container from './Container';
 
 const Wrapper = styled.div`

@@ -1,10 +1,11 @@
 import { 
-    LOGIN_USER, 
+    SET_TOKEN, 
     GET_USER,
     SET_FEATURED_PRODUCTS_DATA,
     SET_TRENDING_PRODUCTS_DATA,
     SET_PLACES_DATA,
-    SET_DISCOUNTED_DATA
+    SET_DISCOUNTED_DATA,
+    SET_FEATURED_PLACES_DATA
 } from "../actions/types";
 
 export const initialState = {
@@ -20,14 +21,17 @@ export const initialState = {
     places: {
         slide_index: 0,
     },
+    featured_places: {
+        slide_index: 0,
+    },
     discounted: {
         slide_index: 0,
-    }
+    },
 }
 
 export default function rootReducer (state = initialState, action) {
     switch (action.type) {
-        case LOGIN_USER:
+        case SET_TOKEN:
             return {
                 ...state,
                 token: action.payload
@@ -51,6 +55,11 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 places: action.payload
+            }
+        case SET_FEATURED_PLACES_DATA:
+            return {
+                ...state,
+                featured_places: action.payload
             }
         case SET_DISCOUNTED_DATA:
             return {
