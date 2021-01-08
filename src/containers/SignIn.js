@@ -159,14 +159,20 @@ const Button = styled.button`
 function SignIn (props) {
 
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        props.loginUser({
-            identifier: 'ezenniaodinaka58@outlook.com',
-            password: 'subsaharan'
+        setLoading(true)
+        const email = document.querySelector('#email').value
+        const password = document.querySelector('#password').value
+
+        await props.loginUser({
+            identifier: email,
+            password: password
         })
-        return
+
+        setLoading(false)
     }
 
     const toggleShowPassword = (id) => {
@@ -221,15 +227,15 @@ function SignIn (props) {
                         <form onSubmit={(e) => handleSubmit(e)}>
                             {/* Note: all fields must be required */}
                             <FormInput>
-                                <input type='email' id='email' name='email' placeholder='Email Address'  />
+                                <input type='email' id='email' name='email' placeholder='Email Address' required />
                             </FormInput>
                             <FormInput>
-                                <input className='password' type='password' id='password' name='password' placeholder='Password'  />
+                                <input className='password' type='password' id='password' name='password' placeholder='Password' required />
                                 <p onClick={() => toggleShowPassword('password')}>{showPassword ? 'Hide' : 'Show'} me</p>
                             </FormInput>
 
                             <Button type='submit'>
-                                <span>Sign In</span>
+                                <span>{loading ? '...' : 'Sign In'}</span>
                             </Button>
                         </form>
                     </Route>

@@ -13,8 +13,8 @@ import { getUser } from '../redux/actions'
 function Landing (props) {
 
     useEffect(() => {
-        props.getUser()
-        setTimeout(() => console.log('user data: ', props.user))
+        props.token && props.getUser()
+        // setTimeout(() => console.log('user data: ', props.user))
         
     }, [])
 
@@ -41,6 +41,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
+        token: state.token,
         user: state.user,
     }
 }

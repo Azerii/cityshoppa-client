@@ -14,6 +14,29 @@ export const loginUser = cred => async dispatch => {
                 type: SET_TOKEN,
                 payload: res.data.jwt
             })
+
+            window.location.replace('/')
+        } else {
+            throw new Error("Invalid Credentials")
+        }
+    } catch (e) {
+        console.log(e.message)
+    }
+
+}
+
+export const registerUser = cred => async dispatch => {
+
+    try {
+        const res =  await axios.post(`${api_host}/auth/local/register`, cred)
+
+        if(res.data.user) {
+            // dispatch({
+            //     type: SET_TOKEN,
+            //     payload: res.data.jwt
+            // })
+
+            window.location.replace('/sign-in/local')
         } else {
             throw new Error("Invalid Credentials")
         }

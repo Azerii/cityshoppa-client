@@ -10,8 +10,12 @@ import food from '../assets/navbar/food.svg'
 import fun_chill from '../assets/navbar/fun_chill.svg'
 import quick_shop from '../assets/navbar/quick_shop.svg'
 import discounts from '../assets/navbar/discounts.svg'
+import logged_in from '../assets/global/logged_in.svg'
 
 import Container from './Container'
+import { connect } from 'react-redux'
+import { setToken } from '../redux/actions'
+import { useHistory } from 'react-router-dom'
 
 const Wrapper = styled.div`
     padding: 2rem 0;
@@ -119,6 +123,7 @@ const Top = styled.div`
 
     .contentRight {
         width: fit-content;
+        position: relative;
 
         a {
             padding: 0.5rem 1rem;
@@ -135,6 +140,45 @@ const Top = styled.div`
                 background-color: transparent;
                 border: 1px solid #ff7235;
                 color: #ff7235;
+            }
+        }
+
+        .user {
+            width: fit-content;
+            cursor: pointer;
+
+            p {
+                color: #0BB53B;
+                margin-right: 0.5rem;
+            }
+
+            img {
+                height: 2rem;
+            }
+        }
+
+        .signOut {
+            position: absolute;
+            top: 3rem;
+            right: 0;
+            min-width: 7rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffffff;
+            border: 1px solid #666666;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease-out 200ms;
+
+            &:hover {
+                background-color: #ff7235;
+                color: #ffffff;
+                border-color: #ff7235;
+            }
+
+            &.show {
+                opacity: 1;
+                pointer-events: all;
             }
         }
     }
@@ -168,13 +212,9 @@ const Bottom = styled.div`
 `
 
 
-function Navbar () {
+function Navbar (props) {
 
-    // const handleSearch = () => {
-
-    // }
-
-    
+    const history = useHistory();
 
     return (
         <>
@@ -201,12 +241,33 @@ function Navbar () {
                         </div>
                     </div>
                     <div className='contentRight'>
-                        <a href='/sign-in' className='signIn'>
-                            Sign In
-                        </a>
-                        <a href='/sign-up' className='signUp'>
-                            Sign Up
-                        </a>
+                        {props.token && <>
+                            <div className='user' onClick={() => {
+                                document.querySelector('.signOut').classList.toggle('show')
+                            }}>
+                                <p>
+                                    {props.user && props.user.username}
+                                </p>
+                                <img src={logged_in} alt='' />
+                            </div>
+                            <div className='signOut'>
+                                <p onClick={() => {
+                                    props.setToken(null)
+                                    setTimeout(() => {
+                                        history.push('/')
+                                    })
+                                }}>Sign out</p>
+                            </div>
+                        </>}
+                        {!props.token && <>
+                            <a href='/sign-in' className='signIn'>
+                                Sign In
+                            </a>
+                            <a href='/sign-up' className='signUp'>
+                                Sign Up
+                            </a>
+                        </>}
+                        
                     </div>
                 </Top>
                 <Bottom>
@@ -244,4 +305,17 @@ function Navbar () {
     )
 }
 
-export default Navbar
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setToken: (token) => dispatch(setToken(token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

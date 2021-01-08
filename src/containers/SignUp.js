@@ -8,6 +8,8 @@ import apple from '../assets/auth/apple.svg'
 import email from '../assets/auth/email.svg'
 
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { registerUser } from '../redux/actions'
 
 const Wrapper = styled.div`
     padding: 5rem 0;
@@ -146,15 +148,33 @@ const Button = styled.button`
 `
 
 
-function SignUp () {
+function SignUp (props) {
 
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
+        const username = document.querySelector('#name').value
+        const email = document.querySelector('#email').value
+        const password = document.querySelector('#password').value
+        const confirmPassword = document.querySelector('#confirmPassword').value
 
-        return
+        if (password !== confirmPassword) {
+            alert('The passwords must match!')
+        } else if (password.length < 8) {
+            alert('The passwords must be at least 8 characters long')
+        } else {
+            await props.registerUser({
+                username,
+                email,
+                password
+            })
+        }
+
+        setLoading(false)
     }
 
     const toggleShowPassword = (id) => {
@@ -204,7 +224,7 @@ function SignUp () {
                             </SignupItem>
 
                             <form onSubmit={(e) => handleSubmit(e)}>
-                                <div className='names'>
+                                {/* <div className='names'>
                                     <div>
                                         <FormInput>
                                             <input type='text' id='firstName' name='firstName' placeholder='First Name' required />
@@ -215,7 +235,10 @@ function SignUp () {
                                             <input type='text' id='lastName' name='lasstName' placeholder='Last Name' required />
                                         </FormInput>
                                     </div>
-                                </div>
+                                </div> */}
+                                <FormInput>
+                                    <input type='text' id='name' name='name' placeholder='Full Name' required />
+                                </FormInput>
                                 <FormInput>
                                     <input type='email' id='email' name='email' placeholder='Email Address' required />
                                 </FormInput>
@@ -229,7 +252,7 @@ function SignUp () {
                                 </FormInput>
 
                                 <Button type='submit'>
-                                    <span>Sign Up</span>
+                                <span>{loading ? '...' : 'Sign Up'}</span>
                                 </Button>
                             </form>
                         </Route>
@@ -244,4 +267,10 @@ function SignUp () {
     )
 }
 
-export default SignUp
+const mapDispatchToProps = dispatch => {
+    return {
+        registerUser: (cred) => dispatch(registerUser(cred))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)
