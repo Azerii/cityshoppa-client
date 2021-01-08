@@ -15,7 +15,7 @@ function Landing (props) {
     useEffect(() => {
         props.token && props.getUser()
         // setTimeout(() => console.log('user data: ', props.user))
-        
+        // eslint-disable-next-line
     }, [])
 
     return (

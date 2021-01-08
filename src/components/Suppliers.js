@@ -104,7 +104,7 @@ function Suppliers () {
                 <Shops>
                     <div className='item'>
                         <div className='imgWrapper'>
-                            <img src={'https://images.unsplash.com/photo-1467139840664-96b244a66825?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cmVwYWlyc3xlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'} />
+                            <img src={'https://images.unsplash.com/photo-1467139840664-96b244a66825?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cmVwYWlyc3xlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'} alt='' />
                         </div>
                         <div className='textWrapper'>
                             <p className='title'>iFixit</p>
@@ -117,7 +117,7 @@ function Suppliers () {
                     </div>
                     <div className='item'>
                         <div className='imgWrapper'>
-                            <img src={'https://images.unsplash.com/photo-1589269806214-714118a4c0d6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzZ8fHRyYW5zcG9ydHxlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'} />
+                            <img src={'https://images.unsplash.com/photo-1589269806214-714118a4c0d6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzZ8fHRyYW5zcG9ydHxlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'} alt='' />
                         </div>
                         <div className='textWrapper'>
                             <p className='title'>Q-Logistics</p>

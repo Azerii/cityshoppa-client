@@ -40,7 +40,8 @@ const LoginRedirect = (props) => {
         console.log(err);
         setText('An error occurred.')
       });
-  }, [history, location.search, params.providerName]);
+      // eslint-disable-next-line
+  }, [history, location.search, params.provider]);
 
   return <Container><p>{text}</p></Container>
 };
