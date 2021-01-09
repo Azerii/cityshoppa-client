@@ -197,11 +197,11 @@ function SignIn (props) {
                     
                     <Route exact path='/sign-in'>
                         <div className='row'>
-                            <SigninItem href='http://localhost:1337/connect/google'>
+                            <SigninItem href='https://cityshoppa.herokuapp.com/connect/google'>
                                 <div className='imgWrapper'><img src={google} alt='' /></div>
                                 <p>Sign in with Google</p>
                             </SigninItem>
-                            <SigninItem href='http://localhost:1337/connect/facebook'>
+                            <SigninItem href='https://cityshoppa.herokuapp.com/connect/facebook'>
                                 <div className='imgWrapper'><img src={facebook} alt='' /></div>
                                 <p>Sign in with Facebook</p>
                             </SigninItem>
