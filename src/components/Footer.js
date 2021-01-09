@@ -68,7 +68,7 @@ const Body = styled.div`
     }
 
     .logo {
-        height: 1.5rem;
+        height: 2rem;
     }
 `
 

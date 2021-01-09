@@ -5,7 +5,7 @@ import Container from '../components/Container';
 import { getUser, setToken } from '../redux/actions';
 
 // const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const backendUrl = 'http://localhost:1337';
+const backendUrl = 'https://cityshoppa.herokuapp.com';
 
 const LoginRedirect = (props) => {
   const [text, setText] = useState('Loading...');

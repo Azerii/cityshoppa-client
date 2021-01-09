@@ -29,8 +29,8 @@ const Wrapper = styled.div`
 
 const ModalContent = styled.div`
     width: 60%;
-    height: 100vh;
-    // border-radius: 0.3rem;
+    height: 90vh;
+    border-radius: 0.3rem;
     background-color: #ffffff;
     overflow: auto;
     position: relative;
@@ -39,7 +39,7 @@ const ModalContent = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 2rem;
+        padding: 1rem 2rem;
 
         .heading {
             font-size: 200%;
@@ -55,7 +55,7 @@ const ModalContent = styled.div`
 
     .displayCards {
         width: 100%;
-        margin-bottom: 2rem;
+        margin: 1rem 0;
         overflow: hidden;
 
         .track {
@@ -305,7 +305,7 @@ function Modal (props) {
                 <div className='description'>
                     <p>For the purposes of auth, a JWT is a token that is issued by the server. The token has a JSON payload that contains information specific to the user. This token can be used by clients when talking to APIs (by sending it along as an HTTP header) so that the APIs can identify the user represented by the token, and take user specific action.</p>
                 </div>
-                <div className='formWrapper'>
+                {/* <div className='formWrapper'>
                     <p className='heading'>Contact Vendor</p>
                     <form>
                         <input type='text' id='full_name' name='name' placeholder='full name' required/>
@@ -316,13 +316,13 @@ function Modal (props) {
                             <button type='submit'>
                                 Send
                             </button>
-                            {/* <p className='successMsg'>
+                            <p className='successMsg'>
                                 message sent
                                 <img src={checked_small} alt='' />
-                            </p> */}
+                            </p>
                         </div>
                     </form>
-                </div>
+                </div> */}
                 <div className='contactDetails'>
                     <p className='heading'>Vendor Info</p>
 

@@ -9,6 +9,7 @@ import email from '../assets/auth/email.svg'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginUser } from '../redux/actions'
+import Loader from '../components/Loader'
 
 const Wrapper = styled.div`
     padding: 5rem 0;
@@ -235,7 +236,7 @@ function SignIn (props) {
                             </FormInput>
 
                             <Button type='submit'>
-                                <span>{loading ? '...' : 'Sign In'}</span>
+                                {loading ? <Loader /> : <span>Sign In</span>}
                             </Button>
                         </form>
                     </Route>

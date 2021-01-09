@@ -43,7 +43,7 @@ const Top = styled.div`
         width: fit-content;
 
         img {
-            height: 1.5rem;
+            height: 2rem;
         }
         
         .hamburger {

@@ -5,11 +5,12 @@ import {
     SET_TRENDING_PRODUCTS_DATA,
     SET_PLACES_DATA,
     SET_DISCOUNTED_DATA,
-    SET_FEATURED_PLACES_DATA
+    SET_FEATURED_PLACES_DATA,
+    SET_CATEGORY
 } from "../actions/types";
 
 export const initialState = {
-    api_host: 'http://localhost:1337',
+    api_host: 'https://cityshoppa.herokuapp.com',
     user: {},
     token: null,
     featured_products: {
@@ -27,6 +28,7 @@ export const initialState = {
     discounted: {
         slide_index: 0,
     },
+    category: 'all'
 }
 
 export default function rootReducer (state = initialState, action) {
@@ -65,6 +67,11 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 discounted: action.payload
+            }
+        case SET_CATEGORY:
+            return {
+                ...state,
+                category: action.payload
             }
         default:
             return state
