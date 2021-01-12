@@ -69,6 +69,11 @@ const Card = styled.li`
         position: relative;
         overflow: hidden;
         cursor: pointer;
+        transition: all ease-out 200ms;
+
+        &:hover {
+            box-shadow: 0px 0px 10px #e5e5e5;
+        }
 
         .trendingBadge {
             position: absolute;

@@ -324,24 +324,25 @@ function Places (props) {
                         </div>
                     </div>
                     <div className='tabNav'>
-                        <p className={`item ${activeTab === 'all' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('all')
+                        {/* Clothes, Shoes, Consumer electronics, Craft, Pet food */}
+                        <p className={`item ${activeTab === 1 ? 'active' : ''}`} onClick={() => {
+                            setActiveTab(1)
                         }}>all</p>
-                        <p className={`item ${activeTab === 'consumables' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('consumables')
-                        }}>consumables</p>
-                        <p className={`item ${activeTab === 'gifts' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('gifts')
-                        }}>gifts</p>
-                        <p className={`item ${activeTab === 'groceries' ? 'active' : ''}`} onClick={() => {
-                            setActiveTab('groceries')
-                        }}>groceries</p>
-                        <p className={`item ${activeTab === 'women' ? 'active' : ''}`}  onClick={() => {
-                            setActiveTab('women')
-                        }}>women</p>
-                        <p className={`item ${activeTab === 'men' ? 'active' : ''}`}  onClick={() => {
-                            setActiveTab('men')
-                        }}>men</p>
+                        <p className={`item ${activeTab === 2 ? 'active' : ''}`} onClick={() => {
+                            setActiveTab(2)
+                        }}>clothes</p>
+                        <p className={`item ${activeTab === 3 ? 'active' : ''}`} onClick={() => {
+                            setActiveTab(3)
+                        }}>Shoes</p>
+                        <p className={`item ${activeTab === 4 ? 'active' : ''}`} onClick={() => {
+                            setActiveTab(4)
+                        }}>consumer electronics</p>
+                        <p className={`item ${activeTab === 5 ? 'active' : ''}`}  onClick={() => {
+                            setActiveTab(5)
+                        }}>crafts</p>
+                        <p className={`item ${activeTab === 6 ? 'active' : ''}`}  onClick={() => {
+                            setActiveTab(6)
+                        }}>pet food</p>
                     </div>
                 </Header>
             </Container>

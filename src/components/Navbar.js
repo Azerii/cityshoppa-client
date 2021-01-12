@@ -195,13 +195,15 @@ const Bottom = styled.div`
         align-items: center;
         justify-content: center;
 
-        .item {
+        >.item {
+            position: relative;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: #000000;
             font-size: 100%;
             padding: 0 1rem;
+            cursor: pointer;
 
             img {
                 height: 1rem;
@@ -209,6 +211,39 @@ const Bottom = styled.div`
             }
         }
     }
+`
+
+const Menu = styled.div`
+    // display: flex;
+    // flex-direction: column;
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-25%);
+    background-color: #ffffff;
+    box-shadow: 0px 0px 3px #e5e5e5;
+    border-radius: 0.2rem;
+    min-width: 8rem;
+    z-index: 23;
+    pointer-events: none;
+    opacity: 0;
+
+    &.show {
+        pointer-events: all;
+        opacity: 1;
+    }
+
+    .item {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #000000;
+        // transition: all ease-out 200ms;
+
+        &:hover {
+            background-color: #f9f9f9;
+        }
+    }
+
 `
 
 
@@ -276,14 +311,35 @@ function Navbar (props) {
                             <img src={home} alt='' />
                             <span>Home</span>
                         </a>
-                        <a href='/gifts' className='item'>
+                        <div className='item' onClick={() => {
+                            document.querySelector('#menu_gifts').classList.toggle('show')
+                            document.querySelector('#menu_food').classList.remove('show')
+                        }}>
                             <img src={gifts} alt='' />
                             <span>Gifts</span>
-                        </a>
-                        <a href='/food' className='item'>
+
+                            <Menu id='menu_gifts'>
+                                <a href='/' className='item'>Cards</a>
+                                <a href='/' className='item'>Jewellery</a>
+                                <a href='/' className='item'>Books</a>
+                                <a href='/' className='item'>Cards</a>
+                            </Menu>
+                        </div>
+                        <div className='item' onClick={() => {
+                            document.querySelector('#menu_food').classList.toggle('show')
+                            document.querySelector('#menu_gifts').classList.remove('show')
+                        }}>
                             <img src={food} alt='' />
                             <span>Food</span>
-                        </a>
+
+                            <Menu id='menu_food'>
+                                <a href='/' className='item'>Soups</a>
+                                <a href='/' className='item'>Cereal</a>
+                                <a href='/' className='item'>Fruits</a>
+                                <a href='/' className='item'>Dairy</a>
+                                <a href='/' className='item'>Grains</a>
+                            </Menu>
+                        </div>
                         <a href='/fun-and-chill' className='item'>
                             <img src={fun_chill} alt='' />
                             <span>Fun&amp;Chill</span>

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const ModalContent = styled.div`
     width: 60%;
     height: 90vh;
-    border-radius: 0.3rem;
+    border-radius: 1rem;
     background-color: #ffffff;
     overflow: auto;
     position: relative;

@@ -133,6 +133,11 @@ const Card = styled.a`
             height: 70%;
             border-radius: 0.3rem;
             overflow: hidden;
+            transition: transform ease-out 200ms;
+
+            &:hover {
+                transform: scale(1.1);
+            }
 
             img {
                 width: 100%
