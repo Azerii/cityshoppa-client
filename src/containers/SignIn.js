@@ -12,15 +12,16 @@ import { loginUser } from '../redux/actions'
 import Loader from '../components/Loader'
 
 const Wrapper = styled.div`
-    padding: 5rem 0;
+    padding: 2rem 0;
 `
 
 const Inner = styled.div`
     display: flex;
-    width: 60%;
+    width: fit-content;
     min-height: 30vh;
     margin: auto;
     margin-bottom: 3rem;
+    padding: auto 2rem;
     border: 1px solid #666666;
     border-radius: 2rem;
     overflow: hidden;
@@ -31,7 +32,7 @@ const Inner = styled.div`
     }
 
     .content {
-        width: 70%;
+        min-width: 40vw;
         height: 100%;
         margin: auto;
         display: flex;
@@ -41,13 +42,16 @@ const Inner = styled.div`
 
         .heading {
             font-weight: 500;
+            text-align: center;
         }
 
         .subheading {
             font-size: 150%;
+            text-align: center;
 
             &.or {
                 text-align: center;
+                width: 40%;
             }
         }
 
@@ -55,6 +59,10 @@ const Inner = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            &.single {
+                justify-content: center;
+            }
         }
 
         form {
@@ -75,7 +83,7 @@ const Inner = styled.div`
         .bottom {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 2rem;
             font-size: 100%;
 
@@ -197,22 +205,32 @@ function SignIn (props) {
                     <p className='subheading'>Sign In To Your Account</p>
                     
                     <Route exact path='/sign-in'>
-                        <div className='row'>
+                        <div className='row single'>
                             <SigninItem href='https://cityshoppa.herokuapp.com/connect/google'>
                                 <div className='imgWrapper'><img src={google} alt='' /></div>
                                 <p>Sign in with Google</p>
                             </SigninItem>
+                            {/* <SigninItem href='https://cityshoppa.herokuapp.com/connect/facebook'>
+                                <div className='imgWrapper'><img src={facebook} alt='' /></div>
+                                <p>Sign in with Facebook</p>
+                            </SigninItem> */}
+                        </div>
+                        <div className='row single'>
+                            {/* <SigninItem href='https://cityshoppa.herokuapp.com/connect/google'>
+                                <div className='imgWrapper'><img src={google} alt='' /></div>
+                                <p>Sign in with Google</p>
+                            </SigninItem> */}
                             <SigninItem href='https://cityshoppa.herokuapp.com/connect/facebook'>
                                 <div className='imgWrapper'><img src={facebook} alt='' /></div>
                                 <p>Sign in with Facebook</p>
                             </SigninItem>
                         </div>
-                        <div className='row'>
-                            <SigninItem href='/'>
+                        <div className='row single'>
+                            {/* <SigninItem href='/'>
                                 <div className='imgWrapper'><img src={apple} alt='' /></div>
                                 <p>Sign in with Apple</p>
-                            </SigninItem>
-                            <p className='subheading or'>Or</p>
+                            </SigninItem> */}
+                            {/* <p className='subheading or'>Or</p> */}
                             <SigninItem href='/sign-in/local'>
                                 <div className='imgWrapper'><img src={email} alt='' /></div>
                                 <p>Sign in with Email</p>
@@ -241,7 +259,7 @@ function SignIn (props) {
                         </form>
                     </Route>
                     <div className='bottom'>
-                        <a href='/'>Forgot Password</a>
+                        {/* <a href='/'>Forgot Password</a> */}
                         <p>
                             Don't have an account?&nbsp;
                             <a href='/sign-up'>Sign Up</a>

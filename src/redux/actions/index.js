@@ -1,8 +1,9 @@
 import axios from "axios"
 import { store } from "../store"
-import { GET_USER, SET_TOKEN, SET_DISCOUNTED_DATA, SET_FEATURED_PLACES_DATA, SET_FEATURED_PRODUCTS_DATA, SET_PLACES_DATA, SET_TRENDING_PRODUCTS_DATA, SET_CATEGORY } from "./types"
+import { GET_USER, SET_TOKEN, SET_DISCOUNTED_DATA, SET_FEATURED_PLACES_DATA, SET_FEATURED_PRODUCTS_DATA, SET_PLACES_DATA, SET_TRENDING_PRODUCTS_DATA, SET_CATEGORY, SET_MODAL_OPEN, SET_MODAL_DATA } from "./types"
+import { API_HOST } from '../../utils/config'
 
-const api_host = store.getState().api_host
+const api_host = API_HOST
 
 export const loginUser = cred => async dispatch => {
 
@@ -76,6 +77,28 @@ export const getUser = async dispatch => {
 
 }
 
+const getCollection = async (collectionType, id) => {
+  let res;
+  try {
+    if (id) {
+      res = await axios.get(`${api_host}/${collectionType}/${id}`);
+    } else {
+      res = await axios.get(`${api_host}/${collectionType}`);
+    }
+
+    if (res.data) {
+      return res.data;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  return null;
+};
+
+export default getCollection;
+
+
 export const setFeaturedProductsData = data => dispatch => {
     dispatch({
         type: SET_FEATURED_PRODUCTS_DATA,
@@ -115,5 +138,19 @@ export const setCategory = name => dispatch => {
     dispatch({
         type: SET_CATEGORY,
         payload: name
+    })
+}
+
+export const setModalOpen = status => dispatch => {
+    dispatch({
+        type: SET_MODAL_OPEN,
+        payload: status
+    })
+}
+
+export const setModalData = data => dispatch => {
+    dispatch({
+        type: SET_MODAL_DATA,
+        payload: data
     })
 }

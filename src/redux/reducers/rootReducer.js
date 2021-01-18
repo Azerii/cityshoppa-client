@@ -6,7 +6,9 @@ import {
     SET_PLACES_DATA,
     SET_DISCOUNTED_DATA,
     SET_FEATURED_PLACES_DATA,
-    SET_CATEGORY
+    SET_CATEGORY,
+    SET_MODAL_OPEN,
+    SET_MODAL_DATA
 } from "../actions/types";
 
 export const initialState = {
@@ -28,7 +30,9 @@ export const initialState = {
     discounted: {
         slide_index: 0,
     },
-    category: 'all'
+    category: 'all',
+    modalOpen: false,
+    modalData: {}
 }
 
 export default function rootReducer (state = initialState, action) {
@@ -72,6 +76,16 @@ export default function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 category: action.payload
+            }
+        case SET_MODAL_OPEN:
+            return {
+                ...state,
+                modalOpen: action.payload
+            }
+        case SET_MODAL_DATA:
+            return {
+                ...state,
+                modalData: action.payload
             }
         default:
             return state

@@ -20,7 +20,7 @@ function Landing (props) {
 
     return (
         <>
-        <Modal />
+        {props.modalOpen && <Modal />}
         <FeaturedPlaces />
         <Discounted />
         <Container>
@@ -43,6 +43,7 @@ const mapStateToProps = state => {
     return {
         token: state.token,
         user: state.user,
+        modalOpen: state.modalOpen,
     }
 }
 

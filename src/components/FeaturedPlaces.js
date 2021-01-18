@@ -1,17 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-
-import cake from '../assets/landing/cake.png'
-import jacket from '../assets/landing/jacket.png'
-import chicken from '../assets/landing/chicken.png'
-// import right_arrow from '../assets/landing/right_arrow.svg'
-// import left_arrow from '../assets/landing/left_arrow.svg'
 import arrow_places from '../assets/landing/arrow_places.svg'
 import arrow_places_active from '../assets/landing/arrow_places_active.svg'
+import green_heart from '../assets/landing/green_heart.svg'
 
 import { setFeaturedPlacesData } from '../redux/actions'
-import { loadModal } from '../utils'
+import { loadModal, dummyData, getRandomRange } from '../utils'
 
 const Wrapper = styled.div`
     display: flex;
@@ -19,12 +14,14 @@ const Wrapper = styled.div`
     margin-bottom: 2rem;
 
     >.caption {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        width: 30%;
+        width: 25%;
         padding-left: 5%;
+        // border: 1px solid red;
         
         .heading {
             max-width: 90%;
@@ -32,30 +29,59 @@ const Wrapper = styled.div`
             font-weight: 500;
             color: #000000;
             margin-bottom: 1rem;
+            z-index: 10;
         }
 
         .subheading {
             max-width: 80%;
             font-size: 100%;
             color: #000000;
+            z-index: 10;
+        }
+
+        .charityCaption {
+            display: flex;
+            align-items: center;
+            font-size: 100%;
+            margin-top: 2rem;
+
+            img {
+                height: 2rem;
+                margin-right: 0.7rem;
+            }
         }
     }
 
+    .bgImage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url(https://source.unsplash.com/collection/1198620/500x900);
+        filter: blur(5px);
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+    }
+
     .trackWrapper {
-        width: 70%;
+        width: 75%;
     }
 `
 
 const Track = styled.div`
     display: flex;
+    flex-wrap: wrap;
     position: relative;
-    margin: 2rem 0;
+    // margin: 2rem 0;
 `
 
 const Card = styled.a`
     display: block;
     width: 25%;
-    padding: 0 1rem;
+    padding: 1rem;
 
     &:visited {
         color: inherit;
@@ -66,7 +92,7 @@ const Card = styled.a`
         flex-direction: column;
         // justify-content: space-between;
         width: 100%;
-        height: 17rem;
+        height: 19rem;
         position: relative;
         cursor: pointer;
         overflow: hidden;
@@ -178,161 +204,53 @@ const Card = styled.a`
 
 function FeaturedPlaces (props) {
 
+    const [products] = useState(dummyData.products)
+    const [limits, setLimits] = useState(getRandomRange(8, products.length))
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLimits(getRandomRange(8, products.length))
+        }, 30_000);
+
+        return () => clearInterval(interval);
+        // eslint-disable-next-line
+    }, [])
+
     return (
         <>
         <Wrapper>
             <div className='caption'>
-                <p className='heading'>Shop Local Business</p>
+                {/* <div className='bgImage'></div> */}
+                <p className='heading'>Shop Local</p>
                 <p className='subheading'>Support and shop with local businesses near you</p>
+                <p className='charityCaption'>
+                    <img src={green_heart} alt='' />
+                    We Love Charity
+                </p>
             </div>
             <div className='trackWrapper'>
                 <Track id='track_featured_places'>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={jacket} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Kajees Apparels</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
+                    {products.slice(limits.lower, limits.upper).map((product) => (
+                        <Card key={product.id} discount onClick={loadModal}>
+                            <div className='inner'>
+                                <div className='cardImageWrapper'>
+                                    <img src={product.contentImage} alt='' className='cardimage' />
+                                </div>
+                                <div className='cardText'>
+                                    <p className='businessName'>{product.business}</p>
+                                    <div className='bottom'>
+                                        <p className='prompt'>Delivered to<br />you today</p>
+                                        <p className='buyNow'>
+                                            <span>buynow</span>
+                                            <img className='arrow' src={arrow_places} alt='' />
+                                            <img className='arrow_active' src={arrow_places_active} alt='' />
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={cake} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Receer Cakes &amp; Pasteries</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={jacket} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Kajees Apparels</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={chicken} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Mecks Restaurant</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                </Track>
-                <Track id='track_featured_places'>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={jacket} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Kajees Apparels</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={cake} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Receer Cakes &amp; Pasteries</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={jacket} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Kajees Apparels</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card discount onClick={loadModal}>
-                        <div className='inner'>
-                            <div className='cardImageWrapper'>
-                                <img src={chicken} alt='' className='cardimage' />
-                            </div>
-                            <div className='cardText'>
-                                <p className='businessName'>Mecks Restaurant</p>
-                                <div className='bottom'>
-                                    <p className='prompt'>Delivered to<br />you today</p>
-                                    <p className='buyNow'>
-                                        <span>buynow</span>
-                                        <img className='arrow' src={arrow_places} alt='' />
-                                        <img className='arrow_active' src={arrow_places_active} alt='' />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
+                        </Card>
+                    ))}
+                    
                 </Track>
             </div>
         </Wrapper>

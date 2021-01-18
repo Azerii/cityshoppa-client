@@ -125,7 +125,7 @@ function Footer () {
                 </Body>
                 <Bottom>
                     <p>
-                        Copyright &copy; 2020 Shoplocal. All rights reserved.
+                        Copyright &copy; 2021 Shoplocal. All rights reserved.
                         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <a href='/'>Privacy Policy</a>
                         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

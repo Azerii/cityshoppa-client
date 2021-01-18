@@ -12,6 +12,7 @@ import SignUp from './containers/SignUp';
 import SignIn from './containers/SignIn';
 import Container from './components/Container';
 import LoginRedirect from './containers/LoginRedirect';
+import Categories from './containers/Categories';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Layout>
               <Switch>
                 <Route exact path='/' component={Landing} />
+                <Route path='/categories' component={Categories} />
                 <Route path='/sign-up' component={SignUp} />
                 <Route path='/sign-in' component={SignIn} />
                 <Route path='/auth/:provider/callback' component={LoginRedirect} />

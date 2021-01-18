@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import arrow_places from '../assets/landing/arrow_places.svg'
 import Container from './Container'
 

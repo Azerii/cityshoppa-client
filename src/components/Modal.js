@@ -5,8 +5,13 @@ import close from '../assets/landing/close.svg'
 import product_display_img from '../assets/landing/product_display_img.png'
 // import service_display_image from '../assets/landing/service_display_img.png'
 import mack_ken from '../assets/landing/mack&ken.svg'
-// import checked_small from '../assets/landing/checked_small.svg'
+import checked_small from '../assets/landing/checked_small.svg'
 import location_modal from '../assets/landing/location_modal.svg'
+import { setModalOpen } from '../redux/actions'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import { API_HOST } from '../utils/config';
+import { store } from '../redux/store'
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -21,10 +26,10 @@ const Wrapper = styled.div`
     z-index: 23;
     transition: all ease-out 150ms;
 
-    &.close {
-        opacity: 0;
-        pointer-events: none;
-    }
+    // &.close {
+    //     opacity: 0;
+    //     pointer-events: none;
+    // }
 `
 
 const ModalContent = styled.div`
@@ -224,86 +229,78 @@ const ModalContent = styled.div`
 const Card = styled.div`
     min-width: fit-content;
     height: inherit;
-    padding-left: 2rem;
-    // position: absolute;
+    margin-left: 2rem;
     border-radius: 1rem;
-    // left: ${props => props.left}px;
+    min-width: 30rem;
+    background: #f1f1f1;
     overflow: hidden;
 
     img {
-        height: 100%;
+        width: 100%;
     }
 `
 
-const getCssProperty = (el, property) => {
-    return window.getComputedStyle(el,null).getPropertyValue(property);
-}
-
-// const goToSlide = (track, cardWidth, index, fn) => {
-
-//     track.style.transform = `translateX(-${index >= 0 ? cardWidth * Number(index) : cardWidth * Number(index*(-1))}px)`
-
-//     fn({
-//         slide_index: index
-//     })
-// }
-
 function Modal (props) {
+    const dispatch = store.dispatch
 
-    const [state, setState] = useState({
-        track: null,
-        cards: [],
-        cardWidth: 530
-    })
+    const [result, setResult] = useState({})
+    const [business, setBusiness] = useState({})
+    const [loading, setLoading] = useState(false)
+
+    async function fetchData () {
+        setLoading(true)
+
+        let productRes, businessRes;
+
+        productRes = await axios.get(`${API_HOST}/products?name=${props.modalData.product}`)
+        businessRes = await axios.get(`${API_HOST}/businesses?name=${props.modalData.business}`)
+
+        if (productRes.data && businessRes.data) {
+            setResult(productRes.data[0])
+            setBusiness(businessRes.data[0])        
+        }
+
+        setLoading(false)
+    }
 
     useEffect(() => {
-        const card1 = Array.from(document.querySelector('#track_modal').children)[0]
-        const cards = Array.from(document.querySelector('#track_modal').children)
-        const cardWidth_px = getCssProperty(card1, 'width')
-
-        setState({
-            ...state,
-            track: document.querySelector('#track_modal'),
-            cards,
-            cardWidth: (cardWidth_px).slice(0, cardWidth_px.length - 2)
-        })
+        fetchData()
 
         // eslint-disable-next-line
     }, [])
 
     return (
-        <Wrapper id='modalWrapper' className='close' onClick={(e) => {
+        <Wrapper id='modalWrapper' onClick={(e) => {
             if(e.target.id === 'modalWrapper') {
-                e.target.classList.add('close')
+                dispatch(setModalOpen(false))
             }
         }}>
             <ModalContent>
+                {loading ? (<p>Loading...</p>) : 
+                (<>
                 <div className='top'>
-                    <p className='heading'>Wheat Cookie</p>
+                    <p className='heading'>{result.name}</p>
                     <img className='closeIcon' src={close} alt='' onClick={() => {
-                        document.querySelector('#modalWrapper').classList.add('close')
+                        dispatch(setModalOpen(false))
                     }}/>
                 </div>
                 <div className='displayCards' >
                     <div id='track_modal' className='track'>
                         <Card left={0}>
-                            <img src={product_display_img} alt='' />
-                        </Card>
-                        <Card left={state.cardWidth}>
-                            <img src={product_display_img} alt='' />
+                            {result.contentImage && <img src={`${API_HOST}${result.contentImage.url}`} alt='' />}
                         </Card>
                     </div>
                 </div>
                 <div className='categories'>
                     <p className='title'>Category</p>
-                    <p className='category'>Food</p>
+                    <p className='category'>{result.category}</p>
                 </div>
                 <div className='businessLogoWrapper'>
-                    <img src={mack_ken} alt='' />
-                    <p>Store</p>
+                    {business.logo && <img src={`${API_HOST}${business.logo.url}`} alt='' />}
+                    {/* <p>Store</p> */}
                 </div>
                 <div className='description'>
-                    <p>For the purposes of auth, a JWT is a token that is issued by the server. The token has a JSON payload that contains information specific to the user. This token can be used by clients when talking to APIs (by sending it along as an HTTP header) so that the APIs can identify the user represented by the token, and take user specific action.</p>
+                    <p>{result.description}.</p>
                 </div>
                 {/* <div className='formWrapper'>
                     <p className='heading'>Contact Vendor</p>
@@ -326,30 +323,43 @@ function Modal (props) {
                 <div className='contactDetails'>
                     <p className='heading'>Vendor Info</p>
 
-                    <div className='item'>
+                    {/* <div className='item'>
                         <p className='title'>Locally UK Shop Front</p>
                         <p className='content bold'>Pettits of Wallingford</p>
-                    </div>
+                    </div> */}
                     <div className='item'>
                         <p className='title'>Address</p>
-                        <p className='content'>35 St Martin's Street, Wallingford, OX10 0ED, United Kingdom (UK), Oxfordshire</p>
+                        <p className='content'>{business.address}</p>
                     </div>
                     <div className='item'>
                         <p className='title'>Phone</p>
-                        <a href='tel:01491835253' className='content'>01491 835253</a>
+                        <a href={`tel:${business.phone}`} className='content'>{business.phone}</a>
                     </div>
                     <div className='item'>
                         <p className='title'>About</p>
-                        <p className='content'>Situated in the market town of Wallingford in Oxfordshire, Pettits was established on 6th March 1856 by Mr William.</p>
+                        <p className='content'>{business.description}</p>
                     </div>
                 </div>
                 <div className='getDirections'>
-                    <a href='/'>get directions via google maps</a>
+                    <a href={business.linkToMaps} target='_blank' rel='noreferrer'>get directions via google maps</a>
                     <img src={location_modal} alt='' />
                 </div>
+                </>)}
             </ModalContent>
         </Wrapper>
     )
 }
 
-export default Modal
+const mapStateToProps = state => {
+    return {
+        modalData: state.modalData
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         setModalData: (data) => dispatch(setModalData(data))
+//     }
+// }
+
+export default connect(mapStateToProps)(Modal)

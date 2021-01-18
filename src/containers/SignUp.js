@@ -13,7 +13,7 @@ import { registerUser } from '../redux/actions'
 import Loader from '../components/Loader'
 
 const Wrapper = styled.div`
-    padding: 5rem 0;
+    padding: 2rem 0;
 `
 
 const Inner = styled.div`
@@ -103,6 +103,11 @@ const SignupItem = styled.a`
 
     p {
         font-size: 120%;
+
+        span {
+            color: #ff7235;
+            font-weight: 500;
+        }
     }
 
 `
@@ -208,14 +213,17 @@ function SignUp (props) {
                                 <div className='imgWrapper'><img src={facebook} alt='' /></div>
                                 <p>Sign up with Facebook</p>
                             </SignupItem>
-                            <SignupItem href='/'>
+                            {/* <SignupItem href='/'>
                                 <div className='imgWrapper'><img src={apple} alt='' /></div>
                                 <p>Sign up with Apple</p>
-                            </SignupItem>
-                            <p className='subheading or'>Or</p>
+                            </SignupItem> */}
+                            {/* <p className='subheading or'>Or</p> */}
                             <SignupItem href='/sign-up/local'>
                                 <div className='imgWrapper'><img src={email} alt='' /></div>
                                 <p>Sign up with Email</p>
+                            </SignupItem>
+                            <SignupItem href='/sign-in'>
+                                <p>Already have an account? <span>Sign In</span></p>
                             </SignupItem>
                         </Route>
                         <Route exact path='/sign-up/local'>
