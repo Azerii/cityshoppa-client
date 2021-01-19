@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import google from '../assets/auth/google.svg'
 import facebook from '../assets/auth/facebook.svg'
-import apple from '../assets/auth/apple.svg'
+// import apple from '../assets/auth/apple.svg'
 import email from '../assets/auth/email.svg'
 
 import { Route } from 'react-router-dom'
