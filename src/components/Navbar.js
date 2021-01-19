@@ -270,6 +270,11 @@ function Navbar(props) {
 
   const handleSearch = e => {
     e.preventDefault();
+
+    const keyword = document.querySelector('#keyword').value;
+    // const location = document.querySelector('#location').value;
+
+    window.location.replace(`/categories/search/${keyword}`);
   };
 
   return (
@@ -290,8 +295,8 @@ function Navbar(props) {
               <div className="searchBar">
                 <input
                   type="text"
-                  id="search"
-                  name="search"
+                  id="keyword"
+                  name="keyword"
                   placeholder="Find local services and Products"
                   required
                 />
