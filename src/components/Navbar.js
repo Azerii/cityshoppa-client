@@ -67,7 +67,7 @@ const Top = styled.div`
 
     .contentCenter {
         min-width: 50%;
-        height: 3rem;
+        height: 2.5rem;
 
         div {
             height: 100%;
@@ -97,7 +97,7 @@ const Top = styled.div`
             background-color: #ffffff;
 
             img {
-                height: 1.5rem;
+                height: 1rem;
             }
 
             input {
@@ -122,7 +122,7 @@ const Top = styled.div`
             }
 
             img {
-                height: 1.5rem;
+                height: 1rem;
             }
         }
 
@@ -277,7 +277,7 @@ function Navbar (props) {
     return (
         <>
         <Wrapper>
-                <Top>
+            <Top>
                 <Container className='topContainer'>
                     <div className='contentLeft'>
                         <a href='/'><img src={logo} alt='' /></a>
@@ -346,26 +346,26 @@ function Navbar (props) {
                         
                     </div>
                     </Container>
-                </Top>
-                <Route exact path='/'> 
-                    <Bottom>
-                        <Container>
-                        <div className='inner'>
-                            <a href='/' className='item'>
-                                <img src={home} alt='' />
-                                <span>Home</span>
-                            </a>
+            </Top>
+            <Route exact path='/'> 
+                <Bottom>
+                    <Container>
+                    <div className='inner'>
+                        <a href='/' className='item'>
+                            <img src={home} alt='' />
+                            <span>Home</span>
+                        </a>
 
-                            {categoryList.map((category) => (
-                                <div className='item'>
-                                    <span>{category}</span>
-                                </div>
-                            ))}
-                            <a href='/categories' className='item seeMore'>All Categories {'>>'}</a>
-                        </div>
-                        </Container>
-                    </Bottom>
-                </Route>
+                        {categoryList.map((category) => (
+                            <a key={category} href={`/categories/${category}`} className='item'>
+                                <span>{category}</span>
+                            </a>
+                        ))}
+                        <a href='/categories' className='item seeMore'>All Categories {'>>'}</a>
+                    </div>
+                    </Container>
+                </Bottom>
+            </Route>
         </Wrapper>
         
         </>
