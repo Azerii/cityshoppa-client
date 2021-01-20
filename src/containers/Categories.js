@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
-import { dummyData } from '../utils';
+import { dummyData, loadModal } from '../utils';
 
 import arrow_places from '../assets/landing/arrow_places.svg';
 import chevron_left from '../assets/global/chevron_left.svg';
@@ -13,12 +13,12 @@ import { Route, useParams } from 'react-router-dom';
 
 const TopBar = styled.div`
   width: 100%;
-  // margin-top: 1rem;
 
   .title {
     .caption {
       font-size: 150%;
       font-weight: 500;
+      text-transform: capitalize;
     }
 
     .smallText {
@@ -26,7 +26,7 @@ const TopBar = styled.div`
       color: #707070;
     }
 
-    .backToCategories {
+    .goBack {
       display: flex;
       align-items: center;
       color: #ff7235;
@@ -69,9 +69,9 @@ const TopBar = styled.div`
 const Results = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 5rem;
   padding-top: 1rem;
   border-top: 1px solid #e5e5e5;
@@ -79,7 +79,9 @@ const Results = styled.div`
   .item {
     display: flex;
     align-items: flex-start;
-    width: 50%;
+    width: 30%;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 5px #e5e5e5;
     cursor: pointer;
 
     .imgWrapper {
@@ -87,8 +89,7 @@ const Results = styled.div`
       align-items: center;
       justify-content: center;
       height: 7rem;
-      min-width: 7rem;
-      max-width: 7rem;
+      min-width: 30%;
       background-color: #f1f1f1;
       overflow: hidden;
 
@@ -101,7 +102,8 @@ const Results = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding-left: 2rem;
+      padding-left: 1rem;
+      padding-top: 0.5rem;
 
       .title {
         font-size: 100%;
@@ -111,7 +113,11 @@ const Results = styled.div`
       .subtitle {
         font-size: 90%;
         margin: 0.3rem 0;
-        max-width: 70%;
+        max-width: 80%;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .contact {
@@ -130,7 +136,7 @@ const Results = styled.div`
   }
 `;
 
-function Content() {
+function Content(props) {
   const { category } = useParams();
   const { keyword } = useParams();
   const [categories] = useState(dummyData.categories);
@@ -157,43 +163,43 @@ function Content() {
     <>
       <TopBar>
         <div className="title">
+          {title === 'Categories' && (
+            <a href="/" className="goBack">
+              <img src={chevron_left} alt="" />
+              Home
+            </a>
+          )}
           <p className="caption">{title}</p>
           {title !== 'Categories' && (
-            <a href="/categories" className="backToCategories">
+            <a href="/categories" className="goBack">
               <img src={chevron_left} alt="" />
               categories
             </a>
           )}
+
           {title === 'Categories' && (
             <p className="smallText">
               Click on a category to see more specific results
             </p>
           )}
         </div>
-        {title === 'Categories' && (
-          <div className="list">
-            <div className="item">
-              <span>All</span>
-            </div>
-            {categories.slice(0, limit).map(category => (
-              <a
-                key={category}
-                href={`/categories/${category}`}
-                className="item"
-              >
-                <span>{category}</span>
-              </a>
-            ))}
-            <p
-              className="item seeMore"
-              onClick={() =>
-                setLimit(limit === categories.length ? 15 : categories.length)
-              }
-            >
-              See {!(limit === categories.length) ? 'More >>' : 'Less <<'}
-            </p>
-          </div>
-        )}
+        {/* {title === 'Categories' && ( */}
+        <div className="list">
+          {categories.slice(0, limit).map(category => (
+            <a key={category} href={`/categories/${category}`} className="item">
+              <span>{category}</span>
+            </a>
+          ))}
+          <p
+            className="item seeMore"
+            onClick={() =>
+              setLimit(limit === categories.length ? 15 : categories.length)
+            }
+          >
+            See {!(limit === categories.length) ? 'More >>' : 'Less <<'}
+          </p>
+        </div>
+        {/* )} */}
       </TopBar>
 
       {title === 'Categories' && (
@@ -203,7 +209,7 @@ function Content() {
             <p>Loading...</p>
           ) : (
             results.map(result => (
-              <div key={result.id} className="item">
+              <div key={result.id} className="item" onClick={() => loadModal()}>
                 <div className="imgWrapper">
                   {result.contentImage && (
                     <img src={`${API_HOST}${result.contentImage.url}`} alt="" />
@@ -223,6 +229,7 @@ function Content() {
         </Results>
       )}
 
+      {/* default categories render */}
       {title !== 'Categories' && !urlArr.includes('search') && (
         <Results>
           {!results.length && !loading && <h2>No Results</h2>}
@@ -261,6 +268,7 @@ function Content() {
         </Results>
       )}
 
+      {/* handle when user uses the search bar */}
       {title !== 'Categories' && urlArr.includes('search') && (
         <Results>
           {!results.length && !loading && <h2>No Results</h2>}
@@ -268,12 +276,40 @@ function Content() {
             <p>Loading...</p>
           ) : (
             results.map(result => {
-              if (
+              const matchCheck =
                 result.category
                   .toLowerCase()
                   .match(title.toLocaleLowerCase()) ||
-                result.name.toLowerCase().match(title.toLocaleLowerCase())
+                result.name.toLowerCase().match(title.toLocaleLowerCase());
+
+              if (
+                props.city &&
+                props.city
+                  .toLowerCase()
+                  .match(result.business.city.name.toLocaleLowerCase()) &&
+                matchCheck
               ) {
+                return (
+                  <div key={result.id} className="item">
+                    <div className="imgWrapper">
+                      {result.contentImage && (
+                        <img
+                          src={`${API_HOST}${result.contentImage.url}`}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div className="textWrapper">
+                      <p className="title">{result.name}</p>
+                      <p className="subtitle">{result.description}</p>
+                      <p className="contact">
+                        contact
+                        <img src={arrow_places} alt="" />
+                      </p>
+                    </div>
+                  </div>
+                );
+              } else if (!props.city && matchCheck) {
                 return (
                   <div key={result.id} className="item">
                     <div className="imgWrapper">
@@ -322,7 +358,7 @@ function Categories(props) {
 
         {/* Handle when user searches for content using the global search bar */}
         <Route exact path="/categories/search/:keyword">
-          <Content />
+          <Content {...props} />
         </Route>
       </Container>
     </>
@@ -331,7 +367,8 @@ function Categories(props) {
 
 const mapStateToProps = state => {
   return {
-    modalOpen: state.modalOpen
+    modalOpen: state.modalOpen,
+    city: state.city
   };
 };
 

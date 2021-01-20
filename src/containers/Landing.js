@@ -1,50 +1,51 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import Container from '../components/Container'
-import Discounted from '../components/Discounted'
-import Featured from '../components/Featured'
-import FeaturedPlaces from '../components/FeaturedPlaces'
-import Modal from '../components/Modal'
-import Places from '../components/Places'
-import Suppliers from '../components/Suppliers'
-import Trending from '../components/Trending'
-import { getUser } from '../redux/actions'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import Container from '../components/Container';
+import Discounted from '../components/Discounted';
+import Featured from '../components/Featured';
+import FeaturedPlaces from '../components/FeaturedPlaces';
+import Modal from '../components/Modal';
+import Places from '../components/Places';
+import Suppliers from '../components/Suppliers';
+import Trending from '../components/Trending';
+import { getUser, setCity } from '../redux/actions';
 
-function Landing (props) {
+function Landing(props) {
+  useEffect(() => {
+    props.token && props.getUser();
+    props.setCity(0);
+    // setTimeout(() => console.log('user data: ', props.user))
+    // eslint-disable-next-line
+  }, []);
 
-    useEffect(() => {
-        props.token && props.getUser()
-        // setTimeout(() => console.log('user data: ', props.user))
-        // eslint-disable-next-line
-    }, [])
-
-    return (
-        <>
-        {props.modalOpen && <Modal />}
-        <FeaturedPlaces />
-        <Discounted />
-        <Container>
-            <Featured />
-        </Container>
-        <Places />
-        <Trending />
-        <Suppliers />
-        </>
-    )
+  return (
+    <>
+      {props.modalOpen && <Modal />}
+      <FeaturedPlaces />
+      <Discounted />
+      <Container>
+        <Featured />
+      </Container>
+      <Places />
+      <Trending />
+      <Suppliers />
+    </>
+  );
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        getUser: () => dispatch(getUser)
-    }
-}
+  return {
+    getUser: () => dispatch(getUser),
+    setCity: city => dispatch(setCity(city))
+  };
+};
 
 const mapStateToProps = state => {
-    return {
-        token: state.token,
-        user: state.user,
-        modalOpen: state.modalOpen,
-    }
-}
+  return {
+    token: state.token,
+    user: state.user,
+    modalOpen: state.modalOpen
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing)
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

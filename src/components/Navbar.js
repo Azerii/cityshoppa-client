@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
@@ -14,10 +14,12 @@ import home from '../assets/navbar/home.svg';
 // import discounts from '../assets/navbar/discounts.svg'
 import logged_in from '../assets/navbar/logged_in.svg';
 import heart_outlined from '../assets/navbar/heart_outlined.svg';
+import arrow_places_active from '../assets/landing/arrow_places_active.svg';
 
 import Container from './Container';
-import { setToken } from '../redux/actions';
+import { setCity, setToken } from '../redux/actions';
 import { categories, getRandomRange } from '../utils';
+import querystring from 'querystring';
 
 const Wrapper = styled.div`
   padding-bottom: 2rem;
@@ -103,11 +105,13 @@ const Top = styled.div`
         height: 1rem;
       }
 
-      input {
+      select {
         width: 100%;
         font-size: 90%;
-        color: #000000;
+        color: #5a7889;
         margin-left: 0.5rem;
+        appearance: none;
+        border: none;
       }
     }
 
@@ -221,7 +225,8 @@ const Top = styled.div`
 
 const Bottom = styled.div`
   padding: 1rem 0;
-  background-color: #ff7235;
+  // background-color: #deb887;
+  background-color: #2e4c5c;
 
   .bottomContainer {
     display: flex;
@@ -243,9 +248,9 @@ const Bottom = styled.div`
       font-size: 100%;
       font-weight: 500;
       padding: 0 1rem;
-      max-width: 10rem;
+      // max-width: 10rem;
       white-space: nowrap;
-      overflow: hidden;
+      // overflow: hidden;
       // text-overflow: ellipsis;
       cursor: pointer;
 
@@ -253,6 +258,11 @@ const Bottom = styled.div`
         font-weight: 700;
         color: #ffffff;
         max-width: unset;
+
+        img {
+          height: 0.5rem;
+          margin-left: 0.5rem;
+        }
       }
 
       img {
@@ -265,17 +275,42 @@ const Bottom = styled.div`
 
 function Navbar(props) {
   const history = useHistory();
-  const limit = getRandomRange(8, categories.length);
+  const limit = getRandomRange(6, categories.length);
   const [categoryList] = useState(categories.slice(limit.lower, limit.upper));
+  const [city, setCity] = useState(props.city);
+
+  const handleCityChange = e => {
+    setCity(e.target.value);
+  };
 
   const handleSearch = e => {
     e.preventDefault();
 
     const keyword = document.querySelector('#keyword').value;
-    // const location = document.querySelector('#location').value;
 
-    window.location.replace(`/categories/search/${keyword}`);
+    if (city) {
+      props.setCity(city);
+      window.location.replace(`/categories/search/${keyword}?location=${city}`);
+    } else {
+      props.setCity(0);
+      window.location.replace(`/categories/search/${keyword}`);
+    }
   };
+
+  useEffect(() => {
+    const urlQueryString = window.location.search.slice(1);
+
+    if (urlQueryString.length) {
+      const searchParams = querystring.parse(urlQueryString);
+
+      if (searchParams.location) {
+        setCity(props.city);
+      }
+    } else {
+      setCity(0);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -286,10 +321,6 @@ function Navbar(props) {
               <a href="/">
                 <img src={logo} alt="" />
               </a>
-              {/* <div className='hamburger'>
-                            <span></span>
-                            <span></span>
-                        </div> */}
             </div>
             <form className="contentCenter" onSubmit={e => handleSearch(e)}>
               <div className="searchBar">
@@ -303,12 +334,18 @@ function Navbar(props) {
               </div>
               <div className="selectLocation">
                 <img src={location_pin} alt="" />
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  placeholder="Select Location"
-                />
+                <select
+                  id="city"
+                  name="city"
+                  value={city}
+                  onChange={e => handleCityChange(e)}
+                >
+                  <option value={0}>All Cities</option>
+                  <option value="london">London</option>
+                  <option value="manchester">Manchester</option>
+                  <option value="cambridge">Cambridge</option>
+                  <option value="belfast">Belfast</option>
+                </select>
               </div>
               <button type="submit" className="searchButton">
                 <img src={search} alt="" />
@@ -397,7 +434,9 @@ function Navbar(props) {
                   <img src={home} alt="" />
                   <span>Home</span>
                 </a>
-
+                <div className="item">
+                  <span>|</span>
+                </div>
                 {categoryList.map(category => (
                   <a
                     key={category}
@@ -405,14 +444,16 @@ function Navbar(props) {
                     className="item"
                   >
                     <span>
-                      {category.length > 15
+                      {/* {category.length > 15
                         ? `${category.substr(0, 15)}...`
-                        : category}
+                        : category} */}
+                      {category}
                     </span>
                   </a>
                 ))}
                 <a href="/categories" className="item seeMore">
-                  All Categories {'>>'}
+                  All Categories
+                  <img src={arrow_places_active} alt="" />
                 </a>
               </div>
             </Container>
@@ -426,13 +467,15 @@ function Navbar(props) {
 const mapStateToProps = state => {
   return {
     token: state.token,
-    user: state.user
+    user: state.user,
+    city: state.city
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setToken: token => dispatch(setToken(token))
+    setToken: token => dispatch(setToken(token)),
+    setCity: city => dispatch(setCity(city))
   };
 };
 
