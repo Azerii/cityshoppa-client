@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
-import { dummyData, loadModal } from '../utils';
+import { loadModal } from '../utils';
 
 import arrow_places from '../assets/landing/arrow_places.svg';
 import chevron_left from '../assets/global/chevron_left.svg';
@@ -46,40 +46,43 @@ const TopBar = styled.div`
     .item {
       margin: 0.5rem;
       padding: 0.5rem;
-      color: #707070;
-      background-color: #ffffff;
-      border: 1px solid #707070;
+      margin-left: 0;
+      color: #ffffff;
+      background-color: #ff7235;
       border-radius: 0.3rem;
       cursor: pointer;
-      transition: all eas-out 200ms;
+      transition: all ease-out 200ms;
 
       &.seeMore {
         font-weight: 500;
         color: #ff7235;
         border: none;
+        background-color: transparent;
       }
 
       &:hover {
         background-color: #f9f9f9;
+        color: #000000;
       }
     }
   }
 `;
 
 const Results = styled.div`
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 1rem;
+  // margin-top: 1rem;
   margin-bottom: 5rem;
-  padding-top: 1rem;
+  // padding-top: 1rem;
   border-top: 1px solid #e5e5e5;
 
   .item {
     display: flex;
     align-items: flex-start;
-    width: 30%;
     margin-top: 2rem;
     box-shadow: 0px 0px 5px #e5e5e5;
     cursor: pointer;
@@ -139,22 +142,43 @@ const Results = styled.div`
 function Content(props) {
   const { category } = useParams();
   const { keyword } = useParams();
-  const [categories] = useState(dummyData.categories);
+  const [categories, setCategories] = useState([]);
   const [results, setResults] = useState([]);
   const [limit, setLimit] = useState(15);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('Categories');
   const urlArr = window.location.href.split('/');
 
-  async function fetchData() {
-    setLoading(true);
-    const res = await getCollection('products');
-    setLoading(false);
-    if (res) setResults(res);
+  async function fetchProducts() {
+    const productsRes = await getCollection('products');
+
+    if (productsRes) setResults(results.concat(productsRes));
   }
+
+  async function fetchServices() {
+    const servicesRes = await getCollection('services');
+
+    if (servicesRes) setResults(results.concat(servicesRes));
+  }
+
+  async function fetchCategories() {
+    const categoriesRes = await getCollection('categories');
+
+    if (categoriesRes) setCategories(categoriesRes);
+  }
+
+  const fetchData = async () => {
+    setLoading(true);
+
+    await fetchCategories();
+    await fetchProducts();
+
+    setLoading(false);
+  };
 
   useEffect(() => {
     fetchData();
+    fetchServices();
     setTitle(category || keyword || 'Categories');
     // eslint-disable-next-line
   }, []);
@@ -185,19 +209,26 @@ function Content(props) {
         </div>
         {/* {title === 'Categories' && ( */}
         <div className="list">
-          {categories.slice(0, limit).map(category => (
-            <a key={category} href={`/categories/${category}`} className="item">
-              <span>{category}</span>
-            </a>
-          ))}
-          <p
-            className="item seeMore"
-            onClick={() =>
-              setLimit(limit === categories.length ? 15 : categories.length)
-            }
-          >
-            See {!(limit === categories.length) ? 'More >>' : 'Less <<'}
-          </p>
+          {categories.length &&
+            categories.slice(0, limit).map(category => (
+              <a
+                key={category.id}
+                href={`/categories/${category.name}`}
+                className="item"
+              >
+                <span>{category.name}</span>
+              </a>
+            ))}
+          {categories.length >= 15 && (
+            <p
+              className="item seeMore"
+              onClick={() =>
+                setLimit(limit === categories.length ? 15 : categories.length)
+              }
+            >
+              See {!(limit === categories.length) ? 'More >>' : 'Less <<'}
+            </p>
+          )}
         </div>
         {/* )} */}
       </TopBar>
@@ -208,6 +239,7 @@ function Content(props) {
           {loading ? (
             <p>Loading...</p>
           ) : (
+            results.length &&
             results.map(result => (
               <div key={result.id} className="item" onClick={() => loadModal()}>
                 <div className="imgWrapper">
@@ -238,7 +270,9 @@ function Content(props) {
           ) : (
             results.map(result => {
               if (
-                result.category.toLowerCase().match(title.toLocaleLowerCase())
+                result.category.name
+                  .toLowerCase()
+                  .match(title.toLocaleLowerCase())
               ) {
                 return (
                   <div key={result.id} className="item">
@@ -277,7 +311,7 @@ function Content(props) {
           ) : (
             results.map(result => {
               const matchCheck =
-                result.category
+                result.category.name
                   .toLowerCase()
                   .match(title.toLocaleLowerCase()) ||
                 result.name.toLowerCase().match(title.toLocaleLowerCase());
@@ -286,7 +320,7 @@ function Content(props) {
                 props.city &&
                 props.city
                   .toLowerCase()
-                  .match(result.business.city.name.toLocaleLowerCase()) &&
+                  .match(result.business.city.name.toLowerCase()) &&
                 matchCheck
               ) {
                 return (

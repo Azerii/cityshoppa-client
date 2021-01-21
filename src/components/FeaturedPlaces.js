@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
     .heading {
       max-width: 90%;
-      font-size: 350%;
+      font-size: 200%;
       font-weight: 500;
       color: #000000;
       margin-bottom: 1rem;
@@ -211,6 +211,11 @@ const Card = styled.a`
 
 function FeaturedPlaces(props) {
   const [products, setProducts] = useState(dummyData.products);
+  const [captions, setCaptions] = useState([]);
+  const [currentCaption, setCurrentCaption] = useState({
+    heading: 'Shop Local',
+    subheading: 'Support and shop with local businesses near you'
+  });
   const [limits, setLimits] = useState(getRandomRange(8, products.length));
 
   async function fetchProducts() {
@@ -219,12 +224,25 @@ function FeaturedPlaces(props) {
     if (res) setProducts(res);
   }
 
+  async function fetchCaptions() {
+    const res = await getCollection('captions');
+
+    if (res) setCaptions(res);
+  }
+
   useEffect(() => {
     // fetchProducts();
-
+    fetchCaptions();
     const interval = setInterval(() => {
       setLimits(getRandomRange(8, products.length));
-    }, 30_000);
+      if (captions.length && captions.length > 1) {
+        setCurrentCaption(
+          captions[Math.floor(Math.random() * captions.length - 1)]
+        );
+      } else if (captions.length && captions.length === 1) {
+        setCurrentCaption(captions[0]);
+      }
+    }, 3000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line
@@ -235,10 +253,8 @@ function FeaturedPlaces(props) {
       <Wrapper>
         <div className="caption">
           {/* <div className='bgImage'></div> */}
-          <p className="heading">Shop Local</p>
-          <p className="subheading">
-            Support and shop with local businesses near you
-          </p>
+          <p className="heading">{currentCaption.heading}</p>
+          <p className="subheading">{currentCaption.subheading}</p>
           <p className="charityCaption">
             <img src={green_heart} alt="" />
             We Love Charity

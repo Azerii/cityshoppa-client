@@ -10,7 +10,8 @@ import {
   SET_TRENDING_PRODUCTS_DATA,
   SET_MODAL_OPEN,
   SET_MODAL_DATA,
-  SET_CITY
+  SET_CITY,
+  SET_DONATION
 } from './types';
 import { API_HOST } from '../../utils/config';
 
@@ -151,5 +152,12 @@ export const setModalData = data => dispatch => {
   dispatch({
     type: SET_MODAL_DATA,
     payload: data
+  });
+};
+
+export const setDonation = amount => dispatch => {
+  dispatch({
+    type: SET_DONATION,
+    payload: amount
   });
 };

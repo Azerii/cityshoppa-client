@@ -8,7 +8,8 @@ import {
   SET_FEATURED_PLACES_DATA,
   SET_CITY,
   SET_MODAL_OPEN,
-  SET_MODAL_DATA
+  SET_MODAL_DATA,
+  SET_DONATION
 } from '../actions/types';
 
 export const initialState = {
@@ -31,7 +32,8 @@ export const initialState = {
   },
   city: null,
   modalOpen: false,
-  modalData: {}
+  modalData: {},
+  donation: 0
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -85,6 +87,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         modalData: action.payload
+      };
+    case SET_DONATION:
+      return {
+        ...state,
+        donation: action.payload
       };
     default:
       return state;

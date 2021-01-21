@@ -17,7 +17,11 @@ import heart_outlined from '../assets/navbar/heart_outlined.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
 
 import Container from './Container';
-import { setCity, setToken } from '../redux/actions';
+import getCollection, {
+  setCity,
+  setDonation,
+  setToken
+} from '../redux/actions';
 import { categories, getRandomRange } from '../utils';
 import querystring from 'querystring';
 
@@ -226,7 +230,7 @@ const Top = styled.div`
 const Bottom = styled.div`
   padding: 1rem 0;
   // background-color: #deb887;
-  background-color: #2e4c5c;
+  background-color: #ff7235;
 
   .bottomContainer {
     display: flex;
@@ -297,7 +301,14 @@ function Navbar(props) {
     }
   };
 
+  async function fetchDonation() {
+    let res = await getCollection('donation');
+
+    if (res) props.setDonation(res.amount);
+  }
+
   useEffect(() => {
+    fetchDonation();
     const urlQueryString = window.location.search.slice(1);
 
     if (urlQueryString.length) {
@@ -345,6 +356,7 @@ function Navbar(props) {
                   <option value="manchester">Manchester</option>
                   <option value="cambridge">Cambridge</option>
                   <option value="belfast">Belfast</option>
+                  <option value="Toronto">Toronto</option>
                 </select>
               </div>
               <button type="submit" className="searchButton">
@@ -355,7 +367,7 @@ function Navbar(props) {
               <div className="donation">
                 <div className="top">
                   <img src={heart_outlined} alt="" />
-                  <span>$257</span>
+                  <span>${props.donation}</span>
                 </div>
                 <p className="caption">donated to charity</p>
               </div>
@@ -468,14 +480,16 @@ const mapStateToProps = state => {
   return {
     token: state.token,
     user: state.user,
-    city: state.city
+    city: state.city,
+    donation: state.donation
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setToken: token => dispatch(setToken(token)),
-    setCity: city => dispatch(setCity(city))
+    setCity: city => dispatch(setCity(city)),
+    setDonation: amount => dispatch(setDonation(amount))
   };
 };
 
