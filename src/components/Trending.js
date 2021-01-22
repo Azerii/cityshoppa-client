@@ -8,7 +8,7 @@ import jacket from '../assets/landing/jacket.png';
 import xmas_tree from '../assets/landing/xmas_tree.png';
 import right_arrow from '../assets/landing/right_arrow.svg';
 import left_arrow from '../assets/landing/left_arrow.svg';
-import getCollection, { setTrendingProductsData } from '../redux/actions';
+import { setTrendingProductsData } from '../redux/actions';
 import { loadModal } from '../utils';
 
 const Wrapper = styled.div`
