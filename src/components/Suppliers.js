@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import arrow_places from '../assets/landing/arrow_places.svg';
-import getCollection from '../redux/actions';
+// import getCollection from '../redux/actions';
 import Container from './Container';
 
 const Wrapper = styled.div`
