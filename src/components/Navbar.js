@@ -394,33 +394,6 @@ function Navbar(props) {
                   </div>
                 </>
               )}
-              {props.token && (
-                <>
-                  <div
-                    className="user"
-                    onClick={() => {
-                      document
-                        .querySelector('.signOut')
-                        .classList.toggle('show');
-                    }}
-                  >
-                    <p>{props.user && props.user.username}</p>
-                    <img src={logged_in} alt="" />
-                  </div>
-                  <div className="signOut">
-                    <p
-                      onClick={() => {
-                        props.setToken(null);
-                        setTimeout(() => {
-                          history.push('/');
-                        });
-                      }}
-                    >
-                      Sign out
-                    </p>
-                  </div>
-                </>
-              )}
               {!props.token && (
                 <>
                   <a href="/sign-in" className="signIn">
