@@ -7,17 +7,13 @@ import logo from '../assets/global/logo_footer.png';
 import location_pin from '../assets/navbar/location_black.svg';
 import search from '../assets/navbar/search.svg';
 import home from '../assets/navbar/home.svg';
-// import gifts from '../assets/navbar/gifts.svg'
-// import food from '../assets/navbar/food.svg'
-// import fun_chill from '../assets/navbar/fun_chill.svg'
-// import quick_shop from '../assets/navbar/quick_shop.svg'
-// import discounts from '../assets/navbar/discounts.svg'
 import logged_in from '../assets/navbar/logged_in.svg';
 import heart_outlined from '../assets/navbar/heart_outlined.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
 
 import Container from './Container';
-import getCollection, {
+import {
+  getCollection,
   setCity,
   setDonation,
   setToken

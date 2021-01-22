@@ -7,7 +7,7 @@ import { loadModal } from '../utils';
 import arrow_places from '../assets/landing/arrow_places.svg';
 import chevron_left from '../assets/global/chevron_left.svg';
 import Modal from '../components/Modal';
-import getCollection from '../redux/actions';
+import { getCollection } from '../redux/actions';
 import { API_HOST } from '../utils/config';
 import { Route, useParams } from 'react-router-dom';
 
@@ -72,18 +72,17 @@ const Results = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   flex-wrap: wrap;
   justify-content: space-between;
   // margin-top: 1rem;
   margin-bottom: 5rem;
-  // padding-top: 1rem;
+  padding-top: 2rem;
   border-top: 1px solid #e5e5e5;
 
   .item {
     display: flex;
     align-items: flex-start;
-    margin-top: 2rem;
     box-shadow: 0px 0px 5px #e5e5e5;
     cursor: pointer;
 
@@ -92,8 +91,8 @@ const Results = styled.div`
       align-items: center;
       justify-content: center;
       height: 7rem;
-      min-width: 30%;
-      background-color: #f1f1f1;
+      width: 30%;
+      background-color: #2e4c5c;
       overflow: hidden;
 
       img {
@@ -105,12 +104,17 @@ const Results = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      width: 70%;
       padding-left: 1rem;
       padding-top: 0.5rem;
 
       .title {
         font-size: 100%;
         font-weight: 500;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .subtitle {
@@ -209,16 +213,15 @@ function Content(props) {
         </div>
         {/* {title === 'Categories' && ( */}
         <div className="list">
-          {categories.length &&
-            categories.slice(0, limit).map(category => (
-              <a
-                key={category.id}
-                href={`/categories/${category.name}`}
-                className="item"
-              >
-                <span>{category.name}</span>
-              </a>
-            ))}
+          {categories.slice(0, limit).map(category => (
+            <a
+              key={category.id}
+              href={`/categories/${category.name}`}
+              className="item"
+            >
+              <span>{category.name}</span>
+            </a>
+          ))}
           {categories.length >= 15 && (
             <p
               className="item seeMore"
@@ -241,7 +244,13 @@ function Content(props) {
           ) : (
             results.length &&
             results.map(result => (
-              <div key={result.id} className="item" onClick={() => loadModal()}>
+              <div
+                key={result.id}
+                className="item"
+                onClick={() =>
+                  loadModal(result.price ? 'products' : 'services', result.id)
+                }
+              >
                 <div className="imgWrapper">
                   {result.contentImage && (
                     <img src={`${API_HOST}${result.contentImage.url}`} alt="" />

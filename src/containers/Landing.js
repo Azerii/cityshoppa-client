@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
 import Discounted from '../components/Discounted';
@@ -8,27 +8,37 @@ import Modal from '../components/Modal';
 import Places from '../components/Places';
 import Suppliers from '../components/Suppliers';
 import Trending from '../components/Trending';
-import { getUser, setCity } from '../redux/actions';
+import { getCollection, getUser, setCity } from '../redux/actions';
 
 function Landing(props) {
+  const [products, setProducts] = useState([]);
+  const [services] = useState([]);
+
+  const fetchProducts = async () => {
+    let res = await getCollection('products');
+
+    if (res) setProducts(res);
+  };
+
   useEffect(() => {
+    fetchProducts();
     props.token && props.getUser();
     props.setCity(0);
-    // setTimeout(() => console.log('user data: ', props.user))
+
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
       {props.modalOpen && <Modal />}
-      <FeaturedPlaces />
+      <FeaturedPlaces products={products} />
       <Discounted />
       <Container>
         <Featured />
       </Container>
-      <Places />
-      <Trending />
-      <Suppliers />
+      <Places products={products} />
+      <Trending products={products} />
+      <Suppliers services={services} />
     </>
   );
 }

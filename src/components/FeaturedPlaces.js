@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import arrow_places from '../assets/landing/arrow_places.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
 import green_heart from '../assets/landing/green_heart.svg';
 
-import getCollection, { setFeaturedPlacesData } from '../redux/actions';
-import { loadModal, dummyData, getRandomRange } from '../utils';
+import { getCollection, setFeaturedPlacesData } from '../redux/actions';
+import { loadModal, getRandomRange } from '../utils';
 import API_HOST from '../utils/config';
 
 const Wrapper = styled.div`
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     // border: 1px solid red;
 
     .heading {
-      max-width: 90%;
+      max-width: 80%;
       font-size: 200%;
       font-weight: 500;
       color: #000000;
@@ -105,7 +105,7 @@ const Card = styled.a`
       .cardText {
         background-color: #ff7235;
 
-        .businessName,
+        .productName,
         .prompt,
         .buyNow {
           color: #ffffff !important;
@@ -156,7 +156,7 @@ const Card = styled.a`
       border-top-left-radius: 0;
       border-top-right-radius: 0;
 
-      .businessName {
+      .productName {
         font-size: 100%;
         font-weight: 500;
         display: -webkit-box;
@@ -200,6 +200,22 @@ const Card = styled.a`
         text-transform: uppercase;
       }
 
+      .discountBadge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 1rem;
+        right: -1rem;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 50%;
+        background-color: #ff7235;
+        color: #ffffff;
+        font-size: 70%;
+        font-weight: 500;
+      }
+
       .caption {
         font-size: 50%;
         text-transform: uppercase;
@@ -208,45 +224,40 @@ const Card = styled.a`
     }
   }
 `;
-
-function FeaturedPlaces(props) {
-  const [products, setProducts] = useState(dummyData.products);
+// move all these to Landing
+function FeaturedPlaces({ products }) {
   const [captions, setCaptions] = useState([]);
   const [currentCaption, setCurrentCaption] = useState({
     heading: 'Shop Local',
     subheading: 'Support and shop with local businesses near you'
   });
-  const [limits, setLimits] = useState(getRandomRange(8, products.length));
-
-  async function fetchProducts() {
-    const res = await getCollection('products');
-
-    if (res) setProducts(res);
-  }
+  let currentCaptionIndex = useRef(0);
+  const [limits, setLimits] = useState(getRandomRange(4, 4));
+  const [update, forceUpdate] = useState(23);
 
   async function fetchCaptions() {
+    if (captions.length) return;
     const res = await getCollection('captions');
 
     if (res) setCaptions(res);
   }
 
   useEffect(() => {
-    // fetchProducts();
     fetchCaptions();
     const interval = setInterval(() => {
-      setLimits(getRandomRange(8, products.length));
-      if (captions.length && captions.length > 1) {
-        setCurrentCaption(
-          captions[Math.floor(Math.random() * captions.length - 1)]
-        );
-      } else if (captions.length && captions.length === 1) {
-        setCurrentCaption(captions[0]);
+      if (captions.length) {
+        currentCaptionIndex.current =
+          (currentCaptionIndex.current + 1) % captions.length;
+
+        setCurrentCaption(captions[currentCaptionIndex.current]);
       }
-    }, 3000);
+      forceUpdate((update + 1) % 50);
+      products.length && setLimits(getRandomRange(4, products.length));
+    }, 10_000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line
-  }, []);
+  }, [update]);
 
   return (
     <>
@@ -262,19 +273,25 @@ function FeaturedPlaces(props) {
         </div>
         <div className="trackWrapper">
           <Track id="track_featured_places">
-            {products.length &&
+            {products &&
               products.slice(limits.lower, limits.upper).map(product => (
-                <Card key={product.id} discount onClick={loadModal}>
+                <Card
+                  key={product.id}
+                  discount
+                  onClick={() => loadModal('products', product.id)}
+                >
                   <div className="inner">
                     <div className="cardImageWrapper">
-                      <img
-                        src={`${API_HOST}${product.contentImage.url}`}
-                        alt=""
-                        className="cardimage"
-                      />
+                      {product.contentImage && (
+                        <img
+                          src={`${API_HOST.API_HOST}${product.contentImage.url}`}
+                          alt=""
+                          className="cardimage"
+                        />
+                      )}
                     </div>
                     <div className="cardText">
-                      <p className="businessName">{product.business.name}</p>
+                      <p className="productName">{product.name}</p>
                       <div className="bottom">
                         <p className="prompt">
                           Delivered to

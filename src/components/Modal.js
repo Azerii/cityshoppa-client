@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import close from '../assets/landing/close.svg';
-import product_display_img from '../assets/landing/product_display_img.png';
-// import service_display_image from '../assets/landing/service_display_img.png'
-import mack_ken from '../assets/landing/mack&ken.svg';
-import checked_small from '../assets/landing/checked_small.svg';
+// import checked_small from '../assets/landing/checked_small.svg';
 import location_modal from '../assets/landing/location_modal.svg';
 import { setModalOpen } from '../redux/actions';
 import { connect } from 'react-redux';
@@ -24,18 +21,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 23;
-  transition: all ease-out 150ms;
-
-  // &.close {
-  //     opacity: 0;
-  //     pointer-events: none;
-  // }
 `;
 
 const ModalContent = styled.div`
   width: 60%;
   height: 90vh;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   background-color: #ffffff;
   overflow: auto;
   position: relative;
@@ -66,7 +57,6 @@ const ModalContent = styled.div`
     .track {
       display: flex;
       position: relative;
-      height: 20rem;
     }
   }
 
@@ -74,7 +64,7 @@ const ModalContent = styled.div`
     display: flex;
     width: 100%;
     padding: 0 2rem;
-    margin: 3rem 0;
+    margin: 2rem 0;
     font-size: 90%;
 
     .title {
@@ -91,10 +81,9 @@ const ModalContent = styled.div`
   .businessLogoWrapper {
     width: 100%;
     padding: 0 2rem;
-    margin: 2rem 0;
 
     .logo {
-      height: 4rem;
+      height: 7rem;
     }
 
     p {
@@ -227,11 +216,11 @@ const ModalContent = styled.div`
 `;
 
 const Card = styled.div`
-  min-width: fit-content;
   height: inherit;
   margin-left: 2rem;
-  border-radius: 1rem;
-  min-width: 30rem;
+  border-radius: 0.3rem;
+  height: 15rem;
+  width: 70%;
   background: #f1f1f1;
   overflow: hidden;
 
@@ -243,28 +232,24 @@ const Card = styled.div`
 function Modal(props) {
   const dispatch = store.dispatch;
 
-  const [result, setResult] = useState({});
-  const [business, setBusiness] = useState({});
+  const [result, setResult] = useState();
   const [loading, setLoading] = useState(false);
 
   async function fetchData() {
     setLoading(true);
 
-    let productRes, businessRes;
+    let res;
 
-    productRes = await axios.get(
-      `${API_HOST}/products?name=${props.modalData.product}`
-    );
-    businessRes = await axios.get(
-      `${API_HOST}/businesses?name=${props.modalData.business}`
+    res = await axios.get(
+      `${API_HOST}/${props.modalData.contentType}/${props.modalData.id}`
     );
 
-    if (productRes.data && businessRes.data) {
-      setResult(productRes.data[0]);
-      setBusiness(businessRes.data[0]);
+    if (res.data) {
+      setLoading(false);
+      setResult(res.data);
+    } else {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -286,89 +271,127 @@ function Modal(props) {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <>
-            <div className="top">
-              <p className="heading">{result.name}</p>
-              <img
-                className="closeIcon"
-                src={close}
-                alt=""
-                onClick={() => {
-                  dispatch(setModalOpen(false));
-                }}
-              />
-            </div>
-            <div className="displayCards">
-              <div id="track_modal" className="track">
-                <Card left={0}>
-                  {result.contentImage && (
-                    <img src={`${API_HOST}${result.contentImage.url}`} alt="" />
-                  )}
-                </Card>
+          result && (
+            <>
+              <div className="top">
+                {result && <p className="heading">{result.name}</p>}
+                <img
+                  className="closeIcon"
+                  src={close}
+                  alt=""
+                  onClick={() => {
+                    dispatch(setModalOpen(false));
+                  }}
+                />
               </div>
-            </div>
-            <div className="categories">
-              <p className="title">Category</p>
-              {result.category && (
-                <p className="category">{result.category.name}</p>
+              <div className="displayCards">
+                <div id="track_modal" className="track">
+                  <Card left={0}>
+                    {result.contentImage && (
+                      <img
+                        src={`${API_HOST}${result.contentImage.url}`}
+                        alt=""
+                      />
+                    )}
+                  </Card>
+                </div>
+              </div>
+              <div className="categories">
+                <p className="title">Category</p>
+                {result.category && (
+                  <p className="category">{result.category.name}</p>
+                )}
+              </div>
+              <div className="businessLogoWrapper">
+                {result.business.logo && (
+                  <img
+                    className="logo"
+                    src={`${API_HOST}${result.business.logo.url}`}
+                    alt=""
+                  />
+                )}
+                {!result.business.logo && <h2>{result.business.name}</h2>}
+                {/* <p>Store</p> */}
+              </div>
+              <div className="description">
+                <p>{result.description}.</p>
+              </div>
+              {props.modalData.contentType !== 'products' && (
+                <div className="formWrapper">
+                  <p className="heading">Contact Vendor</p>
+                  <form>
+                    <input
+                      type="text"
+                      id="full_name"
+                      name="name"
+                      placeholder="full name"
+                      required
+                    />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="e-mail"
+                      required
+                    />
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      placeholder="address"
+                    />
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Message"
+                      required
+                    />
+                    <div className="btnWrapper">
+                      <button type="submit">Send</button>
+                      {/* <p className="successMsg">
+                      message sent
+                      <img src={checked_small} alt="" />
+                    </p> */}
+                    </div>
+                  </form>
+                </div>
               )}
-            </div>
-            <div className="businessLogoWrapper">
-              {business.logo && (
-                <img src={`${API_HOST}${business.logo.url}`} alt="" />
+              <div className="contactDetails">
+                <p className="heading">Vendor Info</p>
+                <div className="item">
+                  <p className="title">Address</p>
+                  <p className="content">{result.business.address}</p>
+                </div>
+                {result.business.phone && (
+                  <div className="item">
+                    <p className="title">Phone</p>
+                    <a
+                      href={`tel:${result.business.phone}`}
+                      className="content"
+                    >
+                      {result.business.phone}
+                    </a>
+                  </div>
+                )}
+                <div className="item">
+                  <p className="title">About</p>
+                  <p className="content">{result.business.description}</p>
+                </div>
+              </div>
+              {result.business.linkToMaps && (
+                <div className="getDirections">
+                  <a
+                    href={result.business.linkToMaps}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    get directions via google maps
+                  </a>
+                  <img src={location_modal} alt="" />
+                </div>
               )}
-              {/* <p>Store</p> */}
-            </div>
-            <div className="description">
-              <p>{result.description}.</p>
-            </div>
-            {/* <div className='formWrapper'>
-                    <p className='heading'>Contact Vendor</p>
-                    <form>
-                        <input type='text' id='full_name' name='name' placeholder='full name' required/>
-                        <input type='email' id='email' name='email' placeholder='e-mail' required/>
-                        <input type='text' id='address' name='address' placeholder='address' />
-                        <textarea id='message' name='message' placeholder='Message' required/>
-                        <div className='btnWrapper'>
-                            <button type='submit'>
-                                Send
-                            </button>
-                            <p className='successMsg'>
-                                message sent
-                                <img src={checked_small} alt='' />
-                            </p>
-                        </div>
-                    </form>
-                </div> */}
-            <div className="contactDetails">
-              <p className="heading">Vendor Info</p>
-
-              {/* <div className='item'>
-                        <p className='title'>Locally UK Shop Front</p>
-                        <p className='content bold'>Pettits of Wallingford</p>
-                    </div> */}
-              <div className="item">
-                <p className="title">Address</p>
-                <p className="content">{business.address}</p>
-              </div>
-              <div className="item">
-                <p className="title">Phone</p>
-                <a href={`tel:${business.phone}`} className="content">
-                  {business.phone}
-                </a>
-              </div>
-              <div className="item">
-                <p className="title">About</p>
-                <p className="content">{business.description}</p>
-              </div>
-            </div>
-            <div className="getDirections">
-              <a href={business.linkToMaps} target="_blank" rel="noreferrer">
-                get directions via google maps
-              </a>
-              <img src={location_modal} alt="" />
-            </div>
-          </>
+            </>
+          )
         )}
       </ModalContent>
     </Wrapper>

@@ -3,12 +3,15 @@ import { store } from '../redux/store';
 
 const uuid = require('uuid');
 
-export const loadModal = async () => {
+export const loadModal = async (
+  contentType = 'products',
+  id = '6003fe2647043a5687e136e8'
+) => {
   const dispatch = store.dispatch;
 
   const modalData = {
-    product: 'Grilled Chicken',
-    business: 'Julius Berger'
+    contentType,
+    id
   };
 
   dispatch(setModalData(modalData));

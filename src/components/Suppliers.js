@@ -88,18 +88,6 @@ const Shops = styled.div`
 `;
 
 function Suppliers() {
-  const [services, setServices] = useState([]);
-
-  async function fetchServices() {
-    const res = await getCollection('services');
-
-    if (res) setServices(res);
-  }
-
-  useEffect(() => {
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <Wrapper>
       <Container>

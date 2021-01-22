@@ -159,13 +159,6 @@ const goToSlide = (track, slideWidth, index, fn) => {
 
 function Trending(props) {
   const [track, setTrack] = useState(null);
-  const [products, setProducts] = useState([]);
-
-  async function fetchProducts() {
-    const res = await getCollection('products');
-
-    if (res) setProducts(res);
-  }
 
   useEffect(() => {
     setTrack(document.querySelector('#track_trending'));
@@ -194,7 +187,7 @@ function Trending(props) {
         </div>
         <div className="trackWrapper">
           <Track id="track_trending">
-            <Card onClick={loadModal}>
+            <Card onClick={() => loadModal('products')}>
               <div className="inner">
                 <img src={trending_badge} alt="" className="trendingBadge" />
                 <div className="cardImageWrapper">
@@ -206,7 +199,7 @@ function Trending(props) {
                 </div>
               </div>
             </Card>
-            <Card onClick={loadModal}>
+            <Card onClick={() => loadModal('products')}>
               <div className="inner">
                 <img src={trending_badge} alt="" className="trendingBadge" />
                 <div className="cardImageWrapper">
@@ -218,7 +211,7 @@ function Trending(props) {
                 </div>
               </div>
             </Card>
-            <Card onClick={loadModal}>
+            <Card onClick={() => loadModal('products')}>
               <div className="inner">
                 <img src={trending_badge} alt="" className="trendingBadge" />
                 <div className="cardImageWrapper">
@@ -230,7 +223,7 @@ function Trending(props) {
                 </div>
               </div>
             </Card>
-            <Card onClick={loadModal}>
+            <Card onClick={() => loadModal('products')}>
               <div className="inner">
                 <img src={trending_badge} alt="" className="trendingBadge" />
                 <div className="cardImageWrapper">

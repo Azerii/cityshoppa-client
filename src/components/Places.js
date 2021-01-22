@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import cake from '../assets/landing/cake.png';
 import jacket from '../assets/landing/jacket.png';
 import chicken from '../assets/landing/chicken.png';
-import right_arrow from '../assets/landing/right_arrow.svg';
-import left_arrow from '../assets/landing/left_arrow.svg';
+// import right_arrow from '../assets/landing/right_arrow.svg';
+// import left_arrow from '../assets/landing/left_arrow.svg';
 import arrow_places from '../assets/landing/arrow_places.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
-import location_orange from '../assets/landing/location_orange.svg';
+// import location_orange from '../assets/landing/location_orange.svg';
 
-import getCollection, { setPlacesData } from '../redux/actions';
-import Container from './Container';
+import { setPlacesData } from '../redux/actions';
+// import Container from './Container';
 import { loadModal } from '../utils';
 
 const MainWrapper = styled.div`
@@ -20,25 +20,25 @@ const MainWrapper = styled.div`
   margin-top: 5rem;
 `;
 
-const Header = styled.div`
-  .caption {
-    display: flex;
-    justify-content: center;
+// const Header = styled.div`
+//   .caption {
+//     display: flex;
+//     justify-content: center;
 
-    .textWrapper {
-      margin-right: 5rem;
+//     .textWrapper {
+//       margin-right: 5rem;
 
-      .heading {
-        font-size: 200%;
-        font-weight: 500;
-      }
+//       .heading {
+//         font-size: 200%;
+//         font-weight: 500;
+//       }
 
-      .subheading {
-        font-size: 120%;
-      }
-    }
-  }
-`;
+//       .subheading {
+//         font-size: 120%;
+//       }
+//     }
+//   }
+// `;
 
 const Wrapper = styled.div`
   display: flex;
@@ -182,63 +182,15 @@ const Card = styled.a`
   }
 `;
 
-// const TrackNav = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-//   padding-bottom: 2rem;
+// const categorySet = [
+//   'Clothing',
+//   'Shoes',
+//   'Consumer Electronics',
+//   'Crafts',
+//   'Pet Food'
+// ];
 
-//   .btnWrapper {
-//     display: flex;
-//     align-items: center;
-//     width: fit-content;
-//     background-color: #ff7235;
-//     margin-right: 7rem;
-
-//     button {
-//       padding: 1rem;
-//       background-color: transparent;
-//       border: none;
-
-//       &:hover {
-//         filter: brightness(1.2);
-//       }
-
-//       img {
-//         height: 1rem;
-//       }
-
-//       &.left {
-//         padding-right: 0.5rem;
-//       }
-
-//       &.right {
-//         padding-left: 0.5rem;
-//       }
-//     }
-//   }
-// `;
-
-const categorySet = [
-  'Clothing',
-  'Shoes',
-  'Consumer Electronics',
-  'Crafts',
-  'Pet Food'
-];
-
-function Places(props) {
-  const [products, setProducts] = useState([]);
-
-  async function fetchProducts() {
-    const res = await getCollection('products');
-
-    if (res) setProducts(res);
-  }
-
-  useEffect(() => {
-    // eslint-disable-next-line
-  }, []);
-
+function Places() {
   return (
     <>
       <MainWrapper>
@@ -249,7 +201,7 @@ function Places(props) {
                 </div> */}
           <div className="trackWrapper">
             <Track id="track_places">
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={jacket} alt="" className="cardimage" />
@@ -275,7 +227,7 @@ function Places(props) {
                   </div>
                 </div>
               </Card>
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={cake} alt="" className="cardimage" />
@@ -301,7 +253,7 @@ function Places(props) {
                   </div>
                 </div>
               </Card>
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={jacket} alt="" className="cardimage" />
@@ -327,7 +279,7 @@ function Places(props) {
                   </div>
                 </div>
               </Card>
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={chicken} alt="" className="cardimage" />
@@ -353,7 +305,7 @@ function Places(props) {
                   </div>
                 </div>
               </Card>
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={cake} alt="" className="cardimage" />
@@ -379,7 +331,7 @@ function Places(props) {
                   </div>
                 </div>
               </Card>
-              <Card onClick={loadModal}>
+              <Card onClick={() => loadModal('products')}>
                 <div className="inner">
                   <div className="cardImageWrapper">
                     <img src={chicken} alt="" className="cardimage" />

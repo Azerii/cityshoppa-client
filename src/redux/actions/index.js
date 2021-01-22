@@ -78,7 +78,7 @@ export const getUser = async dispatch => {
   }
 };
 
-const getCollection = async (collectionType, id) => {
+export const getCollection = async (collectionType, id) => {
   let res;
   try {
     if (id) {
@@ -96,8 +96,6 @@ const getCollection = async (collectionType, id) => {
 
   return null;
 };
-
-export default getCollection;
 
 export const setFeaturedProductsData = data => dispatch => {
   dispatch({
