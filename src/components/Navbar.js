@@ -18,7 +18,6 @@ import {
   setDonation,
   setToken
 } from '../redux/actions';
-import { categories, getRandomRange } from '../utils';
 import querystring from 'querystring';
 
 const Wrapper = styled.div`
@@ -225,7 +224,6 @@ const Top = styled.div`
 
 const Bottom = styled.div`
   padding: 1rem 0;
-  // background-color: #deb887;
   background-color: #ff7235;
 
   .bottomContainer {
@@ -275,8 +273,9 @@ const Bottom = styled.div`
 
 function Navbar(props) {
   const history = useHistory();
-  const limit = getRandomRange(6, categories.length);
-  const [categoryList] = useState(categories.slice(limit.lower, limit.upper));
+  // const limit = getRandomRange(6, categories.length);
+  const [categories, setCategories] = useState([]);
+  const [cities, setCities] = useState([]);
   const [city, setCity] = useState(props.city);
 
   const handleCityChange = e => {
@@ -303,8 +302,22 @@ function Navbar(props) {
     if (res) props.setDonation(res.amount);
   }
 
+  async function fetchCategories() {
+    const res = await getCollection('categories');
+
+    if (res) setCategories(res);
+  }
+
+  async function fetchCities() {
+    let res = await getCollection('cities');
+
+    if (res) setCities(res);
+  }
+
   useEffect(() => {
     fetchDonation();
+    fetchCategories();
+    fetchCities();
     const urlQueryString = window.location.search.slice(1);
 
     if (urlQueryString.length) {
@@ -348,11 +361,9 @@ function Navbar(props) {
                   onChange={e => handleCityChange(e)}
                 >
                   <option value={0}>All Cities</option>
-                  <option value="london">London</option>
-                  <option value="manchester">Manchester</option>
-                  <option value="cambridge">Cambridge</option>
-                  <option value="belfast">Belfast</option>
-                  <option value="Toronto">Toronto</option>
+                  {cities.map(option => (
+                    <option value={option.name}>{option.name}</option>
+                  ))}
                 </select>
               </div>
               <button type="submit" className="searchButton">
@@ -418,17 +429,17 @@ function Navbar(props) {
                 <div className="item">
                   <span>|</span>
                 </div>
-                {categoryList.map(category => (
+                {categories.map(category => (
                   <a
-                    key={category}
-                    href={`/categories/${category}`}
+                    key={category.id}
+                    href={`/categories/${category.name}`}
                     className="item"
                   >
                     <span>
                       {/* {category.length > 15
                         ? `${category.substr(0, 15)}...`
                         : category} */}
-                      {category}
+                      {category.name}
                     </span>
                   </a>
                 ))}

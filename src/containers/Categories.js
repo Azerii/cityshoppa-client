@@ -48,7 +48,8 @@ const TopBar = styled.div`
       padding: 0.5rem;
       margin-left: 0;
       color: #ffffff;
-      background-color: #ff7235;
+      background-color: #c54100;
+      font-weight: 500;
       border-radius: 0.3rem;
       cursor: pointer;
       transition: all ease-out 200ms;

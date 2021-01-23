@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import close from '../assets/landing/close.svg';
 // import checked_small from '../assets/landing/checked_small.svg';
 import location_modal from '../assets/landing/location_modal.svg';
-import { setModalOpen } from '../redux/actions';
+import { getCollection, setModalOpen } from '../redux/actions';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { API_HOST } from '../utils/config';
 import { store } from '../redux/store';
 
@@ -240,13 +239,11 @@ function Modal(props) {
 
     let res;
 
-    res = await axios.get(
-      `${API_HOST}/${props.modalData.contentType}/${props.modalData.id}`
-    );
+    res = await getCollection('products', props.modalData.id);
 
-    if (res.data) {
+    if (res) {
       setLoading(false);
-      setResult(res.data);
+      setResult(res);
     } else {
       setLoading(false);
     }
@@ -316,7 +313,7 @@ function Modal(props) {
               <div className="description">
                 <p>{result.description}.</p>
               </div>
-              {props.modalData.contentType !== 'products' && (
+              {/* {props.modalData.contentType !== 'products' && (
                 <div className="formWrapper">
                   <p className="heading">Contact Vendor</p>
                   <form>
@@ -348,14 +345,14 @@ function Modal(props) {
                     />
                     <div className="btnWrapper">
                       <button type="submit">Send</button>
-                      {/* <p className="successMsg">
+                      <p className="successMsg">
                       message sent
                       <img src={checked_small} alt="" />
-                    </p> */}
+                      </p>
                     </div>
                   </form>
                 </div>
-              )}
+              )} */}
               <div className="contactDetails">
                 <p className="heading">Vendor Info</p>
                 <div className="item">
@@ -377,6 +374,19 @@ function Modal(props) {
                   <p className="title">About</p>
                   <p className="content">{result.business.description}</p>
                 </div>
+                {result.business.website && (
+                  <div className="item">
+                    <p className="title">Website</p>
+                    <a
+                      href={result.business.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="content"
+                    >
+                      {result.business.website}
+                    </a>
+                  </div>
+                )}
               </div>
               {result.business.linkToMaps && (
                 <div className="getDirections">

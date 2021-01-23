@@ -22,14 +22,19 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 25%;
     padding-left: 5%;
+    // box-shadow: 0px 0px 3px #000000;
+    // border-right: 1px solid;
+    // background-color: #8fbc8f;
     // border: 1px solid red;
 
     .heading {
-      max-width: 80%;
+      max-width: 70%;
       font-size: 200%;
       font-weight: 500;
-      color: #000000;
+      color: #ff7235;
       margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      // border-bottom: 1px solid;
       z-index: 10;
     }
 

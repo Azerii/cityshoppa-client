@@ -6,13 +6,12 @@ import Featured from '../components/Featured';
 import FeaturedPlaces from '../components/FeaturedPlaces';
 import Modal from '../components/Modal';
 import Places from '../components/Places';
-import Suppliers from '../components/Suppliers';
-import Trending from '../components/Trending';
+// import Suppliers from '../components/Suppliers';
+// import Trending from '../components/Trending';
 import { getCollection, getUser, setCity } from '../redux/actions';
 
 function Landing(props) {
   const [products, setProducts] = useState([]);
-  const [services] = useState([]);
 
   const fetchProducts = async () => {
     let res = await getCollection('products');
@@ -37,8 +36,8 @@ function Landing(props) {
         <Featured />
       </Container>
       <Places products={products} />
-      <Trending products={products} />
-      <Suppliers services={services} />
+      {/* <Trending products={products} />
+      <Suppliers services={services} /> */}
     </>
   );
 }
