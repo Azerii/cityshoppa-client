@@ -50,8 +50,7 @@ const Track = styled.div`
   width: 100%;
   margin: 2rem 0;
   transform: translateX(0);
-  transition: all ease 250ms;
-  animation: slideshow 10s linear infinite;
+  animation: slideshow 15s linear infinite;
 
   @keyframes slideshow {
     0% {
@@ -59,7 +58,7 @@ const Track = styled.div`
     }
 
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
   }
 `;
@@ -67,6 +66,7 @@ const Track = styled.div`
 const Card = styled.div`
   display: block;
   padding: 0 2rem;
+  min-width: 20%;
 
   &:visited {
     color: inherit;
@@ -85,7 +85,7 @@ const Card = styled.div`
     transition: transform ease-out 200ms;
 
     img {
-      height: 6rem;
+      width: 50%;
     }
 
     .discountBadge {
@@ -155,6 +155,16 @@ function Discounted(props) {
             </Card>
             <Card>
               <div className="inner">
+                <img src={burger_king_logo} alt="" />
+              </div>
+            </Card>
+            <Card>
+              <div className="inner">
+                <img src={sg_logo} alt="" />
+              </div>
+            </Card>
+            <Card>
+              <div className="inner">
                 <img src={starbucks_logo} alt="" />
               </div>
             </Card>
@@ -165,10 +175,10 @@ function Discounted(props) {
             </Card>
             <Card>
               <div className="inner">
-                <img src={burger_king_logo} alt="" />
+                <img src={sg_logo} alt="" />
               </div>
             </Card>
-            <Card>
+            {/* <Card>
               <div className="inner">
                 <img src={sg_logo} alt="" />
               </div>
@@ -198,6 +208,21 @@ function Discounted(props) {
                 <img src={burger_king_logo} alt="" />
               </div>
             </Card>
+            <Card>
+              <div className="inner">
+                <img src={sg_logo} alt="" />
+              </div>
+            </Card>
+            <Card>
+              <div className="inner">
+                <img src={starbucks_logo} alt="" />
+              </div>
+            </Card>
+            <Card>
+              <div className="inner">
+                <img src={sg_logo} alt="" />
+              </div>
+            </Card> */}
           </Track>
         </Wrapper>
       </MainWrapper>
