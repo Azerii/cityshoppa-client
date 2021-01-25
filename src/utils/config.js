@@ -1,4 +1,3 @@
 module.exports = {
-  API_HOST: 'https://cityshoppa.herokuapp.com'
-  // API_HOST: 'http://localhost:1337'
+  API_HOST: 'https://api.cityshoppa.com'
 };
