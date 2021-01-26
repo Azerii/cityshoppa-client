@@ -20,6 +20,10 @@ const MainWrapper = styled.div`
   width: 100vw;
   margin: 5rem 0;
   border-top: 1px solid #e5e5e5;
+
+  @media screen and (max-width: 768px) {
+    margin: 2rem 0;
+  }
 `;
 
 const Header = styled.div`
@@ -32,10 +36,18 @@ const Header = styled.div`
   .heading {
     font-size: 200%;
     font-weight: 500;
+
+    @media screen and (max-width: 768px) {
+      font-size: 150%;
+    }
   }
 
   .subheading {
     font-size: 120%;
+
+    @media screen and (max-width: 768px) {
+      font-size: 100%;
+    }
   }
 `;
 
@@ -50,11 +62,17 @@ const Wrapper = styled.div`
 
 const Track = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
   flex-wrap: wrap;
   justify-content: space-between;
+  position: relative;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  }
 `;
 
 const Category = styled.p`

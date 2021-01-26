@@ -10,7 +10,6 @@ import Container from './Container';
 
 const MainWrapper = styled.div`
   width: 100vw;
-  margin-bottom: 5rem;
   padding: 2rem 0;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -27,11 +26,19 @@ const Header = styled.div`
         font-size: 200%;
         font-weight: 500;
         text-align: center;
+
+        @media screen and (max-width: 768px) {
+          font-size: 150%;
+        }
       }
 
       .subheading {
         font-size: 120%;
         text-align: center;
+
+        @media screen and (max-width: 768px) {
+          font-size: 100%;
+        }
       }
     }
   }
@@ -65,7 +72,6 @@ const Track = styled.div`
 
 const Card = styled.div`
   display: block;
-  padding: 0 2rem;
   min-width: 20%;
 
   &:visited {
@@ -77,15 +83,23 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
     // box-shadow: 0px 0px 5px #e5e5e5;
     // border-radius: 0.3rem;
     position: relative;
     // cursor: pointer;
     transition: transform ease-out 200ms;
 
+    @media screen and (max-width: 768px) {
+      padding: 0 1rem;
+    }
+
     img {
       width: 50%;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
     }
 
     .discountBadge {

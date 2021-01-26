@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
-import {store, persistor} from './redux/store'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -16,18 +16,27 @@ import Categories from './containers/Categories';
 
 function App() {
   return (
-    <Provider store={store} >
-      <PersistGate loading={null} persistor={persistor} >
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <Router>
-          <div className='App'>
+          <div className="App">
             <Layout>
               <Switch>
-                <Route exact path='/' component={Landing} />
-                <Route path='/categories' component={Categories} />
-                <Route path='/sign-up' component={SignUp} />
-                <Route path='/sign-in' component={SignIn} />
-                <Route path='/auth/:provider/callback' component={LoginRedirect} />
-                <Route component={() => <Container><h1>Page Not Found.</h1></Container>} />
+                <Route exact path="/" component={Landing} />
+                <Route path="/categories" component={Categories} />
+                <Route path="/sign-up" component={SignUp} />
+                <Route path="/sign-in" component={SignIn} />
+                <Route
+                  path="/auth/:provider/callback"
+                  component={LoginRedirect}
+                />
+                <Route
+                  component={() => (
+                    <Container>
+                      <h1>Page Not Found.</h1>
+                    </Container>
+                  )}
+                />
               </Switch>
             </Layout>
           </div>

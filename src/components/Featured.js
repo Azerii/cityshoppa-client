@@ -11,9 +11,13 @@ import { loadModal } from '../utils';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 5rem;
+  margin: 5rem 0;
   position: relative;
   overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    margin: 2rem 0;
+  }
 `;
 
 const Track = styled.ul`
@@ -23,6 +27,10 @@ const Track = styled.ul`
   list-style: none;
   height: 20rem;
   transition: all ease-in 500ms;
+
+  @media screen and (max-width: 768px) {
+    height: 7rem;
+  }
 `;
 
 const Slide = styled.li`
@@ -48,7 +56,7 @@ const Slide = styled.li`
 
       .featuredBadge {
         width: 60%;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
       .business {
         width: 70%;
@@ -65,10 +73,16 @@ const Slide = styled.li`
         width: auto;
         transform: translateX(-25%) scale(2);
         margin-top: -2.5rem;
+
+        @media screen and (max-width: 768px) {
+          transform: translateX(-50%) scale(2);
+          margin-top: 0.5rem;
+        }
       }
     }
 
     &.contentRight {
+      display: none;
       justify-content: center;
       width: 20%;
 

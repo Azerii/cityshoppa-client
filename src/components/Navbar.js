@@ -6,7 +6,7 @@ import { Route, useHistory } from 'react-router-dom';
 import logo from '../assets/global/logo_footer.png';
 import location_pin from '../assets/navbar/location_black.svg';
 import search from '../assets/navbar/search.svg';
-import home from '../assets/navbar/home.svg';
+// import home from '../assets/navbar/home.svg';
 import logged_in from '../assets/navbar/logged_in.svg';
 import heart_outlined from '../assets/navbar/heart_outlined.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
@@ -28,9 +28,65 @@ const Top = styled.div`
   padding: 1rem 0;
   background-color: #5a7889;
 
+  @media screen and (max-width: 768px) {
+    padding-top: 0.5rem;
+  }
+
+  .collapsedMenu {
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all ease-out 200ms;
+    z-index: 234567;
+
+    &.close {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .inner {
+      position: relative;
+      width: 70%;
+      background-color: #deb887;
+      padding: 1rem;
+      flex-direction: column;
+      border-radius: 0.3rem;
+
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 0.5rem 0;
+        width: 100%;
+
+        .seeMore {
+          font-weight: 500;
+          text-transform: uppercase;
+          color: #000000;
+          max-width: unset;
+
+          img {
+            height: 0.5rem;
+            margin-left: 0.5rem;
+            filter: invert(1);
+          }
+        }
+      }
+    }
+  }
+
   .topContainer {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+    }
   }
 
   div {
@@ -50,13 +106,22 @@ const Top = styled.div`
   .contentLeft {
     width: fit-content;
 
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
     img {
       height: 2.5rem;
     }
 
     .hamburger {
       display: block;
-      margin-left: 2rem;
+      background-color: transparent;
+      border: none;
 
       span {
         display: block;
@@ -64,14 +129,19 @@ const Top = styled.div`
         width: 1.5rem;
         margin-bottom: 3px;
         background-color: #ffffff;
+        border-radius: 3px;
       }
     }
   }
 
   .contentCenter {
     display: flex;
-    min-width: 45%;
+    width: 45%;
     height: 2.5rem;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
 
     div {
       height: 100%;
@@ -85,10 +155,18 @@ const Top = styled.div`
       border-bottom-left-radius: 0.3rem;
       background-color: #ffffff;
 
+      @media screen and (max-width: 768px) {
+        padding: 0rem 0.5rem;
+      }
+
       input {
         width: 100%;
         font-size: 90%;
         color: #5a7889;
+
+        @media screen and (max-width: 768px) {
+          font-size: 70%;
+        }
       }
     }
 
@@ -111,6 +189,10 @@ const Top = styled.div`
         margin-left: 0.5rem;
         appearance: none;
         border: none;
+
+        @media screen and (max-width: 768px) {
+          font-size: 70%;
+        }
       }
     }
 
@@ -134,91 +216,110 @@ const Top = styled.div`
   }
 
   .contentRight {
-    // display: flex;
-    // justify-content: space-between;
     position: relative;
+  }
+`;
 
-    .donation {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-right: 3rem;
-      color: #ffffff;
+const Donation = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 3rem;
+  color: #ffffff;
 
-      .top {
-        font-size: 100%;
-        font-weight: 500;
+  @media screen and (max-width: 768px) {
+    padding-right: 0;
+    filter: invert(1);
+    // border-top: 1px solid #5e5e5e;
+    width: 100%;
+  }
 
-        img {
-          height: 1rem;
-          margin-right: 0.5rem;
-        }
-      }
+  .top {
+    font-size: 100%;
+    font-weight: 500;
 
-      .caption {
-        font-size: 60%;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
+    img {
+      height: 1rem;
+      margin-right: 0.5rem;
     }
 
-    a {
-      padding: 0.5rem 1rem;
-      font-size: 80%;
-      font-weight: 500;
-
-      &.signIn {
-        background-color: #ff7235;
-        color: #ffffff;
-        margin-right: 1rem;
-      }
-
-      &.signUp {
-        background-color: transparent;
-        border: 1px solid #ffffff;
-        color: #ffffff;
-      }
-    }
-
-    .user {
-      width: fit-content;
-      cursor: pointer;
-
-      p {
-        color: #ffffff;
-        margin-right: 0.5rem;
-      }
+    @media screen and (max-width: 768px) {
+      font-size: 150%;
 
       img {
-        height: 2rem;
+        height: 1.5rem;
       }
     }
+  }
 
-    .signOut {
-      position: absolute;
-      top: 3rem;
-      right: 0;
-      min-width: 7rem;
-      padding: 0.5rem 1rem;
-      background-color: #ffffff;
-      border: 1px solid #666666;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: all ease-out 200ms;
+  .caption {
+    font-size: 60%;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+`;
 
-      &:hover {
-        background-color: #ff7235;
-        color: #ffffff;
-        border-color: #ff7235;
-      }
+const AuthLink = styled.a`
+  padding: 0.5rem 1rem;
+  font-size: 80%;
+  font-weight: 500;
+  border-radius: 0.3rem;
 
-      &.show {
-        opacity: 1;
-        pointer-events: all;
-      }
-    }
+  &.signIn {
+    background-color: #ff7235;
+    color: #ffffff;
+    margin-right: 1rem;
+  }
+
+  &.signUp {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+
+    // @media screen and (max-width: 768px) {
+    //   border-color: #5a7889;
+    //   color: #5a7889;
+    // }
+  }
+`;
+
+const User = styled.div`
+  width: fit-content;
+  cursor: pointer;
+
+  p {
+    color: #ffffff;
+    margin-right: 0.5rem;
+  }
+
+  img {
+    height: 2rem;
+  }
+`;
+
+const SignOut = styled.p`
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  min-width: 7rem;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #666666;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all ease-out 200ms;
+
+  &:hover {
+    background-color: #ff7235;
+    color: #ffffff;
+    border-color: #ff7235;
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: all;
   }
 `;
 
@@ -336,11 +437,89 @@ function Navbar(props) {
     <>
       <Wrapper>
         <Top>
+          <div
+            id="collapsedMenu"
+            className="collapsedMenu close"
+            onClick={e => {
+              if (e.target.id === 'collapsedMenu') {
+                e.target.classList.add('close');
+              }
+            }}
+          >
+            <div className="inner">
+              <div className="item">
+                {props.token && (
+                  <>
+                    <User
+                      onClick={() => {
+                        document
+                          .querySelector('.signOut')
+                          .classList.toggle('show');
+                      }}
+                    >
+                      <p>{props.user && props.user.username}</p>
+                      <img src={logged_in} alt="" />
+                    </User>
+                    <SignOut>
+                      <p
+                        onClick={() => {
+                          props.setToken(null);
+                          setTimeout(() => {
+                            history.push('/');
+                          });
+                        }}
+                      >
+                        Sign out
+                      </p>
+                    </SignOut>
+                  </>
+                )}
+                {!props.token && (
+                  <>
+                    <AuthLink href="/sign-in" className="signIn">
+                      Sign In
+                    </AuthLink>
+                    <AuthLink href="/sign-up" className="signUp">
+                      Sign Up
+                    </AuthLink>
+                  </>
+                )}
+              </div>
+              <div className="item">
+                <Donation>
+                  <div className="top">
+                    <img src={heart_outlined} alt="" />
+                    <span>${props.donation}</span>
+                  </div>
+                  <p className="caption">donated to charity</p>
+                </Donation>
+              </div>
+              <div className="item">
+                <a href="/categories" className="item seeMore">
+                  All Categories
+                  <img src={arrow_places_active} alt="" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div></div>
           <Container className="topContainer">
             <div className="contentLeft">
               <a href="/">
                 <img src={logo} alt="" />
               </a>
+              <button
+                className="hamburger mb"
+                onClick={() => {
+                  document
+                    .querySelector('.collapsedMenu')
+                    .classList.remove('close');
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
             </div>
             <form className="contentCenter" onSubmit={e => handleSearch(e)}>
               <div className="searchBar">
@@ -362,7 +541,9 @@ function Navbar(props) {
                 >
                   <option value={0}>All Cities</option>
                   {cities.map(option => (
-                    <option value={option.name}>{option.name}</option>
+                    <option key={option.name} value={option.name}>
+                      {option.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -370,18 +551,17 @@ function Navbar(props) {
                 <img src={search} alt="" />
               </button>
             </form>
-            <div className="contentRight">
-              <div className="donation">
+            <div className="contentRight lg">
+              <Donation>
                 <div className="top">
                   <img src={heart_outlined} alt="" />
                   <span>${props.donation}</span>
                 </div>
                 <p className="caption">donated to charity</p>
-              </div>
+              </Donation>
               {props.token && (
                 <>
-                  <div
-                    className="user"
+                  <User
                     onClick={() => {
                       document
                         .querySelector('.signOut')
@@ -390,8 +570,8 @@ function Navbar(props) {
                   >
                     <p>{props.user && props.user.username}</p>
                     <img src={logged_in} alt="" />
-                  </div>
-                  <div className="signOut">
+                  </User>
+                  <SignOut className="signOut">
                     <p
                       onClick={() => {
                         props.setToken(null);
@@ -402,33 +582,37 @@ function Navbar(props) {
                     >
                       Sign out
                     </p>
-                  </div>
+                  </SignOut>
                 </>
               )}
               {!props.token && (
                 <>
-                  <a href="/sign-in" className="signIn">
+                  <AuthLink href="/sign-in" className="signIn">
                     Sign In
-                  </a>
-                  <a href="/sign-up" className="signUp">
+                  </AuthLink>
+                  <AuthLink href="/sign-up" className="signUp">
                     Sign Up
-                  </a>
+                  </AuthLink>
                 </>
               )}
             </div>
           </Container>
         </Top>
         <Route exact path="/">
-          <Bottom>
+          <Bottom className="lg">
             <Container>
               <div className="inner">
-                <a href="/" className="item">
+                <a href="/categories" className="item seeMore">
+                  All Categories
+                  <img src={arrow_places_active} alt="" />
+                </a>
+                {/* <a href="/" className="item">
                   <img src={home} alt="" />
                   <span>Home</span>
-                </a>
-                <div className="item">
+                </a> */}
+                {/* <div className="item">
                   <span>|</span>
-                </div>
+                </div> */}
                 {categories.map(category => (
                   <a
                     key={category.id}
@@ -443,10 +627,6 @@ function Navbar(props) {
                     </span>
                   </a>
                 ))}
-                <a href="/categories" className="item seeMore">
-                  All Categories
-                  <img src={arrow_places_active} alt="" />
-                </a>
               </div>
             </Container>
           </Bottom>

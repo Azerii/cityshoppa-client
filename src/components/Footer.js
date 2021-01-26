@@ -7,9 +7,7 @@ import Container from './Container';
 const Wrapper = styled.div`
   background-color: #011116;
   padding: 5rem 0;
-  color: #ffffff .inner {
-    width: 80%;
-  }
+  color: #ffffff;
 `;
 
 const MainCaption = styled.div`
@@ -23,6 +21,10 @@ const MainCaption = styled.div`
     margin-bottom: 1rem;
     color: #ffffff;
     font-size: 250%;
+
+    @media screen and (max-width: 768px) {
+      font-size: 200%;
+    }
   }
 
   a {
@@ -38,10 +40,20 @@ const MainCaption = styled.div`
 `;
 
 const Body = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+  margin: 5rem 0;
+
+  @media screen and (max-width: 768px) {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 7rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  }
+    
 
     .col {
         min-width: 20%;
@@ -76,6 +88,10 @@ const Bottom = styled.div`
     padding: 1rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.5);
 
+    @media screen and (max-width: 768px) {
+      margin-top: 0;
+    }
+
     p {
         font-size: 100%;
         color: #ffffff;
@@ -102,27 +118,36 @@ function Footer() {
               <img src={logo} alt="" className="logo" />
             </div>
             <div className="col links">
-              <a href="/">Products</a>
-              <a href="/">Services</a>
-              <a href="/">Discounts</a>
-            </div>
-            <div className="col links">
-              <a href="/">Businesses</a>
-              <a href="/">Community</a>
-              {/* <a href='/'>lorem</a> */}
-            </div>
-            <div className="col links">
+              <a href="/">Privacy Policy</a>
+              <a href="/">Terms</a>
               <a href="/">
                 Contact<span>*</span>
               </a>
-              {/* <a href='/'>lorem</a> */}
-              {/* <a href='/'>lorem</a> */}
             </div>
+            {/* <div className="col links">
+              <a href="/">
+                Contact<span>*</span>
+              </a>
+              <a href='/'>lorem</a>
+              <a href='/'>lorem</a>
+            </div> */}
           </Body>
           <Bottom>
-            <p>
+            <p className="lg">
               Copyright &copy; 2021 CityShoppa. All rights reserved.
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Privacy Policy</a>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Terms Of Use</a>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Legal</a>
+            </p>
+            <p className="mb">
+              Copyright &copy; 2021 CityShoppa.
+              <br />
+              All rights reserved. &nbsp;&nbsp;&nbsp;
+              <br />
+              <br />
               <a href="/">Privacy Policy</a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
               <a href="/">Terms Of Use</a>

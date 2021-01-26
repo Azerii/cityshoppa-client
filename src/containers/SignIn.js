@@ -10,6 +10,7 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions';
 import Loader from '../components/Loader';
+import Container from '../components/Container';
 
 const Wrapper = styled.div`
   padding: 2rem 0;
@@ -29,6 +30,7 @@ const Inner = styled.div`
   @media screen and (max-width: 768px) {
     width: unset;
     min-width: 60%;
+    border: none;
   }
 
   .content {
@@ -39,6 +41,11 @@ const Inner = styled.div`
     flex-direction: column;
     justify-content: center;
     padding: 3rem 0;
+
+    @media screen and (max-width: 768px) {
+      padding: 0;
+      width: 100%;
+    }
 
     .heading {
       font-weight: 500;
@@ -196,7 +203,7 @@ function SignIn(props) {
   };
 
   return (
-    <>
+    <Container>
       <Wrapper>
         <Inner>
           <div className="content">
@@ -270,7 +277,7 @@ function SignIn(props) {
                     required
                   />
                   <p onClick={() => toggleShowPassword('password')}>
-                    {showPassword ? 'Hide' : 'Show'} me
+                    {showPassword ? 'Hide' : 'Show'}
                   </p>
                 </FormInput>
 
@@ -289,7 +296,7 @@ function SignIn(props) {
           </div>
         </Inner>
       </Wrapper>
-    </>
+    </Container>
   );
 }
 

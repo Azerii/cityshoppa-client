@@ -54,6 +54,10 @@ const TopBar = styled.div`
       cursor: pointer;
       transition: all ease-out 200ms;
 
+      @media screen and (max-width: 768px) {
+        font-size: 70%;
+      }
+
       &.seeMore {
         font-weight: 500;
         color: #ff7235;
@@ -80,6 +84,10 @@ const Results = styled.div`
   margin-bottom: 5rem;
   padding-top: 2rem;
   border-top: 1px solid #e5e5e5;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 
   .item {
     display: flex;
