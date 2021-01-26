@@ -30,6 +30,10 @@ const ModalContent = styled.div`
   overflow: auto;
   position: relative;
 
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+
   .top {
     display: flex;
     justify-content: space-between;
@@ -40,11 +44,19 @@ const ModalContent = styled.div`
       font-size: 200%;
       font-weight: 500;
       color: #666666;
+
+      @media screen and (max-width: 768px) {
+        font-size: 100%;
+      }
     }
 
     .closeIcon {
       height: 1.5rem;
       cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        height: 1rem;
+      }
     }
   }
 
@@ -52,6 +64,10 @@ const ModalContent = styled.div`
     width: 100%;
     margin: 1rem 0;
     overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+      margin-top: 0;
+    }
 
     .track {
       display: flex;
@@ -216,12 +232,17 @@ const ModalContent = styled.div`
 
 const Card = styled.div`
   height: inherit;
-  margin-left: 2rem;
+  margin: 0 2rem;
   border-radius: 0.3rem;
   height: 15rem;
   width: 70%;
   background: #f1f1f1;
   overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 12rem;
+  }
 
   img {
     width: 100%;

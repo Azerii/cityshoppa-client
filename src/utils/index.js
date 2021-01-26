@@ -1,8 +1,6 @@
 import { setModalData, setModalOpen } from '../redux/actions';
 import { store } from '../redux/store';
 
-const uuid = require('uuid');
-
 export const loadModal = async (
   contentType = 'products',
   id = '6003fe2647043a5687e136e8'
@@ -89,336 +87,336 @@ export const categories = [
   'Automobile'
 ];
 
-const businesses = [
-  'Michelin',
-  'Nestle',
-  'Xiaomi',
-  `L'Oreal`,
-  'Reckitt Benckisser',
-  'Nivea',
-  'Sunlight',
-  'Molfix',
-  'Pernod Ricard'
-];
+// const businesses = [
+//   'Michelin',
+//   'Nestle',
+//   'Xiaomi',
+//   `L'Oreal`,
+//   'Reckitt Benckisser',
+//   'Nivea',
+//   'Sunlight',
+//   'Molfix',
+//   'Pernod Ricard'
+// ];
 
-export const dummyData = {
-  products: [
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/300x300/food'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage:
-        'https://source.unsplash.com/300x300/' +
-        categories[Math.floor(Math.random() * (categories.length - 1))]
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage:
-        'https://source.unsplash.com/300x300/' +
-        categories[Math.floor(Math.random() * (categories.length - 1))]
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: 'consectetur adipiscing',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      price: Math.random() * 50,
-      discount: Math.floor(Math.random() * (100 - 1)),
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    }
-  ],
-  services: [
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    },
-    {
-      id: uuid(),
-      name: ' arcu qoremixes',
-      decription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
-      category: categories[Math.floor(Math.random() * (categories.length - 1))],
-      business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
-      contentImage: 'https://source.unsplash.com/random/300x300'
-    }
-  ],
-  categories
-};
+// export const dummyData = {
+//   products: [
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/300x300/food'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage:
+//         'https://source.unsplash.com/300x300/' +
+//         categories[Math.floor(Math.random() * (categories.length - 1))]
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage:
+//         'https://source.unsplash.com/300x300/' +
+//         categories[Math.floor(Math.random() * (categories.length - 1))]
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: 'consectetur adipiscing',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       price: Math.random() * 50,
+//       discount: Math.floor(Math.random() * (100 - 1)),
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     }
+//   ],
+//   services: [
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     },
+//     {
+//       id: uuid(),
+//       name: ' arcu qoremixes',
+//       decription:
+//         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at condimentum arcu.',
+//       category: categories[Math.floor(Math.random() * (categories.length - 1))],
+//       business: businesses[Math.floor(Math.random() * (businesses.length - 1))],
+//       contentImage: 'https://source.unsplash.com/random/300x300'
+//     }
+//   ],
+//   categories
+// };
