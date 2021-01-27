@@ -216,13 +216,13 @@ function SignUp(props) {
               <p className="subheading">Create Your Account</p>
 
               <Route exact path="/sign-up">
-                <SignupItem href="https://cityshoppa.herokuapp.com/connect/google">
+                <SignupItem href="https://api.cityshoppa.com/connect/google">
                   <div className="imgWrapper">
                     <img src={google} alt="" />
                   </div>
                   <p>Sign up with Google</p>
                 </SignupItem>
-                <SignupItem href="https://cityshoppa.herokuapp.com/connect/facebook">
+                <SignupItem href="https://api.cityshoppa.com/connect/facebook">
                   <div className="imgWrapper">
                     <img src={facebook} alt="" />
                   </div>
