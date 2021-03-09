@@ -118,7 +118,7 @@ function Footer() {
               <img src={logo} alt="" className="logo" />
             </div>
             <div className="col links">
-              <a href="/">Privacy Policy</a>
+              <a href="/privacy-policy">Privacy Policy</a>
               <a href="/">Terms</a>
               <a href="/">
                 Contact<span>*</span>
@@ -135,12 +135,12 @@ function Footer() {
           <Bottom>
             <p className="lg">
               Copyright &copy; 2021 CityShoppa. All rights reserved.
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/privacy-policy">Privacy Policy</a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Privacy Policy</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Terms Of Use</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Legal</a>
+              <a href="/terms-of-use">Terms Of Use</a>
+              {/* &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Legal</a> */}
             </p>
             <p className="mb">
               Copyright &copy; 2021 CityShoppa.
@@ -148,11 +148,11 @@ function Footer() {
               All rights reserved. &nbsp;&nbsp;&nbsp;
               <br />
               <br />
-              <a href="/">Privacy Policy</a>
+              <a href="/privacy-policy">Privacy Policy</a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Terms Of Use</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Legal</a>
+              <a href="/termss-of-use">Terms Of Use</a>
+              {/* &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Legal</a> */}
             </p>
           </Bottom>
         </Container>

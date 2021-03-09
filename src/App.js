@@ -13,6 +13,8 @@ import SignIn from './containers/SignIn';
 import Container from './components/Container';
 import LoginRedirect from './containers/LoginRedirect';
 import Categories from './containers/Categories';
+import PrivacyPolicy from './containers/PrivacyPolicy';
+import TermsOfUse from './containers/TermsOfUse';
 
 function App() {
   return (
@@ -30,10 +32,12 @@ function App() {
                   path="/auth/:provider/callback"
                   component={LoginRedirect}
                 />
+                <Route path="/privacy-policy" component={PrivacyPolicy} />
+                <Route path="/terms-of-use" component={TermsOfUse} />
                 <Route
                   component={() => (
                     <Container>
-                      <h1>Page Not Found.</h1>
+                      <h1 style={{ textAlign: 'center' }}>Page Not Found.</h1>
                     </Container>
                   )}
                 />
