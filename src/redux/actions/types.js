@@ -9,3 +9,4 @@ export const SET_CITY = 'SET_CITY';
 export const SET_MODAL_DATA = 'SET_MODAL_DATA';
 export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
 export const SET_DONATION = 'SET_DONATION';
+export const SET_CONTACT_TITLE = 'SET_CONTACT_TITLE';

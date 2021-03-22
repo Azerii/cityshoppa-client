@@ -15,6 +15,7 @@ import LoginRedirect from './containers/LoginRedirect';
 import Categories from './containers/Categories';
 import PrivacyPolicy from './containers/PrivacyPolicy';
 import TermsOfUse from './containers/TermsOfUse';
+import Contact from './containers/Contact';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                   path="/auth/:provider/callback"
                   component={LoginRedirect}
                 />
+                <Route path="/contact-us" component={Contact} />
                 <Route path="/privacy-policy" component={PrivacyPolicy} />
                 <Route path="/terms-of-use" component={TermsOfUse} />
                 <Route
