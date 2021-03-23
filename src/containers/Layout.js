@@ -1,27 +1,23 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
-const Body = styled.div`
-    min-height: 50vh;
-`
+const Content = styled.div`
+  min-height: 50vh;
+`;
 
-
-function Layout (props) {
-
-    
-
-    return (
-        <>
-        <Navbar />
-        <Body>
-            {props.children}
-        </Body>
-        <Footer />
-        </>
-    )
+function Layout(props) {
+  return (
+    <>
+      <Navbar />
+      <Content>
+        <main>{props.children}</main>
+      </Content>
+      <Footer />
+    </>
+  );
 }
 
-export default Layout
+export default Layout;

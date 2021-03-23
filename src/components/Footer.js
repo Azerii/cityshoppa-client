@@ -1,7 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import logo from '../assets/global/logo_footer.png';
+import location_pin from '../assets/global/location_pin.svg';
+import mail from '../assets/global/mail.svg';
+import phone from '../assets/global/phone.svg';
+import { setContactTitle } from '../redux/actions';
 import Container from './Container';
 
 const Wrapper = styled.div`
@@ -42,7 +47,7 @@ const MainCaption = styled.div`
 const Body = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -51,35 +56,46 @@ const Body = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    padding: 0 1rem;
   }
     
+  .flex-row {
+    display: flex;
+  }
 
-    .col {
-        min-width: 20%;
-        
-        &.links {
-            padding-left: 2rem;
-        }
+  .iconWrapper {
+    width: 1.5rem;
+    margin-right: 1rem;
+    img {
+      width: 100%;
     }
+  }
 
-    a {
-        display: block;
-        width: fit-content;
-        text-decoration none;
-        font-size: 100%;
-        color: #ffffff;
-        margin-bottom: 1rem;
-        // font-weight: 500;
+  .col {
+      min-width: 20%;
+      
+      &.links {
+          padding-left: 2rem;
 
-        span {
-            color: #F15A29;
-        }
-    }
+          @media screen and (max-width: 768px) {
+            padding-left: 0;
+          }
+      }
+  }
 
-    .logo {
-        height: 2rem;
-    }
+  a, p {
+      display: block;
+      width: fit-content;
+      text-decoration none;
+      font-size: 100%;
+      color: #ffffff;
+      margin-bottom: 1rem;
+  }
+
+  .logo {
+      height: 4rem;
+  }
 `;
 
 const Bottom = styled.div`
@@ -104,7 +120,7 @@ const Bottom = styled.div`
     }
 `;
 
-function Footer() {
+function Footer(props) {
   return (
     <>
       <Wrapper>
@@ -118,29 +134,63 @@ function Footer() {
               <img src={logo} alt="" className="logo" />
             </div>
             <div className="col links">
-              <a href="/">Privacy Policy</a>
-              <a href="/">Terms</a>
-              <a href="/">
-                Contact<span>*</span>
+              <a
+                href="/contact-us"
+                onClick={() => props.setContactTitle('Want to do business?')}
+              >
+                Want to do business?
+              </a>
+              <a
+                href="/contact-us"
+                onClick={() =>
+                  props.setContactTitle(`Can't find your business here?`)
+                }
+              >
+                Can't find your business here?
+              </a>
+              <a
+                href="/contact-us"
+                onClick={() => props.setContactTitle('Become our partner')}
+              >
+                Become our partner
               </a>
             </div>
-            {/* <div className="col links">
-              <a href="/">
-                Contact<span>*</span>
+            <div className="col links">
+              <p className="flex-row">
+                <span className="iconWrapper">
+                  <img src={location_pin} alt="location pin" />
+                </span>
+                <span>
+                  146 Carleton Drive
+                  <br />
+                  Saskatoon, SK
+                  <br />
+                  S7H3N6, Canada
+                </span>
+              </p>
+              <a href="mailto:contact@cityshoppa.com" className="flex-row">
+                <span className="iconWrapper">
+                  <img src={mail} alt="Email" />
+                </span>
+                <span>contact@cityshoppa.com</span>
               </a>
-              <a href='/'>lorem</a>
-              <a href='/'>lorem</a>
-            </div> */}
+              <a href="tel:+1 3067006929" className="flex-row">
+                <span className="iconWrapper">
+                  <img src={phone} alt="phone" />
+                </span>
+                <span>+1 3067006929</span>
+              </a>
+            </div>
           </Body>
           <Bottom>
             <p className="lg">
               Copyright &copy; 2021 CityShoppa. All rights reserved.
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/privacy-policy">Privacy Policy</a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Privacy Policy</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Terms Of Use</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Legal</a>
+              <a href="/terms-of-use">Terms Of Use</a>
+              {/* &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Legal</a> */}
             </p>
             <p className="mb">
               Copyright &copy; 2021 CityShoppa.
@@ -148,11 +198,11 @@ function Footer() {
               All rights reserved. &nbsp;&nbsp;&nbsp;
               <br />
               <br />
-              <a href="/">Privacy Policy</a>
+              <a href="/privacy-policy">Privacy Policy</a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Terms Of Use</a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <a href="/">Legal</a>
+              <a href="/terms-of-use">Terms Of Use</a>
+              {/* &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <a href="/">Legal</a> */}
             </p>
           </Bottom>
         </Container>
@@ -161,4 +211,10 @@ function Footer() {
   );
 }
 
-export default Footer;
+const mapDispatchToProps = dispatch => {
+  return {
+    setContactTitle: title => dispatch(setContactTitle(title))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Footer);

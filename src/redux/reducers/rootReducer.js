@@ -9,7 +9,8 @@ import {
   SET_CITY,
   SET_MODAL_OPEN,
   SET_MODAL_DATA,
-  SET_DONATION
+  SET_DONATION,
+  SET_CONTACT_TITLE
 } from '../actions/types';
 
 export const initialState = {
@@ -33,7 +34,8 @@ export const initialState = {
   city: null,
   modalOpen: false,
   modalData: {},
-  donation: 0
+  donation: 0,
+  contact_title: ''
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -92,6 +94,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         donation: action.payload
+      };
+    case SET_CONTACT_TITLE:
+      return {
+        ...state,
+        contact_title: action.payload
       };
     default:
       return state;

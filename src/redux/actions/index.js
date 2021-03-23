@@ -11,7 +11,8 @@ import {
   SET_MODAL_OPEN,
   SET_MODAL_DATA,
   SET_CITY,
-  SET_DONATION
+  SET_DONATION,
+  SET_CONTACT_TITLE
 } from './types';
 import { API_HOST } from '../../utils/config';
 
@@ -157,5 +158,12 @@ export const setDonation = amount => dispatch => {
   dispatch({
     type: SET_DONATION,
     payload: amount
+  });
+};
+
+export const setContactTitle = title => dispatch => {
+  dispatch({
+    type: SET_CONTACT_TITLE,
+    payload: title
   });
 };
