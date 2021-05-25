@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 // import Loader from '../components/Loader';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { API_HOST } from '../utils/config';
+import Loader from '../components/Loader';
 
 const Wrapper = styled.div`
   padding: 2rem 0;
@@ -186,16 +189,47 @@ const SuccessModal = styled.div`
   }
 `;
 
+const formDataToJSON = formData => {
+  let object = {};
+
+  formData.forEach((value, key) => {
+    // Reflect.has in favor of: object.hasOwnProperty(key)
+    if (!Reflect.has(object, key)) {
+      object[key] = value;
+      return;
+    }
+    if (!Array.isArray(object[key])) {
+      object[key] = [object[key]];
+    }
+    object[key].push(value);
+  });
+
+  return object;
+};
+
 function Contact(props) {
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-
     const successModal = document.querySelector('#successModal');
+    const formData = new FormData(e.target);
+    let data = formDataToJSON(formData);
+    data.caption = props.contact_title;
 
-    successModal.classList.add('open');
-    console.log(successModal);
+    setLoading(true);
+
+    let res = await axios.post(`${API_HOST}/contacts`, data);
+
+    if (res && res.data && res.data.id) {
+      setLoading(false);
+      e.target.reset();
+      successModal.classList.add('open');
+      return;
+    } else {
+      setLoading(false);
+      alert('Something went wrong.');
+    }
   };
 
   return (
@@ -269,9 +303,8 @@ function Contact(props) {
                 />
               </FormInput>
 
-              <Button type="submit">
-                {/* {loading ? <Loader /> : <span>Submit</span>} */}
-                <span>Submit</span>
+              <Button type="submit" disabled={loading}>
+                {loading ? <Loader /> : <span>Submit</span>}
               </Button>
             </form>
             {/* <div className="bottom">

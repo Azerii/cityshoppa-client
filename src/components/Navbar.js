@@ -541,7 +541,7 @@ function Navbar(props) {
                 >
                   <option value={0}>All Cities</option>
                   {cities.map(option => (
-                    <option key={option.name} value={option.name}>
+                    <option key={option.name} value={option.name || ''}>
                       {option.name}
                     </option>
                   ))}
