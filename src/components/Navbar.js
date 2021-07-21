@@ -14,6 +14,7 @@ import arrow_places_active from '../assets/landing/arrow_places_active.svg';
 import Container from './Container';
 import {
   getCollection,
+  setCategories,
   setCity,
   setDonation,
   setToken
@@ -375,7 +376,7 @@ const Bottom = styled.div`
 function Navbar(props) {
   const history = useHistory();
   // const limit = getRandomRange(6, categories.length);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(props.categories || []);
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState(props.city);
 
@@ -406,7 +407,10 @@ function Navbar(props) {
   async function fetchCategories() {
     const res = await getCollection('categories');
 
-    if (res) setCategories(res);
+    if (res) {
+      setCategories(res);
+      props.setCategories(res);
+    }
   }
 
   async function fetchCities() {
@@ -602,10 +606,6 @@ function Navbar(props) {
           <Bottom className="lg">
             <Container>
               <div className="inner">
-                <a href="/categories" className="item seeMore">
-                  All Categories
-                  <img src={arrow_places_active} alt="" />
-                </a>
                 {/* <a href="/" className="item">
                   <img src={home} alt="" />
                   <span>Home</span>
@@ -627,6 +627,10 @@ function Navbar(props) {
                     </span>
                   </a>
                 ))}
+                <a href="/categories" className="item seeMore">
+                  All Categories
+                  <img src={arrow_places_active} alt="" />
+                </a>
               </div>
             </Container>
           </Bottom>
@@ -649,7 +653,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setToken: token => dispatch(setToken(token)),
     setCity: city => dispatch(setCity(city)),
-    setDonation: amount => dispatch(setDonation(amount))
+    setDonation: amount => dispatch(setDonation(amount)),
+    setCategories: data => dispatch(setCategories(data))
   };
 };
 

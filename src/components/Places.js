@@ -2,24 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import cake from '../assets/landing/cake.png';
-import jacket from '../assets/landing/jacket.png';
-import chicken from '../assets/landing/chicken.png';
-// import right_arrow from '../assets/landing/right_arrow.svg';
-// import left_arrow from '../assets/landing/left_arrow.svg';
 import arrow_places from '../assets/landing/arrow_places.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
-// import location_orange from '../assets/landing/location_orange.svg';
 
 import { setPlacesData } from '../redux/actions';
 // import Container from './Container';
 import { loadModal } from '../utils';
 import Container from './Container';
+import { API_HOST } from '../utils/config';
 
 const MainWrapper = styled.div`
   width: 100vw;
   margin: 5rem 0;
-  border-top: 1px solid #e5e5e5;
+  // border-top: 1px solid #e5e5e5;
 
   @media screen and (max-width: 768px) {
     margin: 2rem 0;
@@ -30,7 +25,7 @@ const Header = styled.div`
   text-align: center;
   padding: 2rem 0;
   margin-bottom: 2rem;
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
   text-transform: capitalize;
 
   .heading {
@@ -145,6 +140,7 @@ const Card = styled.a`
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       overflow: hidden;
+      baclkground-color: #f9f9f9;
 
       img {
         width: 100%;
@@ -180,7 +176,7 @@ const Card = styled.a`
         .prompt {
           font-size: 50%;
           text-transform: uppercase;
-          display: none;
+          // display: none;
         }
 
         .buyNow {
@@ -217,15 +213,7 @@ const Card = styled.a`
   }
 `;
 
-// const categorySet = [
-//   'Clothing',
-//   'Shoes',
-//   'Consumer Electronics',
-//   'Crafts',
-//   'Pet Food'
-// ];
-
-function Places() {
+function Places(props) {
   return (
     <>
       <MainWrapper>
@@ -234,542 +222,57 @@ function Places() {
             <p className="heading">Explore More Products And Services</p>
             <p className="subheading">Buy from local businesses near you</p>
           </Header>
+          {props.categories.slice(0, 3).map(category => (
+            <Container key={category.name}>
+              <Category>{category.name}</Category>
+              <Track>
+                {props.products
+                  ?.filter(
+                    item =>
+                      item.category.name.toLowerCase() ===
+                      category.name.toLowerCase()
+                  )
+                  .map(product => (
+                    <Card key={product.id}>
+                      <div className="inner">
+                        <div className="cardImageWrapper">
+                          {product.contentImage && (
+                            <img
+                              src={`${API_HOST}${product.contentImage?.url}`}
+                              alt={product.name}
+                            />
+                          )}
+                        </div>
+                        <div className="cardText">
+                          <p className="businessName">{product.name}</p>
+                          <div className="bottom">
+                            <p className="prompt">
+                              Delivered to
+                              <br />
+                              you today
+                            </p>
+                            <p className="buyNow">
+                              <span>buynow</span>
+                              <img
+                                className="arrow"
+                                src={arrow_places}
+                                alt=""
+                              />
+                              <img
+                                className="arrow_active"
+                                src={arrow_places_active}
+                                alt=""
+                              />
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+              </Track>
+            </Container>
+          ))}
           <Container>
-            <Category>Clothing</Category>
-            <Track>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={cake} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Receer Cakes &amp; Pasteries</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={cake} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Receer Cakes &amp; Pasteries</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </Track>
-
-            <Category>Consumer Electronics</Category>
-            <Track>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={cake} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Receer Cakes &amp; Pasteries</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </Track>
-
-            <Category>Crafts</Category>
-            <Track>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={cake} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Receer Cakes &amp; Pasteries</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </Track>
-
-            <Category>Pet Food</Category>
-            <Track>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={cake} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Receer Cakes &amp; Pasteries</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={jacket} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Kajees Apparels</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card onClick={() => loadModal('products')}>
-                <div className="inner">
-                  <div className="cardImageWrapper">
-                    <img src={chicken} alt="" className="cardimage" />
-                  </div>
-                  <div className="cardText">
-                    <p className="businessName">Mecks Restaurant</p>
-                    <div className="bottom">
-                      <p className="prompt">
-                        Delivered to
-                        <br />
-                        you today
-                      </p>
-                      <p className="buyNow">
-                        <span>buynow</span>
-                        <img className="arrow" src={arrow_places} alt="" />
-                        <img
-                          className="arrow_active"
-                          src={arrow_places_active}
-                          alt=""
-                        />
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </Track>
             <a className="seeAll" href="/categories">
               See All Categories
             </a>
@@ -782,7 +285,8 @@ function Places() {
 
 const mapStateToProps = state => {
   return {
-    places: state.places
+    places: state.places,
+    categories: state.categories
   };
 };
 

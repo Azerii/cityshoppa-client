@@ -10,27 +10,19 @@ import {
   SET_MODAL_OPEN,
   SET_MODAL_DATA,
   SET_DONATION,
-  SET_CONTACT_TITLE
+  SET_CONTACT_TITLE,
+  SET_CATEGORIES,
+  SET_PRODUCTS
 } from '../actions/types';
 
 export const initialState = {
   user: {},
   token: null,
-  featured_products: {
-    slide_index: 0
-  },
-  trending_products: {
-    slide_index: 0
-  },
-  places: {
-    slide_index: 0
-  },
-  featured_places: {
-    slide_index: 0
-  },
+  products: [],
   discounted: {
     slide_index: 0
   },
+  categories: [],
   city: null,
   modalOpen: false,
   modalData: {},
@@ -74,6 +66,16 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         discounted: action.payload
+      };
+    case SET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
+      };
+    case SET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
       };
     case SET_CITY:
       return {

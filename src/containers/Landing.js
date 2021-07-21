@@ -31,10 +31,11 @@ function Landing(props) {
     <>
       {props.modalOpen && <Modal />}
       <FeaturedPlaces products={products} />
-      <Discounted />
       <Container>
         <Featured />
       </Container>
+      <Discounted />
+
       <Places products={products} />
       {/* <Trending products={products} />
       <Suppliers services={services} /> */}

@@ -273,7 +273,7 @@ function FeaturedPlaces({ products }) {
       }
       forceUpdate((update + 1) % 50);
       products.length && setLimits(getRandomRange(4, products.length));
-    }, 10_000);
+    }, 30_000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line

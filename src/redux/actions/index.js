@@ -12,7 +12,8 @@ import {
   SET_MODAL_DATA,
   SET_CITY,
   SET_DONATION,
-  SET_CONTACT_TITLE
+  SET_CONTACT_TITLE,
+  SET_CATEGORIES
 } from './types';
 import { API_HOST } from '../../utils/config';
 
@@ -129,6 +130,13 @@ export const setFeaturedPlacesData = data => dispatch => {
 export const setDiscountedData = data => dispatch => {
   dispatch({
     type: SET_DISCOUNTED_DATA,
+    payload: data
+  });
+};
+
+export const setCategories = data => dispatch => {
+  dispatch({
+    type: SET_CATEGORIES,
     payload: data
   });
 };

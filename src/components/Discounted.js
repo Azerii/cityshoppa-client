@@ -11,9 +11,9 @@ import Container from './Container';
 const MainWrapper = styled.div`
   width: 100vw;
   padding: 2rem 0;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #f5f5f5;
+  // border-top: 1px solid #e5e5e5;
+  // border-bottom: 1px solid #e5e5e5;
+  background-color: #f9f9f9;
 `;
 
 const Header = styled.div`

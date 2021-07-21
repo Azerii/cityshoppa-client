@@ -47,8 +47,8 @@ const TopBar = styled.div`
       margin: 0.5rem;
       padding: 0.5rem;
       margin-left: 0;
-      color: #ffffff;
-      background-color: #c54100;
+      background-color: #f9f9f9;
+      color: #000000;
       font-weight: 500;
       border-radius: 0.3rem;
       cursor: pointer;
@@ -66,8 +66,8 @@ const TopBar = styled.div`
       }
 
       &:hover {
-        background-color: #f9f9f9;
-        color: #000000;
+        color: #ffffff;
+        background-color: #c54100;
       }
     }
   }
@@ -83,7 +83,7 @@ const Results = styled.div`
   // margin-top: 1rem;
   margin-bottom: 5rem;
   padding-top: 2rem;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #f9f9f9;
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -101,11 +101,11 @@ const Results = styled.div`
       justify-content: center;
       height: 7rem;
       width: 30%;
-      background-color: #2e4c5c;
+      background-color: #f5f5f5;
       overflow: hidden;
 
       img {
-        width: 100%;
+        height: 100%;
       }
     }
 
@@ -165,13 +165,7 @@ function Content(props) {
   async function fetchProducts() {
     const productsRes = await getCollection('products');
 
-    if (productsRes) setResults(results.concat(productsRes));
-  }
-
-  async function fetchServices() {
-    const servicesRes = await getCollection('services');
-
-    if (servicesRes) setResults(results.concat(servicesRes));
+    if (productsRes) setResults(productsRes);
   }
 
   async function fetchCategories() {
@@ -191,7 +185,6 @@ function Content(props) {
 
   useEffect(() => {
     fetchData();
-    fetchServices();
     setTitle(category || keyword || 'Categories');
     // eslint-disable-next-line
   }, []);
@@ -288,7 +281,7 @@ function Content(props) {
           ) : (
             results.map(result => {
               if (
-                result.category.name
+                result.category?.name
                   .toLowerCase()
                   .match(title.toLocaleLowerCase())
               ) {
@@ -329,7 +322,7 @@ function Content(props) {
           ) : (
             results.map(result => {
               const matchCheck =
-                result.category.name
+                result.category?.name
                   .toLowerCase()
                   .match(title.toLocaleLowerCase()) ||
                 result.name.toLowerCase().match(title.toLocaleLowerCase());
@@ -338,7 +331,7 @@ function Content(props) {
                 props.city &&
                 props.city
                   .toLowerCase()
-                  .match(result.business.city.name.toLowerCase()) &&
+                  .match(result.business.city?.name.toLowerCase()) &&
                 matchCheck
               ) {
                 return (
