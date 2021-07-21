@@ -297,7 +297,7 @@ function FeaturedPlaces({ products }) {
               <Card
                 key={product.id}
                 discount
-                onClick={() => loadModal('products', product.id)}
+                onClick={() => loadModal(product.id)}
               >
                 <div className="cardImageWrapper">
                   {product.contentImage && (
@@ -317,7 +317,7 @@ function FeaturedPlaces({ products }) {
                       you today
                     </p>
                     <p className="buyNow">
-                      <span>buynow</span>
+                      <span>Buy now</span>
                       <img className="arrow" src={arrow_places} alt="" />
                       <img
                         className="arrow_active"

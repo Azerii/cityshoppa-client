@@ -140,7 +140,6 @@ const Results = styled.div`
         display: flex;
         align-items: center;
         font-size: 80%;
-        text-transform: capitalize;
         color: #ff7235;
 
         img {
@@ -249,9 +248,7 @@ function Content(props) {
               <div
                 key={result.id}
                 className="item"
-                onClick={() =>
-                  loadModal(result.price ? 'products' : 'services', result.id)
-                }
+                onClick={() => loadModal(result.id)}
               >
                 <div className="imgWrapper">
                   {result.contentImage && (
@@ -262,7 +259,7 @@ function Content(props) {
                   <p className="title">{result.name}</p>
                   <p className="subtitle">{result.description}</p>
                   <p className="contact">
-                    contact
+                    Buy now
                     <img src={arrow_places} alt="" />
                   </p>
                 </div>
@@ -286,7 +283,11 @@ function Content(props) {
                   .match(title.toLocaleLowerCase())
               ) {
                 return (
-                  <div key={result.id} className="item">
+                  <div
+                    key={result.id}
+                    className="item"
+                    onClick={() => loadModal(result.id)}
+                  >
                     <div className="imgWrapper">
                       {result.contentImage && (
                         <img
@@ -299,7 +300,7 @@ function Content(props) {
                       <p className="title">{result.name}</p>
                       <p className="subtitle">{result.description}</p>
                       <p className="contact">
-                        contact
+                        Buy now
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>
@@ -335,7 +336,11 @@ function Content(props) {
                 matchCheck
               ) {
                 return (
-                  <div key={result.id} className="item">
+                  <div
+                    key={result.id}
+                    className="item"
+                    onClick={() => loadModal(result.id)}
+                  >
                     <div className="imgWrapper">
                       {result.contentImage && (
                         <img
@@ -348,7 +353,7 @@ function Content(props) {
                       <p className="title">{result.name}</p>
                       <p className="subtitle">{result.description}</p>
                       <p className="contact">
-                        contact
+                        Buy now
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>
@@ -356,7 +361,11 @@ function Content(props) {
                 );
               } else if (!props.city && matchCheck) {
                 return (
-                  <div key={result.id} className="item">
+                  <div
+                    key={result.id}
+                    className="item"
+                    onClick={() => loadModal(result.id)}
+                  >
                     <div className="imgWrapper">
                       {result.contentImage && (
                         <img
@@ -369,7 +378,7 @@ function Content(props) {
                       <p className="title">{result.name}</p>
                       <p className="subtitle">{result.description}</p>
                       <p className="contact">
-                        contact
+                        Buy now
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>

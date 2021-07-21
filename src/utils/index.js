@@ -1,14 +1,13 @@
 import { setModalData, setModalOpen } from '../redux/actions';
 import { store } from '../redux/store';
 
-export const loadModal = async (
-  contentType = 'products',
-  id = '6003fe2647043a5687e136e8'
-) => {
+export const loadModal = async id => {
   const dispatch = store.dispatch;
 
+  if (!id) return;
+
   const modalData = {
-    contentType,
+    contentType: 'products',
     id
   };
 

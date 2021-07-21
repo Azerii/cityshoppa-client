@@ -66,7 +66,8 @@ const Track = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+    // grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -134,7 +135,7 @@ const Card = styled.a`
 
     .cardImageWrapper {
       height: 60%;
-      border: 1px solid #e5e5e5;
+      // border: 1px solid #e5e5e5;
       border-bottom: none;
       border-radius: 0.3rem;
       border-bottom-left-radius: 0;
@@ -151,7 +152,7 @@ const Card = styled.a`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 40%;
+      height: 50%;
       background-color: #f5f5f5;
       padding: 1rem 2rem;
       border-radius: 0.3rem;
@@ -219,7 +220,7 @@ function Places(props) {
       <MainWrapper>
         <Wrapper>
           <Header>
-            <p className="heading">Explore More Products And Services</p>
+            <p className="heading">Explore More Products</p>
             <p className="subheading">Buy from local businesses near you</p>
           </Header>
           {props.categories.slice(0, 3).map(category => (
@@ -233,7 +234,10 @@ function Places(props) {
                       category.name.toLowerCase()
                   )
                   .map(product => (
-                    <Card key={product.id}>
+                    <Card
+                      key={product.id}
+                      onClick={() => loadModal(product.id)}
+                    >
                       <div className="inner">
                         <div className="cardImageWrapper">
                           {product.contentImage && (
@@ -252,7 +256,7 @@ function Places(props) {
                               you today
                             </p>
                             <p className="buyNow">
-                              <span>buynow</span>
+                              <span>Buy now</span>
                               <img
                                 className="arrow"
                                 src={arrow_places}

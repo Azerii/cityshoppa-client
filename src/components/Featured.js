@@ -215,7 +215,7 @@ function Featured(props) {
   return (
     <Wrapper>
       <Track id="track_featured">
-        <Slide left={0} onClick={loadModal}>
+        <Slide left={0}>
           <div className="contentLeft">
             <img className="featuredBadge" src={featured_badge} alt="" />
             <img className="business" src={mack_ken} alt="" />
@@ -230,7 +230,7 @@ function Featured(props) {
             </a>
           </div>
         </Slide>
-        <Slide bg="darkslateblue" left={state.slideWidth} onClick={loadModal}>
+        <Slide bg="darkslateblue" left={state.slideWidth}>
           <div className="contentLeft">
             <img className="featuredBadge" src={featured_badge} alt="" />
             <img className="business" src={mack_ken} alt="" />
@@ -245,11 +245,7 @@ function Featured(props) {
             </a>
           </div>
         </Slide>
-        <Slide
-          bg="darkslategrey"
-          left={state.slideWidth * 2}
-          onClick={loadModal}
-        >
+        <Slide bg="darkslategrey" left={state.slideWidth * 2}>
           <div className="contentLeft">
             <img className="featuredBadge" src={featured_badge} alt="" />
             <img className="business" src={mack_ken} alt="" />
@@ -264,7 +260,7 @@ function Featured(props) {
             </a>
           </div>
         </Slide>
-        <Slide bg="burlywood" left={state.slideWidth * 3} onClick={loadModal}>
+        <Slide bg="burlywood" left={state.slideWidth * 3}>
           <div className="contentLeft">
             <img className="featuredBadge" src={featured_badge} alt="" />
             <img className="business" src={mack_ken} alt="" />

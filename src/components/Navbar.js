@@ -52,10 +52,15 @@ const Top = styled.div`
     .inner {
       position: relative;
       width: 70%;
-      background-color: #deb887;
+      background-color: #ffffff;
       padding: 1rem;
       flex-direction: column;
       border-radius: 0.3rem;
+
+      .secondaryBtn {
+        border: 1px solid #ff7235;
+        color: #ff7235;
+      }
 
       .item {
         display: flex;
@@ -464,7 +469,7 @@ function Navbar(props) {
                       <p>{props.user && props.user.username}</p>
                       <img src={logged_in} alt="" />
                     </User>
-                    <SignOut>
+                    <SignOut className="secondaryBtn">
                       <p
                         onClick={() => {
                           props.setToken(null);
@@ -483,7 +488,7 @@ function Navbar(props) {
                     <AuthLink href="/sign-in" className="signIn">
                       Sign In
                     </AuthLink>
-                    <AuthLink href="/sign-up" className="signUp">
+                    <AuthLink href="/sign-up" className="signUp secondaryBtn">
                       Sign Up
                     </AuthLink>
                   </>

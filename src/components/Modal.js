@@ -38,7 +38,7 @@ const ModalContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 2rem;
 
     .heading {
       font-size: 200%;
@@ -230,17 +230,31 @@ const ModalContent = styled.div`
   }
 `;
 
+const Highlight = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  > .item {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 768px) {
+    > .item {
+      width: 100%;
+    }
+  }
+`;
+
 const Card = styled.div`
   height: inherit;
   margin: 0 2rem;
   border-radius: 0.3rem;
   height: 15rem;
-  width: 70%;
+  width: 100%;
   background: #f1f1f1;
   overflow: hidden;
 
   @media screen and (max-width: 768px) {
-    width: 100%;
     height: 12rem;
   }
 
@@ -302,38 +316,43 @@ function Modal(props) {
                   }}
                 />
               </div>
-              <div className="displayCards">
-                <div id="track_modal" className="track">
-                  <Card left={0}>
-                    {result.contentImage && (
+              <Highlight>
+                <div className="item">
+                  <div className="categories">
+                    <p className="title">Category</p>
+                    {result.category && (
+                      <p className="category">{result.category.name}</p>
+                    )}
+                  </div>
+                  <div className="businessLogoWrapper">
+                    {result.business.logo && (
                       <img
-                        src={`${API_HOST}${result.contentImage.url}`}
+                        className="logo"
+                        src={`${API_HOST}${result.business.logo.url}`}
                         alt=""
                       />
                     )}
-                  </Card>
+                    <h2>{result.business.name}</h2>
+                  </div>
+                  <div className="description">
+                    <p>{result.description}.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="categories">
-                <p className="title">Category</p>
-                {result.category && (
-                  <p className="category">{result.category.name}</p>
-                )}
-              </div>
-              <div className="businessLogoWrapper">
-                {result.business.logo && (
-                  <img
-                    className="logo"
-                    src={`${API_HOST}${result.business.logo.url}`}
-                    alt=""
-                  />
-                )}
-                {!result.business.logo && <h2>{result.business.name}</h2>}
-                {/* <p>Store</p> */}
-              </div>
-              <div className="description">
-                <p>{result.description}.</p>
-              </div>
+                <div className="item">
+                  <div className="displayCards">
+                    <div id="track_modal" className="track">
+                      <Card left={0}>
+                        {result.contentImage && (
+                          <img
+                            src={`${API_HOST}${result.contentImage.url}`}
+                            alt=""
+                          />
+                        )}
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+              </Highlight>
               {/* {props.modalData.contentType !== 'products' && (
                 <div className="formWrapper">
                   <p className="heading">Contact Vendor</p>
