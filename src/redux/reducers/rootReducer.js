@@ -22,6 +22,9 @@ export const initialState = {
   discounted: {
     slide_index: 0
   },
+  featured_products: {
+    slide_index: 0
+  },
   categories: [],
   city: null,
   modalOpen: false,

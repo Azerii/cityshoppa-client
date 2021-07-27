@@ -96,14 +96,29 @@ const ModalContent = styled.div`
   .businessLogoWrapper {
     width: 100%;
     padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
     .logo {
-      height: 7rem;
+      width: 40%;
     }
 
     p {
       color: #666666;
       font-size: 120%;
+    }
+
+    .businessName {
+      width: 60%;
+      padding-right: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .logo,
+      .businessName {
+        width: 100%;
+      }
     }
   }
 
@@ -325,14 +340,14 @@ function Modal(props) {
                     )}
                   </div>
                   <div className="businessLogoWrapper">
-                    {result.business.logo && (
+                    <h2 className="businessName">{result.business?.name}</h2>
+                    {result.business?.logo && (
                       <img
                         className="logo"
-                        src={`${API_HOST}${result.business.logo.url}`}
+                        src={`${API_HOST}${result.business?.logo?.url}`}
                         alt=""
                       />
                     )}
-                    <h2>{result.business.name}</h2>
                   </div>
                   <div className="description">
                     <p>{result.description}.</p>
@@ -397,41 +412,41 @@ function Modal(props) {
                 <p className="heading">Vendor Info</p>
                 <div className="item">
                   <p className="title">Address</p>
-                  <p className="content">{result.business.address}</p>
+                  <p className="content">{result.business?.address}</p>
                 </div>
-                {result.business.phone && (
+                {result.business?.phone && (
                   <div className="item">
                     <p className="title">Phone</p>
                     <a
-                      href={`tel:${result.business.phone}`}
+                      href={`tel:${result.business?.phone}`}
                       className="content"
                     >
-                      {result.business.phone}
+                      {result.business?.phone}
                     </a>
                   </div>
                 )}
                 <div className="item">
                   <p className="title">About</p>
-                  <p className="content">{result.business.description}</p>
+                  <p className="content">{result.business?.description}</p>
                 </div>
-                {result.business.website && (
+                {result.business?.website && (
                   <div className="item">
                     <p className="title">Website</p>
                     <a
-                      href={result.business.website}
+                      href={result.business?.website}
                       target="_blank"
                       rel="noreferrer"
                       className="content"
                     >
-                      {result.business.website}
+                      {result.business?.website}
                     </a>
                   </div>
                 )}
               </div>
-              {result.business.linkToMaps && (
+              {result.business?.linkToMaps && (
                 <div className="getDirections">
                   <a
-                    href={result.business.linkToMaps}
+                    href={result.business?.linkToMaps}
                     target="_blank"
                     rel="noreferrer"
                   >

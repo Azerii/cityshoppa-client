@@ -159,6 +159,10 @@ const Card = styled.a`
       border-top-left-radius: 0;
       border-top-right-radius: 0;
 
+      @media screen and (max-width: 768px) {
+        padding: 1rem;
+      }
+
       .businessName {
         font-size: 110%;
         font-weight: 500;
@@ -223,7 +227,7 @@ function Places(props) {
             <p className="heading">Explore More Products</p>
             <p className="subheading">Buy from local businesses near you</p>
           </Header>
-          {props.categories.slice(0, 3).map(category => (
+          {props.categories.slice(0, 5).map(category => (
             <Container key={category.name}>
               <Category>{category.name}</Category>
               <Track>
