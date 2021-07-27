@@ -311,11 +311,11 @@ function FeaturedPlaces({ products }) {
                 <div className="cardText">
                   <p className="productName">{product.name}</p>
                   <div className="bottom">
-                    <p className="prompt">
+                    {/* <p className="prompt">
                       Delivered to
                       <br />
                       you today
-                    </p>
+                    </p> */}
                     <p className="buyNow">
                       <span>Buy now</span>
                       <img className="arrow" src={arrow_places} alt="" />

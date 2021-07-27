@@ -618,7 +618,7 @@ function Navbar(props) {
                 {/* <div className="item">
                   <span>|</span>
                 </div> */}
-                {categories.map(category => (
+                {categories.slice(0, 6).map(category => (
                   <a
                     key={category.id}
                     href={`/categories/${category.name}`}
