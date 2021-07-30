@@ -53,6 +53,7 @@ const Inner = styled.div`
 
       @media screen and (max-width: 768px) {
         width: 100%;
+        align-items: center;
       }
 
       .heading {

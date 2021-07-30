@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Container from '../components/Container';
-import Discounted from '../components/Discounted';
+import Brands from '../components/Brands';
 import Featured from '../components/Featured';
 import FeaturedPlaces from '../components/FeaturedPlaces';
 import Modal from '../components/Modal';
 import Places from '../components/Places';
-// import Suppliers from '../components/Suppliers';
-// import Trending from '../components/Trending';
 import { getCollection, getUser, setCity } from '../redux/actions';
 
 function Landing(props) {
@@ -34,11 +32,9 @@ function Landing(props) {
       <Container>
         <Featured />
       </Container>
-      <Discounted />
+      <Brands />
 
       <Places products={products} />
-      {/* <Trending products={products} />
-      <Suppliers services={services} /> */}
     </>
   );
 }

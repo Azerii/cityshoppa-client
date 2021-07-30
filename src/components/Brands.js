@@ -95,7 +95,7 @@ const Card = styled.div`
     }
 
     img {
-      width: 50%;
+      width: 40%;
 
       @media screen and (max-width: 768px) {
         width: 100%;
@@ -120,7 +120,7 @@ const Card = styled.div`
   }
 `;
 
-function Discounted(props) {
+function Brands(props) {
   useEffect(() => {
     // eslint-disable-next-line
   }, []);
@@ -192,51 +192,6 @@ function Discounted(props) {
                 <img src={sg_logo} alt="" />
               </div>
             </Card>
-            {/* <Card>
-              <div className="inner">
-                <img src={sg_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={starbucks_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={burger_king_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={sg_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={starbucks_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={burger_king_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={sg_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={starbucks_logo} alt="" />
-              </div>
-            </Card>
-            <Card>
-              <div className="inner">
-                <img src={sg_logo} alt="" />
-              </div>
-            </Card> */}
           </Track>
         </Wrapper>
       </MainWrapper>
@@ -256,4 +211,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Discounted);
+export default connect(mapStateToProps, mapDispatchToProps)(Brands);

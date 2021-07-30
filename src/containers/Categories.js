@@ -94,6 +94,8 @@ const Results = styled.div`
     align-items: flex-start;
     box-shadow: 0px 0px 5px #e5e5e5;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 
     .imgWrapper {
       display: flex;
@@ -105,6 +107,7 @@ const Results = styled.div`
       overflow: hidden;
 
       img {
+        width: 100%;
         height: 100%;
       }
     }
@@ -147,6 +150,36 @@ const Results = styled.div`
           margin-left: 0.5rem;
         }
       }
+    }
+  }
+
+  .discountBadge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    // background-color: #ff7235;
+    background-color: #c54100;
+    color: #ffffff;
+
+    .text {
+      line-height: 10px;
+    }
+
+    .percentage {
+      font-weight: 700;
+      font-size: 80%;
+    }
+
+    .small {
+      font-weight: 400;
+      font-size: 50%;
+      text-transform: uppercase;
     }
   }
 `;
@@ -243,7 +276,7 @@ function Content(props) {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            results.length &&
+            !!results.length &&
             results.map(result => (
               <div
                 key={result.id}
@@ -263,6 +296,15 @@ function Content(props) {
                     <img src={arrow_places} alt="" />
                   </p>
                 </div>
+                {!!result.discount && (
+                  <div className="discountBadge">
+                    <p className="text">
+                      <span className="percentage">{result.discount}%</span>
+                      <br />
+                      <span className="small">off</span>
+                    </p>
+                  </div>
+                )}
               </div>
             ))
           )}
@@ -304,6 +346,15 @@ function Content(props) {
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>
+                    {!!result.discount && (
+                      <div className="discountBadge">
+                        <p className="text">
+                          <span className="percentage">{result.discount}%</span>
+                          <br />
+                          <span className="small">off</span>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 );
               }
@@ -357,6 +408,15 @@ function Content(props) {
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>
+                    {!!result.discount && (
+                      <div className="discountBadge">
+                        <p className="text">
+                          <span className="percentage">{result.discount}%</span>
+                          <br />
+                          <span className="small">off</span>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 );
               } else if (!props.city && matchCheck) {
@@ -382,6 +442,15 @@ function Content(props) {
                         <img src={arrow_places} alt="" />
                       </p>
                     </div>
+                    {!!result.discount && (
+                      <div className="discountBadge">
+                        <p className="text">
+                          <span className="percentage">{result.discount}%</span>
+                          <br />
+                          <span className="small">off</span>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 );
               }

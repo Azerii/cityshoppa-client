@@ -10,6 +10,7 @@ import { setPlacesData } from '../redux/actions';
 import { loadModal } from '../utils';
 import Container from './Container';
 import { API_HOST } from '../utils/config';
+import ProductCard from './ProductCard';
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -80,144 +81,6 @@ const Category = styled.p`
   border-bottom: 1px solid #ff7235;
 `;
 
-const Card = styled.a`
-  display: block;
-  width: 100%;
-
-  &:visited {
-    color: inherit;
-  }
-
-  .inner {
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-between;
-    width: 100%;
-    height: 15rem;
-    // box-shadow: 0px 0px 5px #e5e5e5;
-    // border: 1px solid #e5e5e5;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform ease-out 200ms;
-
-    &:hover {
-      transform: scale(1.1);
-
-      .cardText {
-        background-color: #ff7235;
-
-        .businessName,
-        .prompt,
-        .buyNow {
-          color: #ffffff !important;
-        }
-
-        .buyNow {
-          img {
-            &.arrow_active {
-              display: inline !important;
-            }
-            &.arrow {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-
-    .trendingBadge {
-      position: absolute;
-      top: 0.5rem;
-      left: 1rem;
-      height: 2rem;
-    }
-
-    .cardImageWrapper {
-      height: 60%;
-      // border: 1px solid #e5e5e5;
-      border-bottom: none;
-      border-radius: 0.3rem;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      overflow: hidden;
-      baclkground-color: #f9f9f9;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    .cardText {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 50%;
-      background-color: #f5f5f5;
-      padding: 1rem 2rem;
-      border-radius: 0.3rem;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-
-      @media screen and (max-width: 768px) {
-        padding: 1rem;
-      }
-
-      .businessName {
-        font-size: 110%;
-        font-weight: 500;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      .bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 0.5rem;
-
-        .prompt {
-          font-size: 50%;
-          text-transform: uppercase;
-          // display: none;
-        }
-
-        .buyNow {
-          display: flex;
-          align-items: center;
-          font-size: 60%;
-          font-weight: 500;
-          color: #ff7235;
-
-          img {
-            height: 0.5rem;
-            margin-left: 0.5rem;
-
-            &.arrow_active {
-              display: none;
-            }
-          }
-        }
-      }
-
-      .discount {
-        display: ${props => (props.discount ? 'block' : 'none')};
-        font-size: 70%;
-        color: #000000;
-        text-transform: uppercase;
-      }
-
-      .caption {
-        font-size: 50%;
-        text-transform: uppercase;
-        color: #000000;
-      }
-    }
-  }
-`;
-
 function Places(props) {
   return (
     <>
@@ -238,7 +101,7 @@ function Places(props) {
                       category.name.toLowerCase()
                   )
                   .map(product => (
-                    <Card
+                    <ProductCard
                       key={product.id}
                       onClick={() => loadModal(product.id)}
                     >
@@ -252,7 +115,7 @@ function Places(props) {
                           )}
                         </div>
                         <div className="cardText">
-                          <p className="businessName">{product.name}</p>
+                          <p className="productName">{product.name}</p>
                           <div className="bottom">
                             {/* <p className="prompt">
                               Delivered to
@@ -274,8 +137,19 @@ function Places(props) {
                             </p>
                           </div>
                         </div>
+                        {!!product.discount && (
+                          <div className="discountBadge">
+                            <p className="text">
+                              <span className="percentage">
+                                {product.discount}%
+                              </span>
+                              <br />
+                              <span className="small">off</span>
+                            </p>
+                          </div>
+                        )}
                       </div>
-                    </Card>
+                    </ProductCard>
                   ))}
               </Track>
             </Container>

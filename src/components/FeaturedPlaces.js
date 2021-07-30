@@ -9,6 +9,7 @@ import { getCollection, setFeaturedPlacesData } from '../redux/actions';
 import { loadModal, getRandomRange } from '../utils';
 import API_HOST from '../utils/config';
 import Container from '../components/Container';
+import ProductCard from './ProductCard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -102,149 +103,6 @@ const Track = styled.div`
   }
 `;
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 17rem;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform ease-out 200ms;
-
-  @media screen and (max-width: 768px) {
-    height: 13rem;
-  }
-
-  &:hover {
-    transform: scale(1.1);
-
-    .cardText {
-      background-color: #ff7235;
-
-      .productName,
-      .prompt,
-      .buyNow {
-        color: #ffffff !important;
-      }
-
-      .buyNow {
-        img {
-          &.arrow_active {
-            display: inline !important;
-          }
-          &.arrow {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-
-  .trendingBadge {
-    position: absolute;
-    top: 0.5rem;
-    left: 1rem;
-    height: 2rem;
-  }
-
-  .cardImageWrapper {
-    height: 50%;
-    border: 1px solid #e5e5e5;
-    border-bottom: none;
-    border-radius: 0.3rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .cardText {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 50%;
-    background-color: #e5e5e5;
-    padding: 1.5rem 2rem;
-    border-radius: 0.3rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-
-    @media screen and (max-width: 768px) {
-      padding: 1rem;
-    }
-
-    .productName {
-      font-size: 100%;
-      font-weight: 500;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .prompt {
-        font-size: 50%;
-        text-transform: uppercase;
-      }
-
-      .buyNow {
-        display: flex;
-        align-items: center;
-        font-size: 60%;
-        font-weight: 500;
-        color: #ff7235;
-
-        img {
-          height: 0.5rem;
-          margin-left: 0.5rem;
-
-          &.arrow_active {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .discount {
-      display: ${props => (props.discount ? 'block' : 'none')};
-      font-size: 70%;
-      color: #000000;
-      text-transform: uppercase;
-    }
-
-    .discountBadge {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      bottom: 1rem;
-      right: -1rem;
-      height: 3rem;
-      width: 3rem;
-      border-radius: 50%;
-      background-color: #ff7235;
-      color: #ffffff;
-      font-size: 70%;
-      font-weight: 500;
-    }
-
-    .caption {
-      font-size: 50%;
-      text-transform: uppercase;
-      color: #000000;
-    }
-  }
-`;
-// move all these to Landing
 function FeaturedPlaces({ products }) {
   const [captions, setCaptions] = useState([]);
   const [currentCaption, setCurrentCaption] = useState({
@@ -294,40 +152,51 @@ function FeaturedPlaces({ products }) {
         <Track id="track_featured_places">
           {products &&
             products.slice(limits.lower, limits.upper).map(product => (
-              <Card
+              <ProductCard
                 key={product.id}
                 discount
                 onClick={() => loadModal(product.id)}
               >
-                <div className="cardImageWrapper">
-                  {product.contentImage && (
-                    <img
-                      src={`${API_HOST.API_HOST}${product.contentImage.url}`}
-                      alt=""
-                      className="cardimage"
-                    />
+                <div className="inner">
+                  <div className="cardImageWrapper">
+                    {product.contentImage && (
+                      <img
+                        src={`${API_HOST.API_HOST}${product.contentImage.url}`}
+                        alt=""
+                        className="cardimage"
+                      />
+                    )}
+                  </div>
+                  <div className="cardText">
+                    <p className="productName">{product.name}</p>
+                    <div className="bottom">
+                      {/* <p className="prompt">
+                    Delivered to
+                    <br />
+                    you today
+                  </p> */}
+                      <p className="buyNow">
+                        <span>Buy now</span>
+                        <img className="arrow" src={arrow_places} alt="" />
+                        <img
+                          className="arrow_active"
+                          src={arrow_places_active}
+                          alt=""
+                        />
+                      </p>
+                    </div>
+                  </div>
+                  {!!product.discount && (
+                    <div className="discountBadge">
+                      <p className="text">
+                        <span className="percentage">{product.discount}%</span>
+                        <br />
+                        <span className="small">off</span>
+                      </p>
+                    </div>
                   )}
                 </div>
-                <div className="cardText">
-                  <p className="productName">{product.name}</p>
-                  <div className="bottom">
-                    {/* <p className="prompt">
-                      Delivered to
-                      <br />
-                      you today
-                    </p> */}
-                    <p className="buyNow">
-                      <span>Buy now</span>
-                      <img className="arrow" src={arrow_places} alt="" />
-                      <img
-                        className="arrow_active"
-                        src={arrow_places_active}
-                        alt=""
-                      />
-                    </p>
-                  </div>
-                </div>
-              </Card>
+              </ProductCard>
             ))}
         </Track>
       </Wrapper>
