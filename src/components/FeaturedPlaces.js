@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import arrow_places from '../assets/landing/arrow_places.svg';
 import arrow_places_active from '../assets/landing/arrow_places_active.svg';
-import green_heart from '../assets/landing/green_heart.svg';
 
 import { getCollection, setFeaturedPlacesData } from '../redux/actions';
 import { loadModal, getRandomRange } from '../utils';
@@ -19,79 +18,11 @@ const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
-
-  > .caption {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 25%;
-
-    @media screen and (max-width: 768px) {
-      width: 100%;
-    }
-
-    .heading {
-      max-width: 70%;
-      font-size: 200%;
-      font-weight: 500;
-      color: #ff7235;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-
-      @media screen and (max-width: 768px) {
-        margin-bottom: 0;
-        max-width: 90%;
-      }
-    }
-
-    .subheading {
-      max-width: 80%;
-      font-size: 100%;
-      color: #000000;
-
-      @media screen and (max-width: 768px) {
-        max-width: 90%;
-      }
-    }
-
-    .charityCaption {
-      display: flex;
-      align-items: center;
-      font-size: 100%;
-      margin-top: 2rem;
-
-      @media screen and (max-width: 768px) {
-        margin: 1rem 0;
-      }
-
-      img {
-        height: 2rem;
-        margin-right: 0.7rem;
-      }
-    }
-  }
-
-  .bgImage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url(https://source.unsplash.com/collection/1198620/500x900);
-    filter: blur(5px);
-    height: 100%;
-    width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 1;
-  }
 `;
 
 const Track = styled.div`
-  width: 75%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: 1rem;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -105,13 +36,7 @@ const Track = styled.div`
 
 function FeaturedPlaces({ products }) {
   const [captions, setCaptions] = useState([]);
-  const [currentCaption, setCurrentCaption] = useState({
-    heading: 'Shop Local',
-    subheading: 'Support and shop with local businesses near you'
-  });
-  let currentCaptionIndex = useRef(0);
-  const [limits, setLimits] = useState(getRandomRange(4, 4));
-  const [update, forceUpdate] = useState(23);
+  const [limits, setLimits] = useState({ lower: 0, upper: 6 });
 
   async function fetchCaptions() {
     if (captions.length) return;
@@ -122,33 +47,14 @@ function FeaturedPlaces({ products }) {
 
   useEffect(() => {
     fetchCaptions();
-    const interval = setInterval(() => {
-      if (captions.length) {
-        currentCaptionIndex.current =
-          (currentCaptionIndex.current + 1) % captions.length;
-
-        setCurrentCaption(captions[currentCaptionIndex.current]);
-      }
-      forceUpdate((update + 1) % 50);
-      products.length && setLimits(getRandomRange(4, products.length));
-    }, 30_000);
-
-    return () => clearInterval(interval);
+    const randomRange = getRandomRange(6, products.length);
+    products.length && setLimits(randomRange);
     // eslint-disable-next-line
-  }, [update]);
+  }, []);
 
   return (
     <Container>
       <Wrapper>
-        <div className="caption">
-          {/* <div className='bgImage'></div> */}
-          <p className="heading">{currentCaption.heading}</p>
-          <p className="subheading">{currentCaption.subheading}</p>
-          <p className="charityCaption">
-            <img src={green_heart} alt="" />
-            We Love Charity
-          </p>
-        </div>
         <Track id="track_featured_places">
           {products &&
             products.slice(limits.lower, limits.upper).map(product => (

@@ -5,8 +5,9 @@ import Brands from '../components/Brands';
 import Featured from '../components/Featured';
 import FeaturedPlaces from '../components/FeaturedPlaces';
 import Modal from '../components/Modal';
-import Places from '../components/Places';
+import Explore from '../components/Explore';
 import { getCollection, getUser, setCity } from '../redux/actions';
+import Hero from '../components/Hero';
 
 function Landing(props) {
   const [products, setProducts] = useState([]);
@@ -28,13 +29,14 @@ function Landing(props) {
   return (
     <>
       {props.modalOpen && <Modal />}
+      <Hero />
       <FeaturedPlaces products={products} />
       <Container>
         <Featured />
       </Container>
       <Brands />
 
-      <Places products={products} />
+      <Explore products={products} />
     </>
   );
 }

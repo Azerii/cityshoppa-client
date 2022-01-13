@@ -8,6 +8,7 @@ import mail from '../assets/global/mail.svg';
 import phone from '../assets/global/phone.svg';
 import { setContactTitle } from '../redux/actions';
 import Container from './Container';
+// import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
   background-color: #011116;
@@ -121,6 +122,8 @@ const Bottom = styled.div`
 `;
 
 function Footer(props) {
+  // const { pathname } = useLocation();
+
   return (
     <>
       <Wrapper>

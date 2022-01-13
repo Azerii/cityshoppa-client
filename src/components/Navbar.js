@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
-import { Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import logo from '../assets/global/logo_footer.png';
 import location_pin from '../assets/navbar/location_black.svg';
 import search from '../assets/navbar/search.svg';
@@ -329,59 +329,8 @@ const SignOut = styled.p`
   }
 `;
 
-const Bottom = styled.div`
-  padding: 1rem 0;
-  background-color: #ff7235;
-
-  .bottomContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .inner {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    > .item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 100%;
-      font-weight: 500;
-      padding: 0 1rem;
-      // max-width: 10rem;
-      white-space: nowrap;
-      // overflow: hidden;
-      // text-overflow: ellipsis;
-      cursor: pointer;
-
-      &.seeMore {
-        font-weight: 700;
-        color: #ffffff;
-        max-width: unset;
-
-        img {
-          height: 0.5rem;
-          margin-left: 0.5rem;
-        }
-      }
-
-      img {
-        height: 1rem;
-        margin-right: 0.5rem;
-      }
-    }
-  }
-`;
-
 function Navbar(props) {
   const history = useHistory();
-  // const limit = getRandomRange(6, categories.length);
-  const [categories, setCategories] = useState(props.categories || []);
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState(props.city);
 
@@ -409,15 +358,6 @@ function Navbar(props) {
     if (res) props.setDonation(res.amount);
   }
 
-  async function fetchCategories() {
-    const res = await getCollection('categories');
-
-    if (res) {
-      setCategories(res);
-      props.setCategories(res);
-    }
-  }
-
   async function fetchCities() {
     let res = await getCollection('cities');
 
@@ -426,12 +366,11 @@ function Navbar(props) {
 
   useEffect(() => {
     fetchDonation();
-    fetchCategories();
     fetchCities();
     const urlQueryString = window.location.search.slice(1);
 
     if (urlQueryString.length) {
-      const searchParams = querystring.parse(urlQueryString);
+      const searchParams = querystring.parse(urlQueryString, true);
 
       if (searchParams.location) {
         setCity(props.city);
@@ -607,39 +546,6 @@ function Navbar(props) {
             </div>
           </Container>
         </Top>
-        <Route exact path="/">
-          <Bottom className="lg">
-            <Container>
-              <div className="inner">
-                {/* <a href="/" className="item">
-                  <img src={home} alt="" />
-                  <span>Home</span>
-                </a> */}
-                {/* <div className="item">
-                  <span>|</span>
-                </div> */}
-                {categories.slice(0, 6).map(category => (
-                  <a
-                    key={category.id}
-                    href={`/categories/${category.name}`}
-                    className="item"
-                  >
-                    <span>
-                      {/* {category.length > 15
-                        ? `${category.substr(0, 15)}...`
-                        : category} */}
-                      {category.name}
-                    </span>
-                  </a>
-                ))}
-                <a href="/categories" className="item seeMore">
-                  All Categories
-                  <img src={arrow_places_active} alt="" />
-                </a>
-              </div>
-            </Container>
-          </Bottom>
-        </Route>
       </Wrapper>
     </>
   );

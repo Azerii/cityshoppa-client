@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -47,10 +47,12 @@ const Header = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
-  width: 100vw;
-
+const Wrapper = styled(Container)`
   .seeAll {
+    display: block;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
     color: #ff7235;
     font-size: 100%;
   }
@@ -72,16 +74,48 @@ const Track = styled.div`
   }
 `;
 
-const Category = styled.p`
-  width: fit-content;
-  font-size: 120%;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  color: #5a7889;
-  border-bottom: 1px solid #ff7235;
-`;
+const Tab = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 48px;
+  overflow: auto;
+  scroll-behavior: smooth;
 
-function Places(props) {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  .item {
+    color: #5a7889;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 24px;
+    transition: all 0.2s ease-out;
+    white-space: nowrap;
+
+    &.active {
+      color: #ff7235;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+  }
+`
+
+function Explore(props) {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <>
       <MainWrapper>
@@ -89,16 +123,20 @@ function Places(props) {
           <Header>
             <p className="heading">Explore More Products</p>
             <p className="subheading">Buy from local businesses near you</p>
+            <Tab>
+              {props.categories?.slice(0, 5).map((category, index) => (
+                <button key={category.name} className={`item${activeTab === index ? " active" : ""}`} onClick={() => setActiveTab(index)}>{category.name}</button>
+              ))}
+            </Tab>
           </Header>
-          {props.categories.slice(0, 5).map(category => (
-            <Container key={category.name}>
-              <Category>{category.name}</Category>
+
+
               <Track>
                 {props.products
                   ?.filter(
                     item =>
                       item.category.name.toLowerCase() ===
-                      category.name.toLowerCase()
+                      props.categories[activeTab]?.name.toLowerCase()
                   )
                   .map(product => (
                     <ProductCard
@@ -152,13 +190,12 @@ function Places(props) {
                     </ProductCard>
                   ))}
               </Track>
-            </Container>
-          ))}
-          <Container>
+
+
             <a className="seeAll" href="/categories">
               See All Categories
             </a>
-          </Container>
+
         </Wrapper>
       </MainWrapper>
     </>
@@ -178,4 +215,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Places);
+export default connect(mapStateToProps, mapDispatchToProps)(Explore);

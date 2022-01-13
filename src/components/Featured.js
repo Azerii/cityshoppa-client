@@ -7,7 +7,6 @@ import featured_badge from '../assets/landing/featured.svg';
 import mack_ken from '../assets/landing/mack&ken.svg';
 import right_arrow from '../assets/landing/right_arrow.svg';
 import cookies_img from '../assets/landing/cookies.svg';
-import { loadModal } from '../utils';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -103,36 +102,6 @@ const Slide = styled.li`
   }
 `;
 
-const Indicators = styled.ol`
-  display: flex;
-  align-items: center;
-  // height: 2rem;
-  // background-color: black;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  list-style: none;
-  z-index: 5;
-
-  li {
-    height: 0.5rem;
-    width: 0.5rem;
-    border-radius: 50%;
-    background-color: #c4c4c4;
-    display: block;
-    margin: 0 0.3rem;
-    cursor: pointer;
-
-    &.active {
-      background-color: #ff7235;
-    }
-  }
-`;
-
-// const setSlidePosition = (slide, slideWidth, index) => {
-//     slide.style.left = `${slideWidth*index}px`
-// }
-
 const getCssProperty = (el, property) => {
   return window.getComputedStyle(el, null).getPropertyValue(property);
 };
@@ -145,18 +114,11 @@ const goToSlide = (track, current, target) => {
   target && target.classList.add('active');
 };
 
-const updateIndicators = (current, target) => {
-  current && current.classList.remove('active');
-  target && target.classList.add('active');
-};
-
 function Featured(props) {
   const initialState = {
     track: null,
     slides: [],
     slideWidth: 0,
-    indicatorNav: null,
-    indicators: []
   };
 
   const [state, setState] = useState(initialState);
@@ -165,22 +127,16 @@ function Featured(props) {
   const slideShow = () => {
     // console.log(currentIndex)
     const track = document.querySelector('#track_featured');
-    const indicatorNav = document.querySelector('#indicatorNav_featured');
-    const currentIndicator = indicatorNav.querySelector('.active');
     const currentSlide = track.querySelector('.active');
     const slides = Array.from(
       document.querySelector('#track_featured').children
     );
-    const indicators = Array.from(
-      document.querySelector('#indicatorNav_featured').children
-    );
+
     const targetIndex = props.featured_products.slide_index;
 
     const targetSlide = slides[targetIndex];
-    const targetIndicator = indicators[targetIndex];
 
     goToSlide(track, currentSlide, targetSlide);
-    updateIndicators(currentIndicator, targetIndicator);
 
     props.setFeaturedProductsData({
       slide_index: (targetIndex + 1) % slides.length
@@ -197,10 +153,6 @@ function Featured(props) {
       slideWidth: Array.from(
         document.querySelector('#track_featured').children
       )[0].getBoundingClientRect().width,
-      indicatorNav: document.querySelector('#indicatorNav_featured'),
-      indicators: Array.from(
-        document.querySelector('#indicatorNav_featured').children
-      )
     });
 
     const interval = setInterval(() => {
@@ -276,81 +228,6 @@ function Featured(props) {
           </div>
         </Slide>
       </Track>
-      <Indicators id="indicatorNav_featured">
-        <li
-          className="active"
-          onClick={e => {
-            const currentIndicator = state.indicatorNav.querySelector(
-              '.active'
-            );
-            const currentSlide = state.track.querySelector('.active');
-            const targetIndex = state.indicators.findIndex(
-              indicator => indicator === e.target
-            );
-            const targetSlide = state.slides[targetIndex];
-
-            goToSlide(state.track, currentSlide, targetSlide);
-            updateIndicators(currentIndicator, e.target);
-            props.setFeaturedProductsData({
-              slide_index: targetIndex
-            });
-          }}
-        ></li>
-        <li
-          onClick={e => {
-            const currentIndicator = state.indicatorNav.querySelector(
-              '.active'
-            );
-            const currentSlide = state.track.querySelector('.active');
-            const targetIndex = state.indicators.findIndex(
-              indicator => indicator === e.target
-            );
-            const targetSlide = state.slides[targetIndex];
-
-            goToSlide(state.track, currentSlide, targetSlide);
-            updateIndicators(currentIndicator, e.target);
-            props.setFeaturedProductsData({
-              slide_index: targetIndex
-            });
-          }}
-        ></li>
-        <li
-          onClick={e => {
-            const currentIndicator = state.indicatorNav.querySelector(
-              '.active'
-            );
-            const currentSlide = state.track.querySelector('.active');
-            const targetIndex = state.indicators.findIndex(
-              indicator => indicator === e.target
-            );
-            const targetSlide = state.slides[targetIndex];
-
-            goToSlide(state.track, currentSlide, targetSlide);
-            updateIndicators(currentIndicator, e.target);
-            props.setFeaturedProductsData({
-              slide_index: targetIndex
-            });
-          }}
-        ></li>
-        <li
-          onClick={e => {
-            const currentIndicator = state.indicatorNav.querySelector(
-              '.active'
-            );
-            const currentSlide = state.track.querySelector('.active');
-            const targetIndex = state.indicators.findIndex(
-              indicator => indicator === e.target
-            );
-            const targetSlide = state.slides[targetIndex];
-
-            goToSlide(state.track, currentSlide, targetSlide);
-            updateIndicators(currentIndicator, e.target);
-            props.setFeaturedProductsData({
-              slide_index: targetIndex
-            });
-          }}
-        ></li>
-      </Indicators>
     </Wrapper>
   );
 }

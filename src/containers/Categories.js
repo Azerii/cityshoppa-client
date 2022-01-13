@@ -189,7 +189,6 @@ function Content(props) {
   const { keyword } = useParams();
   const [categories, setCategories] = useState([]);
   const [results, setResults] = useState([]);
-  const [limit, setLimit] = useState(15);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('Categories');
   const urlArr = window.location.href.split('/');
@@ -245,9 +244,8 @@ function Content(props) {
             </p>
           )}
         </div>
-        {/* {title === 'Categories' && ( */}
-        <div className="list">
-          {categories.slice(0, limit).map(category => (
+        {title === "Categories" && !urlArr.includes('search') && <div className="list">
+          {categories.map(category => (
             <a
               key={category.id}
               href={`/categories/${category.name}`}
@@ -256,60 +254,8 @@ function Content(props) {
               <span>{category.name}</span>
             </a>
           ))}
-          {categories.length >= 15 && (
-            <p
-              className="item seeMore"
-              onClick={() =>
-                setLimit(limit === categories.length ? 15 : categories.length)
-              }
-            >
-              See {!(limit === categories.length) ? 'More >>' : 'Less <<'}
-            </p>
-          )}
-        </div>
-        {/* )} */}
+        </div>}
       </TopBar>
-
-      {title === 'Categories' && (
-        <Results>
-          {!results.length && !loading && <h2>No Results</h2>}
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            !!results.length &&
-            results.map(result => (
-              <div
-                key={result.id}
-                className="item"
-                onClick={() => loadModal(result.id)}
-              >
-                <div className="imgWrapper">
-                  {result.contentImage && (
-                    <img src={`${API_HOST}${result.contentImage.url}`} alt="" />
-                  )}
-                </div>
-                <div className="textWrapper">
-                  <p className="title">{result.name}</p>
-                  <p className="subtitle">{result.description}</p>
-                  <p className="contact">
-                    Buy now
-                    <img src={arrow_places} alt="" />
-                  </p>
-                </div>
-                {!!result.discount && (
-                  <div className="discountBadge">
-                    <p className="text">
-                      <span className="percentage">{result.discount}%</span>
-                      <br />
-                      <span className="small">off</span>
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
-        </Results>
-      )}
 
       {/* default categories render */}
       {title !== 'Categories' && !urlArr.includes('search') && (
@@ -362,6 +308,19 @@ function Content(props) {
               return null;
             })
           )}
+          <TopBar>
+            <div className="list">
+              {categories.map(category => (
+                <a
+                  key={category.id}
+                  href={`/categories/${category.name}`}
+                  className="item"
+                >
+                  <span>{category.name}</span>
+                </a>
+              ))}
+            </div>
+          </TopBar>
         </Results>
       )}
 
@@ -458,6 +417,19 @@ function Content(props) {
               return null;
             })
           )}
+          <TopBar>
+            <div className="list">
+              {categories.map(category => (
+                <a
+                  key={category.id}
+                  href={`/categories/${category.name}`}
+                  className="item"
+                >
+                  <span>{category.name}</span>
+                </a>
+              ))}
+            </div>
+          </TopBar>
         </Results>
       )}
     </>
